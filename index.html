@@ -12,7 +12,7 @@ var rgb=function(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),p
 if(B){d.style.setProperty("--band",B);d.classList.add("skb");d.classList.toggle("skl",lum(rgb(B))>.6)}else{d.style.removeProperty("--band");d.classList.remove("skb","skl")}
 if(C){var c=rgb(C),L=lum(c),a=L>.35?.42:L>.18?.7:1,m=function(x){return Math.round(x*a+12*(1-a))};d.style.setProperty("--bg","rgb("+m(c[0])+","+m(c[1])+","+m(c[2])+")");d.classList.add("skc")}else{d.style.removeProperty("--bg");d.classList.remove("skc")}}
 try{iccSkin()}catch(e){}</script>
-<title>I♥CC · I Love Classic Cars</title>
+<meta name="description" content="클래식카·영타이머 오너의 놀이터. 순정 부품 번호와 가격, 단종 정보, 정비·드라이브·사고팔기 이야기를 한곳에서. I Love Classic Cars."><meta property="og:title" content="I♥CC · I Love Classic Cars"><meta property="og:description" content="클래식카 순정 부품 번호·가격·단종 정보와 오너들의 이야기"><meta property="og:url" content="https://iloveclassiccars.net/"><link rel="canonical" href="https://iloveclassiccars.net/"><title>I♥CC · I Love Classic Cars</title>
 <style>
 :root{--bg:#171b26;--pn:#252a37;--pn2:#2b322e;--ln:rgba(127,127,127,.32);--ln2:rgba(127,127,127,.18);--tx:#e6e8e7;--t2:#a6aba8;--t3:#7d827f;--g:#2aa84b;--band:#1f4d36;--am:#e0a43a}
 *{box-sizing:border-box}
