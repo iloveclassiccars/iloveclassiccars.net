@@ -1,0 +1,40 @@
+// I ♥ Classic Cars — 네임카드 메일 보내기 (Cloudflare Worker)
+// 비밀값 RESEND_KEY 는 형이 클라우드플레어 "암호화 변수"에 직접 넣습니다. 이 파일에는 키가 없습니다.
+const SITE = "https://iloveclassiccars.net";
+const FROM = "I ♥ Classic Cars <no-reply@iloveclassiccars.net>";
+const BODY = {R129:"roadster",R107:"roadster",W113:"roadster",R170:"roadster",NA:"roadster",W208:"coupe","964":"coupe","993":"coupe","944":"coupe","928":"coupe",AE86:"coupe",R32:"coupe",FD:"coupe",W463:"suv","갤로퍼":"suv","포니":"hatch","포니2":"hatch","프라이드":"hatch"};
+const T = {
+ ko:{sub:n=>`[I ♥ Classic Cars] ${n} 님의 네임카드입니다`,hi:n=>`${n} 님, 가입을 환영합니다.`,keep:"아래 네임카드는 회원님만의 보관용 카드입니다. 저희는 이 정보를 따로 보관하지 않으니 이 메일을 지우지 말고 간직해 주십시오.",car:"내 차",sns:"SNS",id:"아이디(이메일)",join:"가입일",pwq:"비밀번호를 바꾸거나 잊으셨나요?",pwt:"아래 단추는 한 번만, 30분 동안만 쓸 수 있습니다.",pwb:"비밀번호 바꾸기",warn:"⚠️ 이 메일에는 비밀번호와 로그인 키가 없습니다. 운영진은 절대 비밀번호를 묻지 않습니다.",en:true},
+ ja:{sub:n=>`[I ♥ Classic Cars] ${n} 様のネームカード`,hi:n=>`${n} 様、ご登録ありがとうございます。`,keep:"下のネームカードはお客様だけの保管用カードです。当サイトはこの情報を保管しませんので、このメールは削除せず保管してください。",car:"マイカー",sns:"SNS",id:"ID(メール)",join:"登録日",pwq:"パスワードを変更・お忘れですか?",pwt:"下のボタンは1回だけ、30分間有効です。",pwb:"パスワードを変更",warn:"⚠️ このメールにパスワードやログインキーは含まれていません。運営がパスワードを尋ねることは絶対にありません。",en:true},
+ en:{sub:n=>`[I ♥ Classic Cars] Your name card, ${n}`,hi:n=>`Welcome, ${n}.`,keep:"This name card is yours to keep. We do not store this information, so please keep this email.",car:"My car",sns:"SNS",id:"ID (email)",join:"Joined",pwq:"Need to change or forgot your password?",pwt:"The button below works once, for 30 minutes.",pwb:"Change password",warn:"⚠️ This email contains no password or login key. We will never ask for your password.",en:false},
+};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const mask=e=>e;
+function html(L,d,link){const t=T[L],body=BODY[d.code]||"sedan",r=(k,v)=>`<tr><td style="color:#9AA3B2;padding:5px 0;width:110px">${k}</td><td style="color:#fff;font-weight:700">${esc(v)}</td></tr>`;
+ const en=t.en?`<tr><td style="padding:14px 28px;border-top:1px solid #2a3142;font-size:14.8px;color:#C9CEDA"><b>ENGLISH</b> — ${T.en.keep} ${T.en.pwt}</td></tr>`:"";
+ return `<!DOCTYPE html><html><body style="margin:0;background:#2a2f3a"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#2a2f3a;padding:16px 0"><tr><td align="center"><table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#171B26;border-radius:14px;font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#E8EAEE">
+<tr><td style="background:#1F4D36;padding:20px 28px;font-size:20px;font-weight:900;color:#fff">I <span style="color:#E5262D">♥</span> CLASSIC CARS</td></tr>
+<tr><td style="padding:24px 28px 6px"><div style="font-size:22.4px;font-weight:800">${esc(t.hi(d.nick))}</div><div style="font-size:16.5px;color:#C9CEDA;margin-top:6px">${t.keep}</div></td></tr>
+<tr><td style="padding:16px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1f3329;border:1px solid #2AA84B;border-radius:14px">
+<tr><td style="padding:18px 20px 4px"><div style="font-size:13px;letter-spacing:2px;color:#7FD99A;font-weight:700">MEMBER NAME CARD</div><div style="font-size:24px;font-weight:900;color:#fff">${esc(d.nick)}</div><div style="font-size:15.3px;color:#C9CEDA">${esc(d.country)}</div></td><td align="right" style="padding:18px 20px 4px;vertical-align:top"><img src="${SITE}/icons/icon-192.png" width="44" height="44" alt="I ♥ CC" style="border-radius:10px"></td></tr>
+<tr><td colspan="2" style="padding:0 20px"><img src="${SITE}/img/nc/${body}.png" width="220" alt="" style="display:block;width:220px;max-width:70%;height:auto"></td></tr>
+<tr><td colspan="2" style="padding:6px 20px 16px"><table role="presentation" width="100%" style="font-size:15.3px">${r(t.car,d.car)}${r(t.sns,d.sns)}${r(t.id,mask(d.email))}${r(t.join,d.joined)}</table></td></tr></table></td></tr>
+<tr><td style="padding:6px 28px"><div style="font-size:17.7px;font-weight:800">${t.pwq}</div><div style="font-size:15.9px;color:#C9CEDA">${t.pwt}</div></td></tr>
+<tr><td style="padding:12px 28px 18px"><a href="${link}" style="display:inline-block;background:#1B8438;color:#fff;text-decoration:none;font-weight:800;padding:13px 26px;border-radius:10px">${t.pwb}</a></td></tr>
+<tr><td style="padding:0 28px 18px;font-size:15.1px;color:#F2DDB0">${t.warn}</td></tr>${en}
+<tr><td style="padding:14px 28px 20px;border-top:1px solid #2a3142;font-size:13.6px;color:#8C94A3"><a href="${SITE}" style="color:#7FD99A">iloveclassiccars.net</a></td></tr></table></td></tr></table></body></html>`}
+const J=(o,s=200)=>new Response(JSON.stringify(o),{status:s,headers:{"content-type":"application/json","access-control-allow-origin":SITE}});
+export default {async fetch(req,env){
+ if(req.method==="OPTIONS")return new Response(null,{headers:{"access-control-allow-origin":SITE,"access-control-allow-methods":"POST","access-control-allow-headers":"content-type"}});
+ const u=new URL(req.url);
+ if(u.pathname!=="/api/namecard"||req.method!=="POST")return J({ok:false},404);
+ let d;try{d=await req.json()}catch{return J({ok:false,err:"bad"},400)}
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email||"")||!d.nick)return J({ok:false,err:"email"},400);
+ // 같은 이메일은 10분에 1번만 (스팸 방지) — KV 'RL' 사용, 이메일은 해시로만 저장
+ const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(d.email.toLowerCase())))].map(b=>b.toString(16).padStart(2,"0")).join("");
+ if(env.RL){if(await env.RL.get(h))return J({ok:false,err:"wait"},429);await env.RL.put(h,"1",{expirationTtl:600})}
+ const L=T[d.lang]?d.lang:(d.cc==="KR"?"ko":d.cc==="JP"?"ja":"en");
+ const link=`${SITE}/reset#t=`+crypto.randomUUID(); // 1회·30분 확인은 서버(D1) 붙일 때 연결
+ const r=await fetch("https://api.resend.com/emails",{method:"POST",headers:{authorization:`Bearer ${env.RESEND_KEY}`,"content-type":"application/json"},body:JSON.stringify({from:FROM,to:[d.email],subject:T[L].sub(d.nick),html:html(L,d,link)})});
+ return J({ok:r.ok},r.ok?200:502);
+}};
