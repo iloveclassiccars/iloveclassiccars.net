@@ -53,8 +53,8 @@ x.fillStyle=TH.acc;x.font="800 36px "+F;var tgt=Math.min(x.measureText(rows[0][1
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
 function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight)*ZM,sw=w/r,sh=h/r;CV={X:X,Y:Y,w:w,h:h,ex:(im.naturalWidth*r-w),ey:(im.naturalHeight*r-h)};var sy=(im.naturalHeight-sh)*PY,sx=(im.naturalWidth-sw)*PX;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
 var PH=null,NOPH=false,PY=.5,PX=.5,ZM=1;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
-$("ph").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var i=new Image();i.onload=function(){var m=1400,k=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);var u=c.toDataURL("image/jpeg",.9);try{localStorage.setItem(PK(),u)}catch(e){}setPH(u)};i.src=rd.result};rd.readAsDataURL(f);this.value=""};
-$("phx").onclick=function(){try{localStorage.removeItem(PK())}catch(e){}setPH(null)};
+$("ph").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var i=new Image();i.onload=function(){var m=2400,k=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);var u=c.toDataURL("image/jpeg",.92);phPut(PK(),u);setPH(u)};i.src=rd.result};rd.readAsDataURL(f);this.value=""};
+$("phx").onclick=function(){phDel(PK());setPH(null)};
 var KEYS=["nk","cc","mk","cd","md","yr","sn","ac","em"];
 function saveNC(){var o={};KEYS.forEach(function(k){o[k]=$(k).value});try{localStorage.setItem("icc_nc",JSON.stringify(o))}catch(e){}}
 function loadNC(){var o;try{o=JSON.parse(localStorage.getItem("icc_nc")||"null")}catch(e){}if(!o)return;
@@ -70,12 +70,12 @@ function curCar(){return{id:MY[CUR]?MY[CUR].id:Date.now(),mk:$("mk").value,cd:$(
 function label(c){return(c.cd||"")+" "+(c.md||"")}
 function chips(){$("mycars").innerHTML=MY.map(function(c,i){return'<button type="button" data-i="'+i+'" class="'+(i==CUR?"on":"")+'">🚗 '+label(c)+'</button>'}).join("")+(MY.length<5?'<button type="button" class="add" data-add>+ 차 추가</button>':"")+(MY.length>1?'<button type="button" class="del" data-del>이 차 빼기</button>':"")}
 function sel(k,v){if(v!=null&&[].some.call($(k).options,function(o){return o.value==v}))$(k).value=v}
-function applyCar(c){loadPos();sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;setPH(lsg(PK()));draw()}
+function applyCar(c){loadPos();sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;var k0=PK();setPH(null);phGet(k0,function(u){if(PK()==k0)setPH(u)});draw()}
 function syncCar(){MY[CUR]=curCar();saveMY();chips()}
 ["mk","cd","md","yr"].forEach(function(k){$(k).addEventListener(k=="yr"?"input":"change",syncCar)});
 $("mycars").onclick=function(e){var b=e.target.closest("button");if(!b)return;
  if(b.dataset.add!=null){MY.push({id:Date.now(),mk:$("mk").options[0].value,cd:"",md:"",yr:""});CUR=MY.length-1;applyCar(MY[CUR]);syncCar();return}
- if(b.dataset.del!=null){if(!confirmDel(b))return;try{localStorage.removeItem(PK())}catch(x){}MY.splice(CUR,1);CUR=Math.max(0,CUR-1);applyCar(MY[CUR]);saveMY();chips();return}
+ if(b.dataset.del!=null){if(!confirmDel(b))return;phDel(PK());MY.splice(CUR,1);CUR=Math.max(0,CUR-1);applyCar(MY[CUR]);saveMY();chips();return}
  CUR=+b.dataset.i;applyCar(MY[CUR]);saveMY();chips()};
 function confirmDel(b){if(b.dataset.ok){return true}b.dataset.ok=1;b.textContent="한 번 더 누르면 빠집니다";setTimeout(function(){delete b.dataset.ok;chips()},4000);return false}
 function initMY(){try{MY=JSON.parse(lsg("icc_nc_cars")||"[]")}catch(e){MY=[]}CUR=+(lsg("icc_nc_cur")||0);
@@ -122,6 +122,10 @@ function up(e){if(PT[e.pointerId]){delete PT[e.pointerId];PD=0;save()}}c.addEven
 c.addEventListener("wheel",function(e){var p=pos(e);if(!inBox(p))return;e.preventDefault();ZM=Math.max(1,Math.min(3,ZM*(e.deltaY<0?1.08:1/1.08)));save();draw()},{passive:false});
 })();
 $("shr").onclick=function(){$("c").toBlob(function(bl){var f=new File([bl],"namecard.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"I ♥ Classic Cars 네임카드",text:"www.iloveclassiccars.net"}).catch(function(){})}else{saveImg(false);setTimeout(function(){$("msg").textContent="이 기기는 바로 보내기가 안 되어 저장했습니다 — 저장된 사진을 올리십시오"},400)}},"image/png")};
+var IDB=null;function idb(cb){if(IDB)return cb(IDB);try{var r=indexedDB.open("icc_nc",1);r.onupgradeneeded=function(){r.result.createObjectStore("ph")};r.onsuccess=function(){IDB=r.result;cb(IDB)};r.onerror=function(){cb(null)}}catch(e){cb(null)}}
+function phPut(k,v){idb(function(d){if(!d){try{localStorage.setItem(k,v)}catch(e){}return}d.transaction("ph","readwrite").objectStore("ph").put(v,k)})}
+function phDel(k){try{localStorage.removeItem(k)}catch(e){}idb(function(d){if(d)d.transaction("ph","readwrite").objectStore("ph").delete(k)})}
+function phGet(k,cb){var ls=lsg(k);idb(function(d){if(!d)return cb(ls);var q=d.transaction("ph").objectStore("ph").get(k);q.onsuccess=function(){if(q.result)return cb(q.result);if(ls){phPut(k,ls);try{localStorage.removeItem(k)}catch(e){}}cb(ls)};q.onerror=function(){cb(ls)}})}
 function fit(x,t,X,Y,M){var f=x.font,n=parseInt(f.match(/(\d+)px/)[1]);while(x.measureText(t).width>M&&n>16){n--;x.font=f.replace(/\d+px/,n+"px")}x.fillText(t,X,Y)}
 addEventListener("resize",draw);
 function saveImg(np){NOPH=np;draw();$("c").toBlob(function(bl){NOPH=false;draw();var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent=(np?"사진을 뺀 카드를 ":"카드를 ")+"저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")}
