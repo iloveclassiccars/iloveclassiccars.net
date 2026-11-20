@@ -242,6 +242,29 @@ body{word-break:keep-all;overflow-wrap:break-word}
 @media (max-width:640px){.nv .nvth{width:88px;height:88px}.nv .t{font-size:15.5px!important;line-height:23px!important}.nv .ex{font-size:13.5px;margin:4px 0 8px}
 .ntc summary{grid-template-columns:44px minmax(0,1fr);gap:10px}.nta,.ntd{display:none}.ntb{padding:2px 10px 12px 62px}}
 </style>
+<style id="icc-clubs">
+.list.clv{display:block!important}
+.clintro{color:#C9CEDA;font-size:14px;line-height:22px;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.04);margin:4px 0 8px}
+.clrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;}
+.clv>.clrow:not(.sub){grid-template-columns:28px auto minmax(0,1fr) auto}
+.clrk{font:800 15px 'Noto Sans KR',sans-serif;color:#7d827f;text-align:center}.clrk.top{color:#E0A43A}
+.clrow{gap:14px;align-items:center;padding:16px 4px;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none;color:inherit}
+.clrow:hover .clt{text-decoration:underline}
+.clbadge{flex:none;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font:800 15px 'Noto Sans KR',sans-serif;letter-spacing:.02em;border:2px solid rgba(255,255,255,.35);box-shadow:inset 0 0 0 3px rgba(0,0,0,.25)}
+.clbadge.big{width:72px;height:72px;font-size:20px}.clbadge.sm{width:40px;height:40px;font-size:12px}
+.clx{display:flex;flex-direction:column;gap:4px;min-width:0}
+.clt{font:700 17px 'Noto Sans KR',sans-serif;color:#fff;display:flex;align-items:center;gap:8px}
+.cld{color:#A6ABA8;font-size:14px;line-height:21px}
+.clm{color:#7FD99A;font-size:12.5px}
+.clgo{color:#7d827f;font-size:24px}
+.clparts{flex:none;font:700 13px 'Noto Sans KR',sans-serif;color:#7FD99A;border:1.5px solid #2AA84B;border-radius:9px;padding:7px 12px;white-space:nowrap;cursor:pointer}.clparts:hover{background:rgba(42,168,75,.16)}
+.clback{display:inline-block;color:#7FD99A;font-size:14px;margin:4px 0 10px;text-decoration:none}
+.clhead{display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid rgba(224,164,58,.5);border-radius:12px;background:rgba(224,164,58,.06)}
+.clht{font:700 18px 'Noto Sans KR',sans-serif;color:#fff;display:flex;gap:8px;align-items:center}
+.clhx p{margin:6px 0 0;color:#C9CEDA;font-size:14px;line-height:22px}.clhx p.clrule{color:#A6ABA8;font-size:13px}
+.clsh{margin:18px 0 0;padding-bottom:8px;border-bottom:2px solid #E0A43A;font:700 16px 'Noto Sans KR',sans-serif;color:#fff}
+@media (max-width:640px){.clbadge{width:44px;height:44px;font-size:13px}.clt{font-size:16px}.cld{font-size:13.5px}}
+</style>
 </head>
 <body>
 <div class="page">
@@ -388,22 +411,86 @@ club:[['공지','클럽 개설 안내 — 브랜드별 클럽으로 정리합니
 parts:[['공지','부품 글 쓰는 법 — 부품번호와 차대번호를 함께 적어 주십시오','부품번호(예: 000 158 65 03)와 차종·연식을 적으면 답이 훨씬 빠릅니다. 차대번호는 앞 11자리만 적어도 충분합니다.','11.20']],
 restore:[['공지','정비복원 기록 안내 — 사진과 비용을 함께 남기면 큰 도움이 됩니다','작업 전후 사진, 들어간 부품, 비용, 정비소를 함께 적어 주시면 다음 오너들에게 큰 도움이 됩니다.','11.20']],
 market:[['필독','중고거래 사기 주의 — 선입금 요구는 꼭 확인하십시오','처음 거래하는 사람이 선입금만 요구하면 거래를 멈추고 운영진에게 알려 주십시오. 가능하면 직접 보고 거래하십시오.','11.20'],['공지','사고팔기 글 양식 — 차종·연식·주행거리·가격·지역','팝니다 글에는 차종, 연식, 주행거리, 가격, 지역, 사진을 꼭 넣어 주십시오.','11.20']]};
+
+var CLB=[
+ {id:'benz',nm:'벤츠',full:'메르세데스-벤츠',cc:'DE',ab:'MB',col:'#3a3f47',intro:'벤츠를 타는 전 세계 오너가 모이는 클럽입니다. W140부터 지바겐까지 차종별 하위 클럽에서 정비 정보와 이야기를 나눕니다.',subs:[["w140","W140 S-Class","S320 · S420 · S500 · S600 …",["W140"],"w140"],["r129","R129 SL","300SL · 300SL-24 · 500SL · 600SL …",["R129"],"r129"],["w126","W126 S-Class","260SE · 280SE · 300SE · 300SEL …",["W126"],"w126"],["w124","W124 E-Class","300E · E320 · E280 · 300TE …",["W124"],"w124"],["w201","W201 190E","190 · 190E · 190E 2.3 · 190E 2.6 …",["W201"],"w201"],["r107","R107 SL","280SL · 350SL · 380SL · 450SL …",["R107"],"r107"],["w123","W123 E-Class","200 · 230E · 240D · 250 …",["W123"],"w123"],["w463","W463 G-Class","G500 · G550 · G55 AMG · G63",["W463"],"w463"],["w108","W108 · W109 S-Class","W108 · W109 250S · 280S · 280SE …",["W108", "W109"],"w108"],["w113","W113 Pagoda SL","230SL · 250SL · 280SL",["W113"],"w113"],["w116","W116 S-Class","280S · 280SE · 350SE · 450SE …",["W116"],"w116"],["r170","R170 SLK","SLK230 · SLK320 · SLK32 AMG",["R170"],"r170"],["w202","W202 C-Class","C220 · C230 · C280 · C36 AMG …",["W202"],"w202"],["w208","W208 CLK","CLK320 · CLK430 · CLK55 AMG · CLK230",["W208"],"w208"],["w210","W210 E-Class","E320 · E300D · E430 · E55 AMG",["W210"],"w210"],["w220","W220 S-Class","S350 · S430 · S500 · S55 AMG …",["W220"],"w220"]]},
+ {id:'porsche',nm:'포르쉐',full:'포르쉐',cc:'DE',ab:'P',col:'#8a6a1c',intro:'공랭 911 오너들의 클럽입니다.',subs:[["356","356","356 · 356A · 356B · 356C (1948-65)",["356"],null],["91119648","911 · 1964-89","911 F-series · 911 G-series · 911 Carrera 3.2",["911", "196"],null],["930turbo","930 Turbo","930 Turbo 3.0 · 3.3",["930"],null],["964","964","Carrera 2 · Carrera 4 · RS · Turbo",["964"],null],["993","993","Carrera · Carrera 4S · Targa · Turbo …",["993"],null],["92494496","924 · 944 · 968","924 · 924 Turbo · 944 · 944 S2 …",["924", "944", "968"],null],["928","928","928 · 928 S · S4 · GT …",["928"],null],["986996","986 · 996","Boxster 986 · 911 996",["986", "996"],null]]},
+ {id:'bmw',nm:'BMW',full:'BMW',cc:'DE',ab:'BMW',col:'#1c4f8a',intro:'E30부터 E38까지, 고전 BMW 오너들의 클럽입니다.',subs:[["e9","E9","3.0 CS · 3.0 CSi · 3.0 CSL",["E9"],null],["e21e30","E21 · E30","3 Series · E30 M3",["E21", "E30"],null],["e28e34","E28 · E34","5 Series · M5",["E28", "E34"],null],["e24","E24","6 Series · M635CSi",["E24"],null],["e32","E32","7 Series · 750iL V12",["E32"],null],["e31","E31","850i · 850CSi",["E31"],null],["e36","E36","3 Series · M3",["E36"],null],["e38","E38 7시리즈","740i · 750iL",["E38"],null]]},
+ {id:'ferrari',nm:'페라리',full:'페라리',cc:'IT',ab:'F',col:'#8a1f1f',intro:'클래식 페라리 오너들의 클럽입니다.',subs:[['308','308 · 328','1975~1989',['308','328']],['testa','테스타로사','1984~1996',['테스타로사']]]},
+ {id:'lamborghini',nm:'람보르기니',full:'람보르기니',cc:'IT',ab:'L',col:'#7a6a1f',intro:'쿤타치와 디아블로 오너들의 클럽입니다.',subs:[['countach','쿤타치','1974~1990',['쿤타치']],['diablo','디아블로','1990~2001',['디아블로']]]},
+ {id:'bugatti',nm:'부가티',full:'부가티',cc:'IT',ab:'BG',col:'#1f3a6b',intro:'EB110 오너들의 클럽입니다.',subs:[['eb110','EB110','1991~1995',['EB110']]]},
+ {id:'mclaren',nm:'맥라렌',full:'맥라렌',cc:'GB',ab:'MC',col:'#7a4a1f',intro:'맥라렌 F1 오너와 팬들의 클럽입니다.',subs:[['f1','맥라렌 F1','1992~1998',['맥라렌']]]},
+ {id:'pagani',nm:'파가니',full:'파가니',cc:'IT',ab:'PG',col:'#3a3a4a',intro:'존다 오너와 팬들의 클럽입니다.',subs:[['zonda','존다','1999~2019',['존다']]]},
+ {id:'landrover',nm:'랜드로버',full:'랜드로버',cc:'GB',ab:'LR',col:'#2f4a2f',intro:'디펜더와 레인지로버 클래식 오너들의 클럽입니다.',subs:[['def','디펜더','1983~2016',['디펜더']],['rrc','레인지로버 클래식','1970~1996',['레인지로버']]]},
+ {id:'jaguar',nm:'재규어',full:'재규어',cc:'GB',ab:'J',col:'#1f4a3a',intro:'XJ6 오너들의 클럽입니다.',subs:[['xj6','XJ6','1968~1997',['재규어']]]},
+ {id:'fiat',nm:'피아트',full:'피아트',cc:'IT',ab:'FI',col:'#2a4f6b',intro:'피아트 클래식 오너들의 클럽입니다.',subs:[['500','500 (누오바)','1957~1975',['피아트 500']],['124','124 스파이더','1966~1985',['124 스파이더']]]},
+ {id:'toyota',nm:'토요타',full:'토요타',cc:'JP',ab:'T',col:'#8a2f2f',intro:'랜드크루저 오너들의 클럽입니다.',subs:[['lc80','랜드크루저 80','1990~1998',['랜드크루저']]]},
+ {id:'nissan',nm:'닛산',full:'닛산 · 닷선',cc:'JP',ab:'N',col:'#5a5a6b',intro:'스카이라인과 페어레이디 Z 오너들의 클럽입니다.',subs:[['r32','스카이라인 R32','1989~1994',['R32','스카이라인']],['z','페어레이디 Z','1969~',['페어레이디']]]},
+ {id:'honda',nm:'혼다',full:'혼다',cc:'JP',ab:'H',col:'#6b2f2f',intro:'고전 혼다 오너들의 클럽입니다. 첫 글을 기다립니다.',subs:[['nsx','NSX (NA1)','1990~2005',['NSX']],['civic','시빅 EF·EG','1987~1995',['시빅']]]},
+ {id:'mazda',nm:'마쓰다',full:'마쓰다',cc:'JP',ab:'M',col:'#5a5a5a',intro:'NA 미아타 오너들의 클럽입니다.',subs:[['na','NA 미아타','1989~1997',['NA 미아타']]]},
+ {id:'ford',nm:'포드',full:'포드',cc:'US',ab:'F',col:'#1f3f7a',intro:'머스탱 같은 미국 클래식 포드 오너들의 클럽입니다. 첫 글을 기다립니다.',subs:[['mustang','머스탱 (1~3세대)','1964~1993',['머스탱']]]},
+ {id:'chevrolet',nm:'쉐보레',full:'쉐보레',cc:'US',ab:'C',col:'#7a6a1f',intro:'콜벳, 카마로 같은 미국 클래식 쉐보레 오너들의 클럽입니다. 첫 글을 기다립니다.',subs:[['corvette','콜벳 (C2~C4)','1963~1996',['콜벳']],['camaro','카마로 (1~3세대)','1967~1992',['카마로']]]},
+ {id:'jeep',nm:'지프',full:'지프',cc:'US',ab:'JP',col:'#3a4a2f',intro:'랭글러 YJ · CJ 오너들의 클럽입니다.',subs:[['cj','CJ · 랭글러 YJ','1945~1995',['CJ','랭글러']]]},
+ {id:'cadillac',nm:'캐딜락',full:'캐딜락',cc:'US',ab:'CA',col:'#3a2f2f',intro:'캐딜락 클래식 오너들의 클럽입니다.',subs:[['deville','드빌 · 엘도라도','1959~1993',['드빌','엘도라도']]]},
+ {id:'hyundai',nm:'현대',full:'현대자동차',cc:'KR',ab:'H',col:'#1f4f86',intro:'포니부터 각그랜저까지, 우리 클래식카 오너들의 클럽입니다.',subs:[['pony','포니2','1982~1990',['포니']],['scoupe','스쿠프','1990~1995',['스쿠프']],['excel','엑센트','1994~1999',['엑센트']],['sonata','쏘나타2','1993~1996',['쏘나타']],['grandeur','각그랜저','1986~1992',['각그랜저']],['galloper','갤로퍼','1991~2003',['갤로퍼']]]},
+ {id:'kia',nm:'기아',full:'기아',cc:'KR',ab:'K',col:'#7a1f2b',intro:'프라이드 오너들의 클럽입니다.',subs:[['pride','프라이드','1987~2000',['프라이드']]]},
+ {id:'daewoo',nm:'대우',full:'대우자동차',cc:'KR',ab:'D',col:'#1f5f8a',intro:'티코 오너들의 클럽입니다.',subs:[['tico','티코','1991~2001',['티코']]]},
+ {id:'samsung',nm:'삼성',full:'삼성자동차',cc:'KR',ab:'SM',col:'#1f3f7a',intro:'SM5 1세대 오너들의 클럽입니다.',subs:[['sm5','SM5 (1세대)','1998~2005',['SM5']]]},
+ {id:'ssangyong',nm:'쌍용',full:'쌍용자동차',cc:'KR',ab:'S',col:'#2f5d3a',intro:'코란도와 무쏘 오너들의 클럽입니다.',subs:[['korando','코란도','1983~2005',['코란도']],['musso','무쏘','1993~2005',['무쏘']]]},
+ {id:'audi',nm:'아우디',full:'아우디',cc:'DE',ab:'A',col:'#4a4f57',intro:'콰트로 시대 아우디 오너들의 클럽입니다.',subs:[['urq','우어 콰트로','1980~1991',['콰트로']],['a100','아우디 100 (C3)','1982~1991',['아우디 100']]]},
+ {id:'vw',nm:'폭스바겐',full:'폭스바겐',cc:'DE',ab:'VW',col:'#2a4f7a',intro:'골프 Mk2 오너들의 클럽입니다.',subs:[['golf2','골프 Mk2','1983~1992',['골프']]]},
+ {id:'opel',nm:'오펠',full:'오펠',cc:'DE',ab:'O',col:'#7a6a1f',intro:'오펠 클래식 오너들의 클럽입니다.',subs:[['gt','오펠 GT','1968~1973',['오펠 GT']],['manta','만타','1970~1988',['만타']]]},
+ {id:'volvo',nm:'볼보',full:'볼보',cc:'SE',ab:'V',col:'#2a3f5a',intro:'240과 940, 각진 볼보 오너들의 클럽입니다.',subs:[['240','볼보 240','1974~1993',['볼보 240']],['940','볼보 940','1990~1998',['볼보 940']]]},
+ {id:'saab',nm:'사브',full:'사브',cc:'SE',ab:'S',col:'#3a3a5a',intro:'사브 900 오너들의 클럽입니다.',subs:[['900','사브 900','1978~1998',['사브']]]},
+ {id:'alfa',nm:'알파 로메오',full:'알파 로메오',cc:'IT',ab:'AR',col:'#6b1f2a',intro:'알파 로메오 오너들의 클럽입니다.',subs:[['spider','스파이더','1966~1993',['스파이더']],['gtv','GTV · 줄리아','1963~1977',['줄리아','GTV']]]},
+ {id:'citroen',nm:'시트로엥',full:'시트로엥',cc:'FR',ab:'C',col:'#5a2f2f',intro:'DS와 2CV 오너들의 클럽입니다.',subs:[['ds','DS','1955~1975',['DS']],['2cv','2CV','1948~1990',['2CV']]]},
+ {id:'peugeot',nm:'푸조',full:'푸조',cc:'FR',ab:'P',col:'#2a3f6b',intro:'푸조 클래식 오너들의 클럽입니다.',subs:[['205','205 GTI','1984~1994',['205']]]},
+ {id:'renault',nm:'르노',full:'르노',cc:'FR',ab:'R',col:'#7a6a1f',intro:'르노 클래식 오너들의 클럽입니다.',subs:[['r5','르노 5 터보','1980~1986',['르노 5']]]},
+ {id:'rolls',nm:'롤스로이스',full:'롤스로이스',cc:'GB',ab:'RR',col:'#2f2f3f',intro:'롤스로이스 오너들의 클럽입니다.',subs:[['shadow','실버 섀도','1965~1980',['실버 섀도']]]},
+ {id:'bentley',nm:'벤틀리',full:'벤틀리',cc:'GB',ab:'B',col:'#1f3a2f',intro:'벤틀리 오너들의 클럽입니다.',subs:[['turbo','터보 R','1985~1997',['터보 R']]]},
+ {id:'aston',nm:'애스턴 마틴',full:'애스턴 마틴',cc:'GB',ab:'AM',col:'#1f4a3a',intro:'애스턴 마틴 오너들의 클럽입니다.',subs:[['db','DB 시리즈','1958~1972',['DB']]]},
+ {id:'mini',nm:'미니',full:'미니 (클래식)',cc:'GB',ab:'MI',col:'#3a3a3a',intro:'클래식 미니 오너들의 클럽입니다.',subs:[['classic','클래식 미니','1959~2000',['미니']]]},
+ {id:'lotus',nm:'로터스',full:'로터스',cc:'GB',ab:'LO',col:'#2f5a2f',intro:'로터스 오너들의 클럽입니다.',subs:[['esprit','에스프리','1976~2004',['에스프리']]]},
+ {id:'mitsubishi',nm:'미쓰비시',full:'미쓰비시',cc:'JP',ab:'MT',col:'#7a1f1f',intro:'갤랑과 파제로 오너들의 클럽입니다.',subs:[['pajero','파제로 1·2세대','1982~1999',['파제로']]]},
+ {id:'subaru',nm:'스바루',full:'스바루',cc:'JP',ab:'SB',col:'#1f3f7a',intro:'임프레자 오너들의 클럽입니다.',subs:[['gc8','임프레자 GC8','1992~2000',['임프레자']]]},
+ {id:'dodge',nm:'닷지',full:'닷지',cc:'US',ab:'DG',col:'#6b1f1f',intro:'차저와 챌린저 오너들의 클럽입니다.',subs:[['charger','차저 (2세대)','1968~1970',['차저']]]}
+];
+function clbFind(id){for(var i=0;i<CLB.length;i++)if(CLB[i].id===id)return CLB[i];return null}
+function subMatch(sb,car){car=car||'';for(var i=0;i<sb[3].length;i++)if(car.indexOf(sb[3][i])===0)return true;return false}
+function clbCount(sb){var n=0;D.club.items.forEach(function(it){if(subMatch(sb,it.car))n++});return n}
+function clubView(h){var parts=h.split('/');var b=parts[1]?clbFind(parts[1]):null;
+ tabs('club');$('bdot').style.background=D.club.col;
+ var L=$('list');L.textContent='';L.className='list clv';$('lhead').style.display='none';$('pager').textContent='';
+ var rk=$('rank');if(rk)rk.style.display='none';var fb=$('fbar');if(fb)fb.style.display='none';
+ $('views').style.display='none';$('wbtn').style.display='none';$('cnt').textContent='';
+ if(!b){$('bko').textContent='클럽';$('ben').textContent=LANG==='ko'?'Clubs':'';
+  L.appendChild(el('div','clintro','자동차 회사별 클럽입니다. 부품찾기의 제조사 순서대로 보여 드립니다. 내 차 회사 클럽에 들어가면 차종별 하위 클럽이 있습니다. 전 세계 오너가 같은 차끼리 모여 자유롭게 이야기합니다.'));
+  var RK=CLB.map(function(c,i){return {c:c,i:i,n:c.subs.reduce(function(t,sb){return t+clbCount(sb)},0)}});RK.forEach(function(o,ri){var c=o.c;var a=el('a','clrow');a.appendChild(el('span','clrk'+(ri<3?' top':''),String(ri+1)));a.href='#club/'+c.id;var bd=el('span','clbadge',c.ab);bd.style.background=c.col;a.appendChild(bd);
+   var x=el('span','clx');var t=el('span','clt');t.appendChild(document.createTextNode(c.nm+' 클럽'));var f=el('span','clcc');f.appendChild(cc(c.cc));t.appendChild(f);x.appendChild(t);
+   x.appendChild(el('span','cld',c.intro));var tot=c.subs.reduce(function(s,sb){return s+clbCount(sb)},0);
+   x.appendChild(el('span','clm','하위 클럽 '+c.subs.length+'개 · 글 '+tot.toLocaleString()+'개 · '+c.subs.slice(0,4).map(function(sb){return sb[1]}).join(' · ')+(c.subs.length>4?' …':'')));a.appendChild(x);a.appendChild(el('span','clgo','›'));L.appendChild(a)});
+  return}
+ $('bko').textContent=b.nm+' 클럽';$('ben').textContent=LANG==='ko'?b.full:'';
+ var bc=el('a','clback','‹ 전체 클럽');bc.href='#club';L.appendChild(bc);
+ var hd=el('div','clhead');var bd=el('span','clbadge big',b.ab);bd.style.background=b.col;hd.appendChild(bd);var hx=el('div','clhx');var ht=el('div','clht');ht.appendChild(document.createTextNode(b.full+' 클럽 소개'));var f2=el('span','clcc');f2.appendChild(cc(b.cc));ht.appendChild(f2);hx.appendChild(ht);hx.appendChild(el('p','',b.intro));hx.appendChild(el('p','clrule','글은 내 차 하위 클럽에 올려 주십시오. 차종 · 연식 · 나라를 적으면 같은 차 오너를 찾기 쉽습니다.'));hd.appendChild(hx);L.appendChild(hd);
+ L.appendChild(el('div','clsh','하위 클럽 '+b.subs.length+'개'));
+ b.subs.forEach(function(sb){var n=clbCount(sb);var a=el('a','clrow sub');a.href='#club/'+b.id+'/'+sb[0];var bd=el('span','clbadge sm',b.ab);bd.style.background=b.col;a.appendChild(bd);var x=el('span','clx');x.appendChild(el('span','clt',sb[1]+' 클럽'));x.appendChild(el('span','cld',sb[2]));x.appendChild(el('span','clm',n?'글 '+n.toLocaleString()+'개':'아직 글이 없습니다 · 첫 글을 올려 주십시오'));a.appendChild(x);var pl=el('span','clparts','부품 찾기');pl.dataset.href=sb[4]?'/#/parts/'+sb[4]:'/#/parts';a.appendChild(pl);L.appendChild(a)})}
 var HEADS={lounge:['이야기','사진','질문'],carmeet:['모임','후기','질문'],club:['소개','모집','모임'],parts:['구해요','팝니다','질문','정보'],restore:['기록','질문','정비소'],market:['팝니다','삽니다']};
 var HC={'팝니다':'sell','삽니다':'buy','구해요':'buy'};
 function homeCards(){var box=$('cards');ORDER.forEach(function(k){var b=D[k];var s=el('section','board');var h=el('a','bh');h.href='#'+k;var d=el('span','dot');d.style.background=b.col;h.appendChild(d);h.appendChild(el('h2','',NM(k)));h.appendChild(el('span','ben',b.en));s.appendChild(h);b.items.slice(0,7).forEach(function(it,i){var r=el('a','row');r.href=POSTS[k]?('#'+k+'-'+(b.items.length-i)):('#'+k);r.appendChild(titleNode(k,it,'rt'));r.appendChild(el('span','rd',it.d));s.appendChild(r);});box.appendChild(s);});}
 function tabs(k){var T=$('tabs');T.textContent='';var h=el('a','hm',tr('home'));h.href='#home';T.appendChild(h);ORDER.forEach(function(x){var a=el('a',x===k?'on':'',NM(x));a.href='#'+x;if(x===k)a.setAttribute('aria-current','page');T.appendChild(a);});}
 function centerTab(){var T=$('tabs'),on=T.querySelector('.on');if(!on)return;try{var a=on.getBoundingClientRect(),b=T.getBoundingClientRect();T.scrollLeft+=a.left-b.left-(b.width-a.width)/2;}catch(e){}}
-function filtered(k){var q=S.q.trim().toLowerCase();var a=D[k].items.map(function(it,i){return {it:it,n:D[k].items.length-i};});if(S.f){var f=S.f;a=a.filter(function(o){return f.t==='cc'?o.it.cc===f.v:f.t==='car'?o.it.car===f.v:f.t==='sns'?(o.it.sns||'').split(' @')[0]===f.v:((o.it.sns||'').split('@')[1]===f.v)})}if(S.sort==='hot')a=a.slice().sort(function(x,y){return likes(k,y.n,y.it)-likes(k,x.n,x.it)});else if(S.sort==='talk')a=a.slice().sort(function(x,y){return ncom(k,y.n,y.it)-ncom(k,x.n,x.it)});if(!q)return a;return a.filter(function(o){return (o.it.t+' '+(o.it.car||'')+' '+(o.it.yr||'')+' '+(o.it.body||'')+' '+(o.it.sns||'')+(o.it.test?' 테스트':'')).toLowerCase().indexOf(q)>=0;});}
+function filtered(k){var q=S.q.trim().toLowerCase();var a=D[k].items.map(function(it,i){return {it:it,n:D[k].items.length-i};});if(k==='club'&&S.sub){var sb0=S.sub.s;a=a.filter(function(o){return subMatch(sb0,o.it.car)})}if(S.f){var f=S.f;a=a.filter(function(o){return f.t==='cc'?o.it.cc===f.v:f.t==='car'?o.it.car===f.v:f.t==='sns'?(o.it.sns||'').split(' @')[0]===f.v:((o.it.sns||'').split('@')[1]===f.v)})}if(S.sort==='hot')a=a.slice().sort(function(x,y){return likes(k,y.n,y.it)-likes(k,x.n,x.it)});else if(S.sort==='talk')a=a.slice().sort(function(x,y){return ncom(k,y.n,y.it)-ncom(k,x.n,x.it)});if(!q)return a;return a.filter(function(o){return (o.it.t+' '+(o.it.car||'')+' '+(o.it.yr||'')+' '+(o.it.body||'')+' '+(o.it.sns||'')+(o.it.test?' 테스트':'')).toLowerCase().indexOf(q)>=0;});}
 function board(k){var b=D[k],w=wide(),isPost=!!POSTS[k];
   tabs(k);
-  $('bdot').style.background=b.col;$('bko').textContent=NM(k);$('ben').textContent=LANG==='ko'?b.en:'';
+  $('bdot').style.background=b.col;$('bko').textContent=NM(k);$('ben').textContent=LANG==='ko'?b.en:'';var rk1=$('rank');if(rk1)rk1.style.display='';var fb1=$('fbar');if(fb1)fb1.style.display='';if(k==='club'&&S.sub){$('bko').textContent=S.sub.s[1]+' 클럽';$('ben').textContent=S.sub.b.nm+' 클럽';}
   var unit='글';
   $('bsim').textContent=tr('testing');
   var view=isPost?(S.view||'list'):'table';
   $('views').style.display=isPost?'':'none';$('wbtn').style.display=isPost?'':'none';
   if(isPost){$('wbtn').href='#'+k+'-write';[].forEach.call($('views').children,function(bt){var on=bt.getAttribute('data-v')===view;bt.className=on?'on':'';bt.setAttribute('aria-pressed',on?'true':'false');});}
   var all=filtered(k);var rk=$('rank');if(!rk){rk=el('div','rank');rk.id='rank';$('lhead').parentNode.parentNode.insertBefore(rk,$('lhead').parentNode);}rk.textContent='';var fbar=$('fbar');if(!fbar){fbar=el('div','fbar');fbar.id='fbar';var tl0=document.querySelector('#board .tool');if(tl0)tl0.insertBefore(fbar,$('cnt').nextSibling);else rk.parentNode.insertBefore(fbar,rk);}fbar.textContent='';[['new','최신순'],['hot','인기순'],['talk','댓글 많은 순']].forEach(function(o){var b=el('button',(S.sort||'new')===o[0]?'on':'',o[1]);b.type='button';b.addEventListener('click',function(){S.sort=o[0];S.page=1;board(k);});fbar.appendChild(b);});if(S.f){var ch=el('button','chip',FLAB[S.f.t]+': '+S.f.v+'  ✕');ch.type='button';ch.addEventListener('click',function(){S.f=null;S.page=1;board(k);});fbar.appendChild(ch);}
-  if(S.page===1&&!S.f&&!S.q.trim()&&(S.sort||'new')==='new'){var top=D[k].items.map(function(it,i){return {it:it,n:D[k].items.length-i}}).sort(function(x,y){return likes(k,y.n,y.it)-likes(k,x.n,x.it)}).slice(0,5);rk.appendChild(el('div','rkh','🔥 인기 글 TOP 5'));top.forEach(function(o,i){var a=el('a','rki');a.href='#'+k+'-'+o.n;a.appendChild(el('span','rkn',String(i+1)));var tn=titleNode(k,o.it);a.appendChild(tn);a.appendChild(el('span','rkl','♥ '+likes(k,o.n,o.it)));rk.appendChild(a);});rk.style.display='';}else rk.style.display='none';$('cnt').textContent=tr('cnt',all.length);
+  if(S.page===1&&!S.f&&!S.q.trim()&&(S.sort||'new')==='new'){var top=(k==='club'&&S.sub?all.slice():D[k].items.map(function(it,i){return {it:it,n:D[k].items.length-i}})).sort(function(x,y){return likes(k,y.n,y.it)-likes(k,x.n,x.it)}).slice(0,5);rk.appendChild(el('div','rkh','🔥 인기 글 TOP 5'));top.forEach(function(o,i){var a=el('a','rki');a.href='#'+k+'-'+o.n;a.appendChild(el('span','rkn',String(i+1)));var tn=titleNode(k,o.it);a.appendChild(tn);a.appendChild(el('span','rkl','♥ '+likes(k,o.n,o.it)));rk.appendChild(a);});rk.style.display='';}else rk.style.display='none';$('cnt').textContent=tr('cnt',all.length);
   var per=30,pages=Math.max(1,Math.ceil(all.length/per));if(S.page>pages)S.page=pages;
   var rows=all.slice((S.page-1)*per,S.page*per);
   var lh=$('lhead');lh.textContent='';
@@ -475,7 +562,7 @@ function submitPost(){var k=S.wk,br=$('wbr').value,md=$('wmd').value,car=(br==='
   if(e){$('werr').textContent=e;return;}
     D[k].items.unshift({h:S.kind,cc:$('wcc').value,car:car,yr:yr.slice(2),t:tt,sns:$('wsns').value+' @'+acc,d:(function(){var t=new Date();return ('0'+(t.getMonth()+1)).slice(-2)+'.'+('0'+t.getDate()).slice(-2)})(),v:0,body:bd,mine:true});
   saveLS();S.page=1;S.q='';$('bq').value='';location.hash='#'+k;}
-function route(){var h=(location.hash||'').replace('#','');var m=h.match(/^([a-z]+)-(\d+)$/),wm=h.match(/^([a-z]+)-write$/);var k=m?m[1]:(wm?wm[1]:h);
+function route(){var h=(location.hash||'').replace('#','');if(h==='club'||h.indexOf('club/')===0){var ps=h.split('/');S.sub=null;document.body.classList.remove('inboard','inpost','inwrite');if(ps.length>=3){var bb=clbFind(ps[1]),sb=null;if(bb)bb.subs.forEach(function(x){if(x[0]===ps[2])sb=x});if(bb&&sb){S.sub={b:bb,s:sb};var key='club/'+bb.id+'/'+sb[0];if(S.subkey!==key){S.page=1;S.q='';$('bq').value='';S.f=null;S.subkey=key}S.cur='club';S.last='club';board('club');document.body.classList.add('inboard');window.scrollTo(0,0);return}}S.cur='';S.last='';S.subkey='';clubView(h);document.body.classList.add('inboard');window.scrollTo(0,0);return}S.sub=null;var m=h.match(/^([a-z]+)-(\d+)$/),wm=h.match(/^([a-z]+)-write$/);var k=m?m[1]:(wm?wm[1]:h);
   document.body.classList.remove('inboard','inpost','inwrite');
   if(wm&&POSTS[k]){writeForm(k);document.body.classList.add('inwrite');S.cur='';}
   else if(m&&POSTS[k]&&+m[2]>=1&&+m[2]<=D[k].items.length){post(k,+m[2]);document.body.classList.add('inpost');S.cur='';}
@@ -493,6 +580,7 @@ $('wform').addEventListener('submit',function(e){e.preventDefault();submitPost()
 $('cform').addEventListener('submit',function(e){e.preventDefault();var v=$('cin').value.trim();if(!v)return;(CM[S.pk]=CM[S.pk]||[]).push(v);$('cin').value='';saveLS();comments();});
 applyStatic();$('langb').addEventListener('click',langMenu);homeCards();route();
 document.addEventListener('click',function(e){var f=e.target.closest&&e.target.closest('.fl');if(!f||!f.dataset.ft)return;e.preventDefault();e.stopPropagation();var h=(location.hash||'').replace('#','');var k=(h.match(/^([a-z]+)/)||[])[1]||S.cur||'lounge';S.f={t:f.dataset.ft,v:f.dataset.fv};S.page=1;S.q='';$('bq').value='';if(location.hash!=='#'+k){S.last=k;S.cur=k;location.hash='#'+k;setTimeout(function(){board(k)},0);}else board(k);},true);
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.clparts');if(!b)return;e.preventDefault();e.stopPropagation();location.href=b.dataset.href},true);
 window.addEventListener('hashchange',route);
 var mq=window.matchMedia('(min-width:900px)');var re=function(){if(S.cur)board(S.cur);};if(mq.addEventListener)mq.addEventListener('change',re);else if(mq.addListener)mq.addListener(re);
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#"]');if(a)e.preventDefault();});
