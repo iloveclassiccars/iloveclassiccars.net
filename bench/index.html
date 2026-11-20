@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>띠 · 실시간 포털 vs 공개 계산기</title>
+<style>
+html,body{margin:0;background:#0f1216;color:#e8e8e8;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.top{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:8px;padding:8px 14px;background:#161b22;border-bottom:1px solid #2a3244;flex-wrap:wrap}
+.top b{font-size:15px}.top b i{color:#e5322d;font-style:normal}
+.top button{background:#1f2630;color:#cfd5dc;border:1px solid #2f3a4a;border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px;cursor:pointer}
+.top small{margin-left:auto;color:#7f8a95;font-size:12px}
+.row{display:flex;gap:16px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid #2a3244}
+.lab{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:800;font-size:14px;padding:6px 2px;border-radius:6px;align-self:stretch;text-align:center}
+.lab.p{background:#1F4D36}.lab.c{background:#2a3244}
+.cell{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cell h3{margin:0;font-size:12.5px;color:#9aa3ad;font-weight:600;display:flex;gap:8px;align-items:center}
+.cell h3 a{color:#7fc79a;font-size:11.5px}
+.box{position:relative;overflow:hidden;border:1px solid #2f3a4a;background:#171b26}
+.box.ph{border:8px solid #050505;border-radius:34px}
+.box iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:#171b26}
+.pcw{flex:1}
+</style></head><body>
+<div class="top"><b>띠 · 실시간 포털 <i>vs</i> 공개 계산기</b><button id="rl">모두 새로고침</button><button id="sz">크게/작게</button><small>왼쪽 휴대폰(390×844) · 오른쪽 PC(1280) · 실제 사이트를 그대로 띄웁니다</small></div>
+<div class="row"><div class="lab p">실시간 포털</div>
+ <div class="cell"><h3>휴대폰 <a href="https://iloveclassiccars.net/" target="_blank">새 창</a></h3><div class="box ph" data-w="390" data-h="844"><iframe src="https://iloveclassiccars.net/"></iframe></div></div>
+ <div class="cell pcw"><h3>PC <a href="https://iloveclassiccars.net/" target="_blank">새 창</a></h3><div class="box" data-w="1280" data-h="844"><iframe src="https://iloveclassiccars.net/"></iframe></div></div></div>
+<div class="row"><div class="lab c">공개 계산기</div>
+ <div class="cell"><h3>휴대폰 <a href="https://iloveclassiccars.github.io/m/" target="_blank">새 창</a></h3><div class="box ph" data-w="390" data-h="844"><iframe src="https://iloveclassiccars.github.io/m/"></iframe></div></div>
+ <div class="cell pcw"><h3>PC <a href="https://iloveclassiccars.github.io/" target="_blank">새 창</a></h3><div class="box" data-w="1280" data-h="844"><iframe src="https://iloveclassiccars.github.io/"></iframe></div></div></div>
+<script>
+var big=false;
+function fit(){var W=innerWidth,phs=big?0.85:(W<900?0.5:0.62);
+ document.querySelectorAll('.row').forEach(function(r){
+  var ph=r.querySelector('.box.ph'),pc=r.querySelector('.pcw .box');
+  var pw=Math.round(390*phs),phh=Math.round(844*phs);
+  ph.style.width=pw+'px';ph.style.height=phh+'px';var f=ph.querySelector('iframe');f.style.width='390px';f.style.height='844px';f.style.transform='scale('+phs+')';
+  var avail=r.clientWidth-pw-16-40-28;var s=Math.max(0.25,Math.min(1,avail/1280));
+  pc.style.width=Math.round(1280*s)+'px';pc.style.height=Math.round(844*s)+'px';var g=pc.querySelector('iframe');g.style.width='1280px';g.style.height='844px';g.style.transform='scale('+s+')';
+ })}
+addEventListener('resize',fit);fit();
+document.getElementById('rl').onclick=function(){document.querySelectorAll('iframe').forEach(function(f){var u=f.src.split('?')[0];f.src=u+'?t='+Date.now()})};
+document.getElementById('sz').onclick=function(){big=!big;fit()};
+</script></body></html>
