@@ -679,7 +679,7 @@ header .unav a span{white-space:nowrap;letter-spacing:-.3px}
 var IT=[["lounge","오너라운지","life","#8B5A2B",G],["carmeet","카밋","drive","#2E8B57",G],["club","클럽","community","#8A5BD6",G],["parts","부품찾기","parts","#2F6FDE",G],["restore","정비복원","service","#D9661F",G],["market","사고팔기","trade","#1B8E9C",G],["/#/quote","내 견적","quote","#B7791F",D],["/#/garage","My Garage","garage","#4B5D73",D]];
 function svg(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'}
 function build(){var h=document.querySelector("header");if(!h||h.querySelector(".unav"))return;var lg=h.querySelector(".logo");
- var ic=document.createElement("a");ic.className="uicon";ic.href="/";ic.setAttribute("aria-label","첫 화면");ic.innerHTML='<img src="/icons/icon-header.png" alt="">';h.insertBefore(ic,lg);
+ var ic=document.createElement("a");ic.className="uicon";ic.href="/";ic.setAttribute("aria-label","첫 화면");ic.innerHTML='<img src="/icons/icon-header.png?v=b" alt="">';h.insertBefore(ic,lg);
  var nv=document.createElement("nav");nv.className="unav";nv.setAttribute("aria-label","메뉴");nv.innerHTML=IT.map(function(x){var href=x[0].charAt(0)==="/"?x[0]:"#"+x[0];return '<a href="'+href+'" data-k="'+x[0]+'"><i style="background:'+x[3]+'">'+svg((x[4][x[2]])||"")+'</i><span>'+x[1]+'</span></a>'}).join("");lg.parentNode.insertBefore(nv,lg.nextSibling);mark()}
 function mark(){var k=((location.hash||"").replace("#","").match(/^[a-z]+/)||[""])[0];document.querySelectorAll("header .unav a").forEach(function(a){a.classList.toggle("on",a.dataset.k===k)})}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",build);else build();addEventListener("hashchange",mark)})();</script>
