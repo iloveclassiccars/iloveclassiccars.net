@@ -6,7 +6,7 @@
 <label>국가</label><select id="cc"></select>
 <label>내 차 (눌러서 바꾸기)</label><div id="mycars" class="mc"></div>
 <label>제조사 · 차종 코드</label><div class="row"><select id="mk"></select><select id="cd"></select></div>
-<label>모델 · 연식</label><div class="row"><select id="md"></select><input id="yr" inputmode="numeric" maxlength="4" value="1997"></div>
+<label>모델 · 연식</label><div class="row"><select id="md"></select><input id="yr" inputmode="numeric" maxlength="4" value="1997"></div><label>언제부터 내 차? (선택)</label><input id="own" inputmode="numeric" maxlength="4" placeholder="예) 2015 — 넣으면 카드에 오너 경력이 나옵니다">
 <select id="bd" hidden><option value="sedan"></option><option value="coupe"></option><option value="roadster"></option><option value="suv"></option><option value="wagon"></option><option value="hatch"></option></select>
 <div class="nkr" style="margin:14px 0 8px;line-height:1.7;font-size:14px;letter-spacing:-.3px">✅ 본인 · 내 차 · 가족 · 반려견까지만 허용합니다.<br>🚫 연예인 · 광고 · 퍼온 사진은 금합니다.</div><div class="row"><button type="button" class="pbtn" id="phc">📸 사진 찍기</button><button type="button" class="pbtn" id="phb">🖼 앨범에서</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" id="phx">사진 빼기</button></div><div class="tip one" style="margin-top:8px">👆 카드 사진을 손가락으로 끌고, 두 손가락으로 키울 수 있습니다</div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="u">⬆ 위로</button><button type="button" class="pbtn" data-mv="d">⬇ 아래로</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="l">⬅ 왼쪽</button><button type="button" class="pbtn" data-mv="r">➡ 오른쪽</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="zi">➕ 크게</button><button type="button" class="pbtn" data-mv="zo">➖ 작게</button></div><input id="ph" type="file" accept="image/*" hidden><input id="phcam" type="file" accept="image/*" capture="environment" hidden>
 <label>이메일</label><input id="em" type="email" value="futurenix@gmail.com">
@@ -39,7 +39,7 @@ function rr(x,c,y,w,h,r){x.beginPath();x.moveTo(c+r,y);x.arcTo(c+w,y,c+w,y+h,r);
 var F='-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
 var THS={sig:{n:"시그니처",base:"#171B26",g1:"#1c2433",g2:"#171B26",line:"#2AA84B",acc:"#7FD99A",p1:"#22392d",sub:"#C9CEDA",lab:"#9AA3B2",txt:"#ffffff",head:"#1F4D36"}};
 var TH=THS.sig;
-function draw(){var cv=$("c"),W=720,H=1200,S=Math.max(2,Math.min(3,Math.ceil(window.devicePixelRatio||1)));if(cv.width!=W*S||cv.height!=H*S){cv.width=W*S;cv.height=H*S}var x=cv.getContext("2d");x.setTransform(S,0,0,S,0,0);x.imageSmoothingEnabled=true;x.imageSmoothingQuality="high";x.clearRect(0,0,W,H);x.fillStyle=TH.base;x.fillRect(0,0,W,H);
+function draw(){var ow0=parseInt(($("own")||{}).value,10),hasOw=ow0>1900&&ow0<=new Date().getFullYear(),SP=hasOw?70:80,UY=900+(hasOw?4:3)*SP,cv=$("c"),W=720,H=UY+60,S=Math.max(2,Math.min(3,Math.ceil(window.devicePixelRatio||1)));if(cv.width!=W*S||cv.height!=H*S){cv.width=W*S;cv.height=H*S}window.CH=H;var x=cv.getContext("2d");x.setTransform(S,0,0,S,0,0);x.imageSmoothingEnabled=true;x.imageSmoothingQuality="high";x.clearRect(0,0,W,H);x.fillStyle=TH.base;x.fillRect(0,0,W,H);
 var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,TH.g1);g.addColorStop(1,TH.g2);rr(x,0,0,W,H,40);x.fillStyle=g;x.fill();x.lineWidth=5;x.strokeStyle=TH.line;rr(x,3,3,W-6,H-6,38);x.stroke();
 x.save();rr(x,3,3,W-6,H-6,38);x.clip();x.fillStyle=TH.head;x.fillRect(0,0,W,100);x.restore();x.fillStyle="#fff";x.font="800 28px "+F;x.fillText("I ",44,56);var iw=x.measureText("I ").width;x.fillStyle="#E5262D";x.fillText("♥",44+iw,56);var hw=x.measureText("♥ ").width;x.fillStyle="#fff";x.fillText("CLASSIC CARS",44+iw+hw,56);var tw=iw+hw+x.measureText("CLASSIC CARS").width;x.fillStyle=TH.acc;x.font="700 18px "+F;spread(x,"MEMBER NAME CARD",44,84,tw);if(logo.complete&&logo.naturalWidth){var L=74;x.save();rr(x,W-44-L,13,L,L,16);x.clip();x.drawImage(logo,W-44-L,13,L,L);x.restore()}
 var bx=44,by=124,bw=W-88,bh=548;
@@ -47,9 +47,9 @@ if(PH&&PH.naturalWidth&&!NOPH){cover(x,PH,bx,by,bw,bh)}else{var pg=x.createLinea
 var o=$("cc").selectedOptions[0],cT=o?o.textContent:"";if(lang()!="ko"){try{cT=new Intl.DisplayNames([lang()],{type:"region"}).of($("cc").value)}catch(e){}}var fx=44;fx+=flag(x,$("cc").value,fx,700,34);x.fillStyle=TH.sub;x.font="600 30px "+F;x.fillText(cT,fx,728);
 var nx=44;
 x.fillStyle=TH.txt;x.font="900 60px "+F;var nkT=($("nk").value||"이름").slice(0,16);fit(x,nkT,nx,812,W-nx-44);
-var LG=lang(),LB=LBL[LG],c=car(),rows=[[LB.car,(LG=="ko"?c[0].replace("Mercedes-Benz","벤츠"):c[0])+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],[LB.join,new Date().toISOString().slice(0,10).replace(/-/g,".")]];
-rows.forEach(function(r,i){var y=900+i*80;x.fillStyle=TH.lab;x.font="500 30px "+F;x.fillText(r[0],44,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
-x.fillStyle=TH.acc;x.font="800 36px "+F;var tgt=Math.min(x.measureText(rows[0][1]).width,W-170-44);x.font="800 30px "+F;var u="www.iloveclassiccars.net",uw=x.measureText(u).width,fs=Math.max(18,Math.min(36,30*tgt/uw));x.font="900 "+fs.toFixed(1)+"px "+F;var ux=170;[["www.",0],["i",1],["love",0],["c",1],["lassic",0],["c",1],["ars.net",0]].forEach(function(p){x.fillStyle=p[1]?"#FF6B70":TH.acc;x.fillText(p[0],ux,1140);ux+=x.measureText(p[0]).width});if(typeof miniDraw=="function")miniDraw()}
+var LG=lang(),LB=LBL[LG],c=car(),rows=[[LB.car,(LG=="ko"?c[0].replace("Mercedes-Benz","벤츠"):c[0])+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],[LB.join,new Date().toISOString().slice(0,10).replace(/-/g,".")]];var ow=parseInt($("own").value,10),ny=new Date().getFullYear();if(ow>1900&&ow<=ny){rows.splice(1,0,[LB.own,LB.ownv(ow,ny-ow+1)])}
+rows.forEach(function(r,i){var y=900+i*SP;x.fillStyle=TH.lab;x.font="500 30px "+F;x.fillText(r[0],44,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
+x.fillStyle=TH.acc;x.font="800 36px "+F;var tgt=Math.min(x.measureText(rows[0][1]).width,W-170-44);x.font="800 30px "+F;var u="www.iloveclassiccars.net",uw=x.measureText(u).width,fs=Math.max(18,Math.min(36,30*tgt/uw));x.font="900 "+fs.toFixed(1)+"px "+F;var ux=170;[["www.",0],["i",1],["love",0],["c",1],["lassic",0],["c",1],["ars.net",0]].forEach(function(p){x.fillStyle=p[1]?"#FF6B70":TH.acc;x.fillText(p[0],ux,UY);ux+=x.measureText(p[0]).width});if(typeof miniDraw=="function")miniDraw()}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
 function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight)*ZM,sw=w/r,sh=h/r;CV={X:X,Y:Y,w:w,h:h,ex:(im.naturalWidth*r-w),ey:(im.naturalHeight*r-h)};var sy=(im.naturalHeight-sh)*PY,sx=(im.naturalWidth-sw)*PX;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
 var PH=null,NOPH=false,PY=.5,PX=.5,ZM=1;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
@@ -66,13 +66,13 @@ $("md").addEventListener("input",autoBd);
 var MY=[],CUR=0;function PK(){return"icc_nc_photo_"+(MY[CUR]?MY[CUR].id:"0")}
 function lsg(k){try{return localStorage.getItem(k)}catch(e){return null}}function lss(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function saveMY(){lss("icc_nc_cars",JSON.stringify(MY));lss("icc_nc_cur",String(CUR))}
-function curCar(){return{id:MY[CUR]?MY[CUR].id:Date.now(),mk:$("mk").value,cd:$("cd").value,md:$("md").value,yr:$("yr").value}}
+function curCar(){return{id:MY[CUR]?MY[CUR].id:Date.now(),mk:$("mk").value,cd:$("cd").value,md:$("md").value,yr:$("yr").value,own:$("own").value}}
 function label(c){return(c.cd||"")+" "+(c.md||"")}
 function chips(){$("mycars").innerHTML=MY.map(function(c,i){return'<button type="button" data-i="'+i+'" class="'+(i==CUR?"on":"")+'">🚗 '+label(c)+'</button>'}).join("")+(MY.length<5?'<button type="button" class="add" data-add>+ 차 추가</button>':"")+(MY.length>1?'<button type="button" class="del" data-del>이 차 빼기</button>':"")}
 function sel(k,v){if(v!=null&&[].some.call($(k).options,function(o){return o.value==v}))$(k).value=v}
-function applyCar(c){loadPos();sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;var k0=PK();setPH(null);phGet(k0,function(u){if(PK()==k0)setPH(u)});draw()}
+function applyCar(c){loadPos();sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;$("own").value=c.own||"";var k0=PK();setPH(null);phGet(k0,function(u){if(PK()==k0)setPH(u)});draw()}
 function syncCar(){MY[CUR]=curCar();saveMY();chips()}
-["mk","cd","md","yr"].forEach(function(k){$(k).addEventListener(k=="yr"?"input":"change",syncCar)});
+["mk","cd","md","yr","own"].forEach(function(k){$(k).addEventListener((k=="yr"||k=="own")?"input":"change",syncCar)});$("own").addEventListener("input",draw);
 $("mycars").onclick=function(e){var b=e.target.closest("button");if(!b)return;
  if(b.dataset.add!=null){MY.push({id:Date.now(),mk:$("mk").options[0].value,cd:"",md:"",yr:""});CUR=MY.length-1;applyCar(MY[CUR]);syncCar();return}
  if(b.dataset.del!=null){if(!confirmDel(b))return;phDel(PK());MY.splice(CUR,1);CUR=Math.max(0,CUR-1);applyCar(MY[CUR]);saveMY();chips();return}
@@ -101,17 +101,17 @@ document.addEventListener("click",function(e){var b=e.target.closest("[data-mv]"
 
 $("phb").onclick=function(){ruleOk(this,function(){$("ph").click()},"🖼 앨범에서")};
 
-var MINI=false;function miniDraw(){if(!MINI)return;var m=$("mini");m.getContext("2d").drawImage($("c"),0,0,m.width,m.height)}
+var MINI=false;function miniDraw(){if(!MINI)return;var m=$("mini"),nh=Math.round(360*(window.CH||1200)/720);if(m.height!=nh)m.height=nh;m.getContext("2d").drawImage($("c"),0,0,m.width,m.height)}
 if("IntersectionObserver" in window){new IntersectionObserver(function(es){MINI=!es[0].isIntersecting;$("mini").classList.toggle("on",MINI);miniDraw()},{threshold:.15}).observe($("c"))}
 
 function ruleOk(b,go,lab){if(lsg("icc_nc_rule")){go();return}if(!b.dataset.ok){b.dataset.ok=1;b.textContent="✔ 본인·내 차·가족·반려견 (누르기)";setTimeout(function(){delete b.dataset.ok;b.textContent=lab},6000);return}lss("icc_nc_rule","1");b.textContent=lab;delete b.dataset.ok;go()}
 $("phc").onclick=function(){ruleOk(this,function(){$("phcam").click()},"📸 사진 찍기")};
 $("phcam").onchange=function(){$("ph").onchange.call(this)};
-var LBL={ko:{car:"내 차",join:"가입일"},ja:{car:"愛車",join:"登録日"},en:{car:"My car",join:"Joined"}};
+var LBL={ko:{car:"내 차",join:"가입일",own:"오너",ownv:function(y,n){return y+"년부터 · "+n+"년째"}},ja:{car:"愛車",join:"登録日",own:"オーナー",ownv:function(y,n){return y+"年から · "+n+"年目"}},en:{car:"My car",join:"Joined",own:"Owner",ownv:function(y,n){return"Since "+y+" · "+n+(n==1?"st":n==2?"nd":n==3?"rd":"th")+" year"}}};
 function lang(){var c=$("cc")&&$("cc").value;return c=="KR"?"ko":c=="JP"?"ja":"en"}
 var CV=null,PT={},PD=0;
 (function(){var c=$("c");c.style.touchAction="none";
-function pos(e){var b=c.getBoundingClientRect();return{x:(e.clientX-b.left)*720/b.width,y:(e.clientY-b.top)*1200/b.height}}
+function pos(e){var b=c.getBoundingClientRect();return{x:(e.clientX-b.left)*720/b.width,y:(e.clientY-b.top)*(window.CH||1200)/b.height}}
 function inBox(p){return CV&&PH&&PH.naturalWidth&&p.x>CV.X&&p.x<CV.X+CV.w&&p.y>CV.Y&&p.y<CV.Y+CV.h}
 function save(){lss(PYK(),PX+","+PY+","+ZM)}
 c.addEventListener("pointerdown",function(e){var p=pos(e);if(!inBox(p))return;PT[e.pointerId]=p;c.setPointerCapture(e.pointerId);var k=Object.keys(PT);if(k.length==2){var a=PT[k[0]],b=PT[k[1]];PD=Math.hypot(a.x-b.x,a.y-b.y)}});
