@@ -425,11 +425,11 @@ function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==und
 function cc(code){return el('span','cc',code);}
 function wide(){return window.matchMedia('(min-width:900px)').matches;}
 function carTxt(it){return it.car+(it.yr?" '"+it.yr:'');}
-function titleNode(k,it,cls){var t=el('span',(cls||'t')+' tn');var s=it.t,h=it.h;
+function titleNode(k,it,cls,nn){var t=el('span',(cls||'t')+' tn');var s=it.t,h=it.h;
   if(!h&&k==='market'){var m=s.match(/^(팝니다|삽니다) · (.*)$/);if(m){h=m[1];s=m[2];}}
   if(it.mine){t.appendChild(el('span','badge new',HD('새 글')));}
   if(h){t.appendChild(el('span','badge '+(HC[h]||'hd'),HD(h)));}
-  t.appendChild(el('span','tx',s));if((it.lg||'ko')!==LANG){t.appendChild(el('span','lgt',(it.lg||'ko').toUpperCase()))}if(it.test){var tt=el('span','tmark','T');tt.title='테스트 글';t.appendChild(tt);}return t;}
+  t.appendChild(el('span','tx',s));if(nn){var cn=ncom(k,nn,it);if(cn)t.appendChild(el('span','cmn','['+cn+']'))}if((it.lg||'ko')!==LANG){t.appendChild(el('span','lgt',(it.lg||'ko').toUpperCase()))}if(it.test){var tt=el('span','tmark','T');tt.title='테스트 글';t.appendChild(tt);}return t;}
 var NTC={_all:[['필독','테스트 기간 안내 — 제목 끝에 T가 붙은 글은 시험용입니다','지금은 오픈 전 테스트 기간입니다. 제목 끝에 T 표시가 붙은 글은 화면을 시험하려고 넣은 글이며, 정식 오픈 전에 모두 지웁니다. 실제 회원 글에는 T 표시가 없습니다.','11.20']],
 lounge:[['공지','오너라운지 이용 안내 — 내 차 이야기를 자유롭게 써 주십시오','차와 함께한 일상, 사진, 질문을 자유롭게 올리는 곳입니다. 서로 존중하는 말투로 써 주시고, 광고 글은 지웁니다.','11.20']],
 carmeet:[['공지','카밋 공지 쓰는 법 — 날짜·장소·차종을 꼭 적어 주십시오','모임 글에는 날짜, 시간, 모이는 곳, 오는 차종을 적어 주십시오. 공공 도로에서 과속이나 소음은 삼가 주십시오.','11.20']],
@@ -554,8 +554,8 @@ var rh=el('div','rkh');rh.appendChild(document.createTextNode('🔥 인기 글 T
   rows.forEach(function(o){var it=o.it,n=o.n,p;
     if(k==='zz'){p=el('div','p part');p.appendChild(el('span','n',String(n)));p.appendChild(el('span','t',it.t));if(w){p.appendChild(el('span','c',it.car));p.appendChild(el('span','pr',it.price+'원'));}else{p.appendChild(el('span','pr',it.price+'원'));p.appendChild(el('span','m',it.car));}}
     else if(k==='zz'){p=el('div','p club');p.appendChild(el('span','n',String(n)));var sp=it.t.split(' — ');var t=el('span','t');t.appendChild(cc(it.cc));t.appendChild(document.createTextNode(sp[0]));p.appendChild(t);p.appendChild(el('span',w?'c':'m',sp[1]||''));}
-    else if(view==='photo'){p=el('a','card');p.href='#'+k+'-'+n;var th=el('span','thumb');th.style.background='#333 url('+imgFor(k,n,0)+') center/cover no-repeat';p.appendChild(th);p.appendChild(titleNode(k,it));p.appendChild(metaNode(k,it,n,false));}
-    else if(view==='list'){p=el('a','p nv');p.href='#'+k+'-'+n;var bx=el('span','nvx');bx.appendChild(titleNode(k,it));
+    else if(view==='photo'){p=el('a','card');p.href='#'+k+'-'+n;var th=el('span','thumb');th.style.background='#333 url('+imgFor(k,n,0)+') center/cover no-repeat';p.appendChild(th);p.appendChild(titleNode(k,it,null,n));p.appendChild(metaNode(k,it,n,false));}
+    else if(view==='list'){p=el('a','p nv');p.href='#'+k+'-'+n;var bx=el('span','nvx');bx.appendChild(titleNode(k,it,null,n));
       var ex='';try{ex=(it.body||'')+' '+longBody(k,it,n).filter(function(x){return x.indexOf('## ')!==0}).slice(0,2).join(' ')}catch(e){ex=it.body||''}
       bx.appendChild(el('span','ex',ex.slice(0,240)));
       var mm=el('span','mm');var sp=(it.sns||'').split(' @');var u=el('span','fl au','@'+(sp[1]||it.sns||''));u.dataset.ft='id';u.dataset.fv=sp[1]||it.sns;mm.appendChild(u);
@@ -564,7 +564,7 @@ var rh=el('div','rkh');rh.appendChild(document.createTextNode('🔥 인기 글 T
       mm.appendChild(el('span','dt',it.d));mm.appendChild(el('span','vw','조회 '+(it.v||0).toLocaleString()));mm.appendChild(el('span','ct','💬 '+ncom(k,n,it)));mm.appendChild(el('span','lk','♡ '+likes(k,n,it)));
       bx.appendChild(mm);p.appendChild(bx);
       if(n%5<3){var th=el('span','nvth');th.style.backgroundImage='url('+imgFor(k,n,0)+')';th.appendChild(el('i','',(n%7+1)+'+'));p.appendChild(th);}}
-    else{p=el('a','p');p.href='#'+k+'-'+n;if(w){p.appendChild(el('span','n',String(n)));p.appendChild(titleNode(k,it));var c1=el('span','c');var fa=el('span','fl fcc');fa.appendChild(cc(it.cc));fa.dataset.ft='cc';fa.dataset.fv=it.cc;c1.appendChild(fa);var fb=el('span','fl',carTxt(it));fb.dataset.ft='car';fb.dataset.fv=it.car;c1.appendChild(fb);p.appendChild(c1);var c2=el('span','c fl',it.sns);c2.dataset.ft='id';c2.dataset.fv=(it.sns||'').split('@')[1];p.appendChild(c2);p.appendChild(el('span','c',it.d));p.appendChild(el('span','c r','♥ '+likes(k,n,it)));}else{p.appendChild(titleNode(k,it));p.appendChild(el('span','dd',it.d));}}
+    else{p=el('a','p');p.href='#'+k+'-'+n;if(w){p.appendChild(el('span','n',String(n)));p.appendChild(titleNode(k,it,null,n));var c1=el('span','c');var fa=el('span','fl fcc');fa.appendChild(cc(it.cc));fa.dataset.ft='cc';fa.dataset.fv=it.cc;c1.appendChild(fa);var fb=el('span','fl',carTxt(it));fb.dataset.ft='car';fb.dataset.fv=it.car;c1.appendChild(fb);p.appendChild(c1);var c2=el('span','c fl',it.sns);c2.dataset.ft='id';c2.dataset.fv=(it.sns||'').split('@')[1];p.appendChild(c2);p.appendChild(el('span','c',it.d));p.appendChild(el('span','c r','♥ '+likes(k,n,it)));}else{p.appendChild(titleNode(k,it,null,n));p.appendChild(el('span','dd',it.d));}}
     L.appendChild(p);});
   var P=$('pager');P.textContent='';if(pages>1){var win=w?10:5,st=Math.floor((S.page-1)/win)*win+1,en=Math.min(pages,st+win-1);
   function pb(lbl,go,cls,dis,aria){var bt=el('button',cls||'',lbl);bt.type='button';if(aria)bt.setAttribute('aria-label',aria);if(dis){bt.disabled=true;bt.className+=' off';}else bt.addEventListener('click',function(){S.page=go;board(k);window.scrollTo(0,0);});P.appendChild(bt);return bt;}
@@ -667,7 +667,7 @@ header .unav a i svg{width:18px;height:18px}
 header .unav a span{white-space:nowrap;letter-spacing:-.3px}
 }
 #board>.tabs#tabs{display:none!important}
-.rkh{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap}.rkt{margin-left:auto;display:inline-flex;gap:4px}.rkt button{border:1px solid rgba(224,164,58,.45);background:none;color:#E0B866;border-radius:14px;padding:3px 11px;font:700 12.5px "Noto Sans KR",sans-serif;cursor:pointer}.rkt button.on{background:#E0A43A;border-color:#E0A43A;color:#171B26}.rkc{flex:none;margin-left:auto;margin-right:12px;color:#A6ABA8;font-size:12.5px;white-space:nowrap}.rki .rkc+.rkl{margin-left:0!important}.rke{color:#A6ABA8;font-size:13.5px;padding:8px 2px}
+.rkh{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap}.rkt{margin-left:auto;display:inline-flex;gap:4px}.rkt button{border:1px solid rgba(224,164,58,.45);background:none;color:#E0B866;border-radius:14px;padding:3px 11px;font:700 12.5px "Noto Sans KR",sans-serif;cursor:pointer}.rkt button.on{background:#E0A43A;border-color:#E0A43A;color:#171B26}.rkc{flex:none;margin-left:auto;margin-right:12px;color:#A6ABA8;font-size:12.5px;white-space:nowrap}.rki .rkc+.rkl{margin-left:0!important}.cmn{flex:none;margin-left:5px;color:#FF8A80;font-weight:700;font-size:.88em}.rke{color:#A6ABA8;font-size:13.5px;padding:8px 2px}
 @media (min-width:900px){html body header{flex-wrap:nowrap!important}html body header .logo{flex:none!important;white-space:nowrap}html body header .unav a{padding:8px 10px!important}html body header .btns{flex:none!important;margin-left:12px!important}html body header .unav{flex:1 1 auto!important;min-width:0!important;overflow:hidden}html body header .unav a{flex:none}}
 @media (min-width:900px) and (max-width:1420px){html body header .unav{margin-left:10px!important;gap:0!important}html body header .unav a{padding:8px 8px!important;font-size:14px!important}html body header .logo{font-size:21px!important}}
 @media (min-width:900px) and (max-width:999px){html body header .unav a{padding:6px 4px!important;font-size:12px!important}html body header .uicon{display:none!important}}
