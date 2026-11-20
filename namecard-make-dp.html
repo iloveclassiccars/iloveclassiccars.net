@@ -14,6 +14,7 @@
 <label>SNS</label><div class="row"><select id="sn"></select><input id="ac" value="koreain" placeholder="아이디"></div>
 </div>
 <div class="cv"><canvas id="c" width="1080" height="640"></canvas>
+<div class="mc" id="ths" style="margin:12px 0 0"></div>
 <div style="display:flex;gap:8px"><button class="btn" id="sv">📸 사진 넣고 저장</button><button class="btn" id="sv2" style="background:#2a3142">🙈 사진 빼고 저장</button></div>
 <div class="tip">📷 사진은 <b>이 기기에만</b> 저장되고 우리 서버로 오지 않습니다. 찍은 장소·날짜 정보는 자동으로 지웁니다. 카드 이미지에는 <b>이메일이 들어가지 않습니다</b> — SNS로 충분합니다. 이메일은 가입 메일 속 카드에만 있습니다. 차 그림은 고른 차에 맞춰 자동으로 들어갑니다. 사진을 넣으면 그림 대신 사진이 들어갑니다 — 내 차든 반려견이든 본인이 찍은 사진이면 됩니다.</div><div class="tip">✏️ <b>수정</b>은 입력 칸을 바꾸기만 하면 됩니다. 바꾼 내용과 사진은 <b>이 기기에 저장</b>되어, 다음에 열어도 그대로 나옵니다.</div><div class="tip ok" id="msg"></div></div></div>
 <script>
@@ -37,19 +38,24 @@ var IM={},logo=new Image();logo.src="/icons/icon-192.png";logo.onload=draw;
 Object.keys(BN).forEach(function(k){IM[k]=new Image();IM[k].src="/img/nc/"+k+".png";IM[k].onload=draw});
 function rr(x,c,y,w,h,r){x.beginPath();x.moveTo(c+r,y);x.arcTo(c+w,y,c+w,y+h,r);x.arcTo(c+w,y+h,c,y+h,r);x.arcTo(c,y+h,c,y,r);x.arcTo(c,y,c+w,y,r);x.closePath()}
 var F='-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
-function draw(){var cv=$("c"),W=720,H=1220;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle="#171B26";x.fillRect(0,0,W,H);
-var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#24402f");g.addColorStop(1,"#1c2433");rr(x,0,0,W,H,40);x.fillStyle=g;x.fill();x.lineWidth=5;x.strokeStyle="#2AA84B";rr(x,3,3,W-6,H-6,38);x.stroke();
-x.fillStyle="#7FD99A";x.font="800 26px "+F;x.fillText("MEMBER NAME CARD",44,68);if(logo.complete&&logo.naturalWidth){var L=74;x.save();rr(x,W-44-L,20,L,L,16);x.clip();x.drawImage(logo,W-44-L,20,L,L);x.restore()}
+var THS={green:{n:"클래식 그린",base:"#171B26",g1:"#24402f",g2:"#1c2433",line:"#2AA84B",acc:"#7FD99A",p1:"#2c4a39",sub:"#C9CEDA",lab:"#9AA3B2",txt:"#ffffff"},
+gold:{n:"블랙 골드",base:"#0b0b0d",g1:"#1d1a14",g2:"#0b0b0d",line:"#C9A24B",acc:"#E3C27A",p1:"#2a2418",sub:"#d8cfbf",lab:"#9a8f7a",txt:"#fff8e8"},
+ivory:{n:"아이보리 빈티지",base:"#efe7d6",g1:"#f6f0e2",g2:"#e6dcc6",line:"#1F4D36",acc:"#1F4D36",p1:"#d9cfb7",sub:"#4b4a44",lab:"#7a7466",txt:"#1d1f1c"},
+navy:{n:"네이비 레이싱",base:"#0e1626",g1:"#13284a",g2:"#0e1626",line:"#E5262D",acc:"#ff6b70",p1:"#1b2f52",sub:"#c9d3e6",lab:"#8fa0bf",txt:"#ffffff"}};
+var TH=THS.green;
+function draw(){var cv=$("c"),W=720,H=1220;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle=TH.base;x.fillRect(0,0,W,H);
+var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,TH.g1);g.addColorStop(1,TH.g2);rr(x,0,0,W,H,40);x.fillStyle=g;x.fill();x.lineWidth=5;x.strokeStyle=TH.line;rr(x,3,3,W-6,H-6,38);x.stroke();
+x.fillStyle=TH.acc;x.font="800 26px "+F;x.fillText("MEMBER NAME CARD",44,68);if(logo.complete&&logo.naturalWidth){var L=74;x.save();rr(x,W-44-L,20,L,L,16);x.clip();x.drawImage(logo,W-44-L,20,L,L);x.restore()}
 var bx=44,by=108,bw=W-88,bh=560;
-if(PH&&PH.naturalWidth&&!NOPH){cover(x,PH,bx,by,bw,bh)}else{var pg=x.createLinearGradient(0,by,0,by+bh);pg.addColorStop(0,"#2c4a39");pg.addColorStop(1,"#1c2433");x.save();rr(x,bx,by,bw,bh,22);x.fillStyle=pg;x.fill();x.restore();var im=IM[$("bd").value];if(im&&im.complete&&im.naturalWidth){var iw=bw*.8,ih=iw*im.naturalHeight/im.naturalWidth;x.drawImage(im,bx+(bw-iw)/2,by+(bh-ih)/2,iw,ih)}x.lineWidth=3;x.strokeStyle="#2AA84B";rr(x,bx,by,bw,bh,22);x.stroke()}
-var o=$("cc").selectedOptions[0],cT=o?o.textContent:"";var fx=44;fx+=flag(x,$("cc").value,fx,700,34);x.fillStyle="#C9CEDA";x.font="600 30px "+F;x.fillText(cT,fx,729);
+if(PH&&PH.naturalWidth&&!NOPH){cover(x,PH,bx,by,bw,bh)}else{var pg=x.createLinearGradient(0,by,0,by+bh);pg.addColorStop(0,TH.p1);pg.addColorStop(1,TH.g2);x.save();rr(x,bx,by,bw,bh,22);x.fillStyle=pg;x.fill();x.restore();var im=IM[$("bd").value];if(im&&im.complete&&im.naturalWidth){var iw=bw*.8,ih=iw*im.naturalHeight/im.naturalWidth;x.drawImage(im,bx+(bw-iw)/2,by+(bh-ih)/2,iw,ih)}x.lineWidth=3;x.strokeStyle=TH.line;rr(x,bx,by,bw,bh,22);x.stroke()}
+var o=$("cc").selectedOptions[0],cT=o?o.textContent:"";var fx=44;fx+=flag(x,$("cc").value,fx,700,34);x.fillStyle=TH.sub;x.font="600 30px "+F;x.fillText(cT,fx,729);
 var nx=44;
-x.fillStyle="#fff";x.font="900 60px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);fit(x,nkT,nx,812,W-nx-44);
+x.fillStyle=TH.txt;x.font="900 60px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);fit(x,nkT,nx,812,W-nx-44);
 var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
-rows.forEach(function(r,i){var y=900+i*80;x.fillStyle="#9AA3B2";x.font="500 31px "+F;x.fillText(r[0],46,y);x.fillStyle="#fff";x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
-x.fillStyle="#E8EAEE";x.font="900 30px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-46,H-44);x.textAlign="left"}
+rows.forEach(function(r,i){var y=900+i*80;x.fillStyle=TH.lab;x.font="500 31px "+F;x.fillText(r[0],46,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
+x.fillStyle=TH.txt;x.font="900 30px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-46,H-44);x.textAlign="left"}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
-function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sx=(im.naturalWidth-sw)/2,sy=(im.naturalHeight-sh)*.3;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle="#2AA84B";rr(x,X,Y,w,h,18);x.stroke()}
+function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sx=(im.naturalWidth-sw)/2,sy=(im.naturalHeight-sh)*.3;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
 var PH=null,NOPH=false;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
 $("ph").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var i=new Image();i.onload=function(){var m=1000,k=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);var u=c.toDataURL("image/jpeg",.85);try{localStorage.setItem(PK(),u)}catch(e){}setPH(u)};i.src=rd.result};rd.readAsDataURL(f);this.value=""};
 $("phx").onclick=function(){try{localStorage.removeItem(PK())}catch(e){}setPH(null)};
@@ -89,6 +95,9 @@ $("nkb").onclick=function(){var b=this;if(b.disabled)return;
  if(b.dataset.s==1){b.dataset.s=2;b.textContent="정말 확정합니까? 한 번 더 누르십시오";setTimeout(function(){if(b.dataset.s==2){b.dataset.s=1;b.textContent="✔ 이 닉네임으로 확정 (1년 동안 못 바꿈)"}},4000);return}
  lss("icc_nc_nkAt",String(Date.now()));saveNC();nkInit();draw()};
 var FL={};function flag(x,cc,X,Y,h){if(!cc)return 0;var k=cc.toLowerCase(),im=FL[k];if(!im){im=FL[k]=new Image();im.onload=draw;im.src="/img/flags/"+k+".png"}if(!im.complete||!im.naturalWidth)return 0;var w=h*4/3;x.save();rr(x,X,Y,w,h,5);x.clip();x.drawImage(im,X,Y,w,h);x.restore();x.lineWidth=1.5;x.strokeStyle="rgba(255,255,255,.35)";rr(x,X,Y,w,h,5);x.stroke();return w+12}
+
+function thInit(){var k=lsg("icc_nc_th")||"green";if(!THS[k])k="green";TH=THS[k];$("ths").innerHTML="🎨 "+Object.keys(THS).map(function(t){return'<button type="button" data-t="'+t+'" class="'+(t==k?"on":"")+'">'+THS[t].n+'</button>'}).join("");}
+$("ths").onclick=function(e){var b=e.target.closest("button");if(!b)return;lss("icc_nc_th",b.dataset.t);thInit();draw()};
 function fit(x,t,X,Y,M){var f=x.font,n=parseInt(f.match(/(\d+)px/)[1]);while(x.measureText(t).width>M&&n>16){n--;x.font=f.replace(/\d+px/,n+"px")}x.fillText(t,X,Y)}
 addEventListener("resize",draw);
 function saveImg(np){NOPH=np;draw();$("c").toBlob(function(bl){NOPH=false;draw();var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent=(np?"사진을 뺀 카드를 ":"카드를 ")+"저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")}
@@ -96,5 +105,5 @@ $("sv").onclick=function(){saveImg(false)};$("sv2").onclick=function(){saveImg(t
 var SNSP={"KR":["네이버","카카오","인스타그램","유튜브","X","페이스북"],"JP":["LINE","X","인스타그램","유튜브","믹시","페이스북"],"CN":["위챗","웨이보","더우인","샤오훙수","비리비리","QQ"],"TW":["LINE","페이스북","인스타그램","유튜브","X","스레드"],"TH":["LINE","페이스북","틱톡","인스타그램","유튜브","X"],"VN":["잘로","페이스북","틱톡","유튜브","인스타그램","X"],"RU":["VK","텔레그램","오드노클라스니키","유튜브","왓츠앱","Viber"],"_":["인스타그램","페이스북","유튜브","X","틱톡","왓츠앱"]},SNSALL=["네이버","카카오","X","페이스북","인스타그램","유튜브","틱톡","스레드","구글","애플","LINE","위챗","웨이보","QQ","샤오훙수","비리비리","더우인","VK","오드노클라스니키","텔레그램","왓츠앱","링크드인","핀터레스트","레딧","스냅챗","디스코드","텀블러","블루스카이","마스토돈","잘로","네이버 밴드","다음","믹시","Viber","Signal"];
 function fillSn(){var c=$("cc").value,top=SNSP[c]||SNSP._,cur=$("sn").value;var h=top.concat(SNSALL.filter(function(v){return top.indexOf(v)<0})).map(function(v){return"<option>"+v+"</option>"}).join("");$("sn").innerHTML=h;if(cur&&SNSALL.indexOf(cur)>=0)$("sn").value=cur}
 fillSn();$("cc").addEventListener("change",function(){fillSn();draw()});$("sn").value="X";
-fillCd();loadNC();initMY();nkInit();draw();
+fillCd();loadNC();initMY();nkInit();thInit();draw();
 </script></body></html>
