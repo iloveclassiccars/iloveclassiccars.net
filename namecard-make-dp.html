@@ -8,7 +8,7 @@
 <label>제조사 · 차종 코드</label><div class="row"><select id="mk"></select><select id="cd"></select></div>
 <label>모델 · 연식</label><div class="row"><select id="md"></select><input id="yr" inputmode="numeric" maxlength="4" value="1997"></div>
 <select id="bd" hidden><option value="sedan"></option><option value="coupe"></option><option value="roadster"></option><option value="suv"></option><option value="wagon"></option><option value="hatch"></option></select>
-<label>카드 사진 (선택 · 내 차·반려견 등 · 넣으면 그림 대신 들어갑니다)</label><div class="row"><label class="pbtn" for="ph">📷 사진 넣기</label><button type="button" class="pbtn" id="phx">사진 빼기</button></div><input id="ph" type="file" accept="image/*" hidden>
+<label>카드 사진 (선택 · 내 차·반려견 등 · 넣으면 그림 대신 들어갑니다)</label><div class="row"><label class="pbtn" for="ph">📷 사진 넣기</label><button type="button" class="pbtn" id="phx">사진 빼기</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="u">⬆ 사진 올리기</button><button type="button" class="pbtn" data-mv="d">⬇ 사진 내리기</button><button type="button" class="pbtn" data-mv="l">⬅</button><button type="button" class="pbtn" data-mv="r">➡</button></div><input id="ph" type="file" accept="image/*" hidden>
 <label>이메일</label><input id="em" type="email" value="futurenix@gmail.com">
 
 <label>SNS</label><div class="row"><select id="sn"></select><input id="ac" value="koreain" placeholder="아이디"></div>
@@ -51,8 +51,8 @@ var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" �
 rows.forEach(function(r,i){var y=900+i*80;x.fillStyle=TH.lab;x.font="500 30px "+F;x.fillText(r[0],44,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
 x.fillStyle=TH.acc;x.font="900 36px "+F;x.textAlign="center";x.fillText("www.iloveclassiccars.net",W/2,1150);x.textAlign="left"}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
-function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sx=(im.naturalWidth-sw)/2,sy=(im.naturalHeight-sh)*.3;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
-var PH=null,NOPH=false;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
+function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sy=(im.naturalHeight-sh)*PY,sx=(im.naturalWidth-sw)*PX;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
+var PH=null,NOPH=false,PY=.5,PX=.5;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
 $("ph").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var i=new Image();i.onload=function(){var m=1000,k=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);var u=c.toDataURL("image/jpeg",.85);try{localStorage.setItem(PK(),u)}catch(e){}setPH(u)};i.src=rd.result};rd.readAsDataURL(f);this.value=""};
 $("phx").onclick=function(){try{localStorage.removeItem(PK())}catch(e){}setPH(null)};
 var KEYS=["nk","cc","mk","cd","md","yr","sn","ac","em"];
@@ -70,7 +70,7 @@ function curCar(){return{id:MY[CUR]?MY[CUR].id:Date.now(),mk:$("mk").value,cd:$(
 function label(c){return(c.cd||"")+" "+(c.md||"")}
 function chips(){$("mycars").innerHTML=MY.map(function(c,i){return'<button type="button" data-i="'+i+'" class="'+(i==CUR?"on":"")+'">🚗 '+label(c)+'</button>'}).join("")+(MY.length<5?'<button type="button" class="add" data-add>+ 차 추가</button>':"")+(MY.length>1?'<button type="button" class="del" data-del>이 차 빼기</button>':"")}
 function sel(k,v){if(v!=null&&[].some.call($(k).options,function(o){return o.value==v}))$(k).value=v}
-function applyCar(c){sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;setPH(lsg(PK()));draw()}
+function applyCar(c){loadPos();sel("mk",c.mk);fillCd();sel("cd",c.cd);fillMd();sel("md",c.md);autoBd();if(c.yr!=null)$("yr").value=c.yr;setPH(lsg(PK()));draw()}
 function syncCar(){MY[CUR]=curCar();saveMY();chips()}
 ["mk","cd","md","yr"].forEach(function(k){$(k).addEventListener(k=="yr"?"input":"change",syncCar)});
 $("mycars").onclick=function(e){var b=e.target.closest("button");if(!b)return;
@@ -93,6 +93,10 @@ $("nkb").onclick=function(){var b=this;if(b.disabled)return;
 var FL={};function flag(x,cc,X,Y,h){if(!cc)return 0;var k=cc.toLowerCase(),im=FL[k];if(!im){im=FL[k]=new Image();im.onload=draw;im.src="/img/flags/"+k+".png"}if(!im.complete||!im.naturalWidth)return 0;var w=h*4/3;x.save();rr(x,X,Y,w,h,5);x.clip();x.drawImage(im,X,Y,w,h);x.restore();x.lineWidth=1.5;x.strokeStyle="rgba(255,255,255,.35)";rr(x,X,Y,w,h,5);x.stroke();return w+12}
 
 function spread(x,t,X,Y,w){var cs=t.split(""),tot=cs.reduce(function(a,c){return a+x.measureText(c).width},0),gap=(w-tot)/(cs.length-1),cx=X;cs.forEach(function(c){x.fillText(c,cx,Y);cx+=x.measureText(c).width+gap})}
+
+function PYK(){return"icc_nc_pos_"+(MY[CUR]?MY[CUR].id:"0")}
+function loadPos(){var v=(lsg(PYK())||".5,.4").split(",");PX=+v[0];PY=+v[1]}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-mv]");if(!b)return;var m=b.dataset.mv,st=.1;if(m=="u")PY=Math.min(1,PY+st);if(m=="d")PY=Math.max(0,PY-st);if(m=="l")PX=Math.min(1,PX+st);if(m=="r")PX=Math.max(0,PX-st);PX=Math.round(PX*10)/10;PY=Math.round(PY*10)/10;lss(PYK(),PX+","+PY);draw()});
 function fit(x,t,X,Y,M){var f=x.font,n=parseInt(f.match(/(\d+)px/)[1]);while(x.measureText(t).width>M&&n>16){n--;x.font=f.replace(/\d+px/,n+"px")}x.fillText(t,X,Y)}
 addEventListener("resize",draw);
 function saveImg(np){NOPH=np;draw();$("c").toBlob(function(bl){NOPH=false;draw();var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent=(np?"사진을 뺀 카드를 ":"카드를 ")+"저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")}
