@@ -49,7 +49,7 @@ var nx=44;
 x.fillStyle=TH.txt;x.font="900 60px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);fit(x,nkT,nx,812,W-nx-44);
 var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
 rows.forEach(function(r,i){var y=900+i*80;x.fillStyle=TH.lab;x.font="500 30px "+F;x.fillText(r[0],44,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
-x.fillStyle=TH.acc;x.font="900 36px "+F;x.textAlign="center";x.fillText("www.iloveclassiccars.net",W/2,1150);x.textAlign="left"}
+x.fillStyle=TH.acc;x.font="800 36px "+F;var tgt=Math.min(x.measureText(rows[0][1]).width,W-170-44);x.font="800 30px "+F;var u="www.iloveclassiccars.net",uw=x.measureText(u).width,fs=Math.max(18,Math.min(36,30*tgt/uw));x.font="800 "+fs.toFixed(1)+"px "+F;x.fillText(u,170,1140)}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
 function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sy=(im.naturalHeight-sh)*PY,sx=(im.naturalWidth-sw)*PX;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
 var PH=null,NOPH=false,PY=.5,PX=.5;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
