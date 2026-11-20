@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>디피 — SNS 링크 카드형 게시판 | I ♥ Classic Cars</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#171B26;color:#E8EAEE;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;overflow-y:scroll}
+.top{background:#1F4D36;padding:12px 16px;font-weight:800}.top small{font-weight:500;opacity:.8;margin-left:8px}
+.wrap{max-width:1168px;margin:0 auto;padding:14px 16px 40px}
+.dpn{font-size:12.5px;color:#F2C46B;border:1px solid #C99A3B;border-radius:8px;padding:8px 12px;margin-bottom:12px}
+.box{border:1px solid #8a5a2b;background:rgba(138,90,43,.12);border-radius:12px;padding:10px 12px;height:305px;overflow:hidden}
+.bh{display:flex;align-items:center;gap:8px;height:27px;margin-bottom:6px;white-space:nowrap}.bh b{font-size:17px}.bh span{color:#C9B49A;font-size:13px}
+.area{height:150px;overflow:hidden}
+.rk{display:flex;align-items:center;gap:10px;height:30px;font-size:14px;white-space:nowrap}.rk .n{flex:none;width:20px;height:20px;border-radius:50%;background:#8a5a2b;color:#fff;font:700 12px/20px sans-serif;text-align:center}.rk .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.rk .s{flex:none;font-size:12px;color:#9AA3B2}.rk .l{flex:none;color:#FF8A80;font-size:12.5px;width:56px;text-align:right}
+.nt{border-top:1px solid rgba(201,154,59,.5);margin-top:10px}.nt div{display:flex;gap:12px;align-items:center;height:43px;white-space:nowrap;overflow:hidden}.nt div+div{border-top:1px solid rgba(255,255,255,.08)}.tag{flex:none;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;border:1px solid #C99A3B;color:#F2C46B}.tag.m{background:#C8102E;border-color:#C8102E;color:#fff}.nt b{font-size:14px;overflow:hidden;text-overflow:ellipsis}
+.wf{display:none;height:150px;grid-template-columns:minmax(0,1fr) 300px;gap:14px}.box.fo .wf{display:grid}.box.fo .rks{display:none}
+.wf input{width:100%;height:40px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:#0f131c;color:#fff;font:inherit;padding:0 12px}
+.wf .row{display:flex;gap:8px;margin-top:8px}.wf button{height:40px;border-radius:8px;font:inherit;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:none;color:#E8EAEE;padding:0 16px}.wf .go{background:#1B8438;border-color:#1B8438;color:#fff}.wf .go:disabled{opacity:.4}
+.wf .hint{font-size:12px;color:#9AA3B2;margin-top:6px;height:36px;overflow:hidden}
+.pv{border:1px dashed rgba(255,255,255,.25);border-radius:10px;height:150px;display:flex;align-items:center;justify-content:center;color:#9AA3B2;font-size:13px;overflow:hidden}
+.tt{display:flex;align-items:center;gap:12px;height:36px;margin:42px 0 27px;padding-bottom:0;white-space:nowrap}
+.tt .ic{width:32px;height:32px;border-radius:9px;background:#8a5a2b;display:flex;align-items:center;justify-content:center;font-size:17px}.tt .nm{font-weight:700}.tt .c{color:#9AA3B2;font-size:13px}
+.tt .sp{flex:1}.tt .q{width:240px;height:34px;border-radius:17px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff;font:inherit;padding:0 14px}
+.tt .w{height:34px;border-radius:8px;border:0;background:#1B8438;color:#fff;font:inherit;font-weight:800;padding:0 14px;cursor:pointer}
+.line{border-top:1px solid rgba(255,255,255,.18);margin-top:-15px;margin-bottom:0}
+.it{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:16px;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer;height:126px}
+.it:hover{background:rgba(255,255,255,.03)}
+.it .t1{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden}.it .t1 span.tx{overflow:hidden;text-overflow:ellipsis}
+.T{flex:none;font:700 10.5px/14px sans-serif;color:#F2C46B;border:1px solid #C99A3B;border-radius:3px;padding:0 4px}
+.src{font-size:13px;color:#AEB6C2;margin:6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm{display:flex;gap:12px;font-size:12.5px;color:#9AA3B2;align-items:center;white-space:nowrap;overflow:hidden}.mm .cc{border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:0 5px;font-size:11px;font-weight:700;color:#E8EAEE}.mm .car{color:#7FD99A}.mm .lk{color:#FF8A80}
+.th{width:120px;height:96px;border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start;padding:6px}
+.pb{font:700 11px/16px sans-serif;color:#fff;padding:1px 6px;border-radius:4px;background:rgba(0,0,0,.6)}
+.open{grid-column:1/-1;display:none}
+.view{border:1px solid rgba(255,255,255,.18);border-radius:12px;margin:10px 0 18px;padding:14px;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:18px}
+.emb{border-radius:10px;background:#fff;color:#222;overflow:hidden}.emb .eh{display:flex;gap:8px;align-items:center;padding:10px 12px;font-weight:700;font-size:13px;border-bottom:1px solid #eee}.emb .eh i{width:28px;height:28px;border-radius:50%;display:inline-block}.emb .ei{height:300px}.emb .et{padding:10px 12px;font-size:13px;color:#333}
+.vt h3{margin:0 0 8px;font-size:18px}.vt p{color:#C9CEDA;font-size:13.5px;line-height:1.7;margin:0 0 12px}.vt a{display:inline-flex;height:38px;align-items:center;padding:0 16px;border-radius:8px;background:#1B8438;color:#fff;text-decoration:none;font-weight:800}
+.vt .nb{font-size:12px;color:#9AA3B2;margin-top:12px;line-height:1.6}
+.pg{display:flex;gap:6px;justify-content:center;margin:16px 0}.pg button{min-width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:none;color:#E8EAEE;cursor:pointer}.pg .on{background:#1B8438;border-color:#1B8438}
+@media (max-width:640px){.wrap{padding:12px 12px 40px}.box{height:300px}.wf{grid-template-columns:1fr}.pv{display:none}.tt{flex-wrap:wrap;height:auto;row-gap:8px;margin:30px 0 20px}.tt .q{order:3;flex:1 1 100%;width:auto}.tt .sp{display:none}.tt .w{margin-left:auto}.line{margin-top:-8px}.it{grid-template-columns:minmax(0,1fr) 84px;height:110px;gap:10px}.th{width:84px;height:84px}.it .t1{font-size:15px}.view{grid-template-columns:1fr}.rk .s{display:none}.emb .ei{height:220px}}
+</style></head><body>
+<div class="top">I ♥ Classic Cars <small>디피 — SNS 링크 카드형 게시판 (사이트에는 아직 없음)</small></div>
+<div class="wrap"><div class="dpn">미리보기입니다. 글 본문과 사진은 회원 SNS에 있고, 우리는 주소 · 제목 한 줄 · 차종 · 국가 · 날짜만 갖습니다. 아래 SNS 카드는 모양만 흉내 낸 테스트입니다.</div>
+<div class="box" id="box"><div class="bh">🔥 <b>오너라운지</b><span>인기 글 TOP 5</span></div>
+<div class="area"><div class="rks" id="rks"></div>
+<div class="wf"><div><input id="url" placeholder="내 SNS 글 주소를 붙여 넣으십시오 (인스타그램 · 페이스북 · X · 유튜브 · 네이버 블로그)" autocomplete="off"><div class="row"><input id="ttl" placeholder="제목 한 줄 (목록에 보입니다)"><button type="button" id="cx">취소</button><button type="button" class="go" id="ok" disabled>올리기</button></div><div class="hint" id="hint">공개 글만 띄울 수 있습니다. 국가 · 차종은 내 정보 카드에서 자동으로 붙습니다.</div></div><div class="pv" id="pv">주소를 넣으면 여기에 미리보기</div></div></div>
+<div class="nt"><div><span class="tag">공지</span><b>새 글쓰기 방식 — 내 SNS에 올리고, 여기에는 주소만 붙여 넣으십시오</b></div><div><span class="tag m">필독</span><b>상담실 · 사고팔기는 회원 보호를 위해 지금처럼 이 사이트에 직접 씁니다</b></div></div></div>
+<div class="tt"><span class="ic">☕</span><span class="nm">오너라운지</span><span class="c" id="cnt"></span><span class="sp"></span><input class="q" id="q" placeholder="이 게시판에서 찾기"><button type="button" class="w" id="wb">+ SNS 글 소개하기</button></div>
+<div class="line"></div><div id="list"></div><div class="pg" id="pg"></div></div>
+<script>
+var PF={ig:["인스타그램","linear-gradient(135deg,#f58529,#dd2a7b,#8134af)"],fb:["페이스북","#1877F2"],x:["X","#111"],yt:["유튜브","#E62117"],nv:["네이버 블로그","#03C75A"],th:["스레드","#222"]};
+var D=[["ig","test_w140_s600","W140 S600 10년 정비 기록을 한 장으로 정리했습니다","KR","W140 S600 1997","11.20",389],["yt","test_pony_garage","포니2 엔진 다시 살리기 1편 — 30년 만의 시동","KR","포니2 1986","11.19",312],["fb","test_e30_club","E30 클럽 가을 정기 모임 사진","DE","E30 325i 1988","11.19",204],["x","test_964_driver","964 오일 누유, 원인은 이 부품이었습니다","JP","964 Carrera 2 1991","11.18",188],["nv","test_galloper","갤로퍼 하체 방청 셀프로 해 봤습니다","KR","갤로퍼 1996","11.18",151],["ig","test_r129","R129 소프트탑 유압 실린더 교체 후기","US","R129 SL500 1996","11.17",140],["th","test_w124","W124 E220 아내가 처음으로 예쁘다고 했습니다","KR","W124 E220 1994","11.16",129],["ig","test_ae86","AE86 복원 1년 — 처음과 지금 비교","JP","AE86 Trueno 1985","11.16",117],["yt","test_w123","W123 300D 예열 플러그 교체 영상","KR","W123 300D 1983","11.15",98],["fb","test_volvo240","240 왜건으로 캠핑 다녀왔습니다","SE","240 Estate 1990","11.14",86],["x","test_na_mx5","NA 로드스터 첫 세차 — 30년 된 페인트","AU","MX-5 1.6 1991","11.13",71],["ig","test_w126","560SEL 연료 펌프 교체, 소리가 달라졌습니다","KR","W126 560SEL 1988","11.12",64],["nv","test_grandeur","각그랜저 실내 가죽 복원 맡긴 이야기","KR","그랜저 3.0 1991","11.11",55],["yt","test_e34","E34 M5 고속도로 첫 주행","DE","E34 M5 1992","11.10",47],["ig","test_g300","G300 디퍼렌셜 오일 교체 사진","KR","W463 G300 1994","11.09",33]];
+var FLAG={KR:"🇰🇷",DE:"🇩🇪",JP:"🇯🇵",US:"🇺🇸",SE:"🇸🇪",AU:"🇦🇺"};
+var PG=1,PER=8,OPEN=-1,Q="";
+function E(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function th(p,i){return'<div class="th" style="background:'+PF[p][1]+'"><span class="pb">'+PF[p][0]+'</span></div>'}
+function rk(){var t=D.slice().sort(function(a,b){return b[6]-a[6]}).slice(0,5);document.getElementById("rks").innerHTML=t.map(function(x,i){return'<div class="rk"><span class="n">'+(i+1)+'</span><span class="t">'+E(x[2])+' <span class="T">T</span></span><span class="s">'+PF[x[0]][0]+' · '+E(x[4])+'</span><span class="l">♥ '+x[6]+'</span></div>'}).join("")}
+function list(){var L=D.filter(function(x){return !Q||(x[2]+x[4]+x[1]).toLowerCase().indexOf(Q)>=0});var N=Math.max(1,Math.ceil(L.length/PER));if(PG>N)PG=N;document.getElementById("cnt").textContent="글 "+L.length+"개";
+ document.getElementById("list").innerHTML=L.slice((PG-1)*PER,PG*PER).map(function(x){var i=D.indexOf(x);return'<div class="it" data-i="'+i+'"><div style="min-width:0"><div class="t1"><span class="tx">'+E(x[2])+'</span><span class="T">T</span></div><div class="src">'+PF[x[0]][0]+' @'+E(x[1])+' 에 올린 글 · 원문은 회원 SNS에 있습니다</div><div class="mm"><span class="cc">'+FLAG[x[3]]+' '+x[3]+'</span><span class="car">'+E(x[4])+'</span><span>'+x[5]+'</span><span class="lk">♥ '+x[6]+'</span></div></div>'+th(x[0])+'</div>'+(OPEN===i?view(x):'')}).join("");
+ var h="";for(var p=1;p<=N;p++)h+='<button type="button" data-p="'+p+'"'+(p===PG?' class="on"':'')+'>'+p+'</button>';document.getElementById("pg").innerHTML=h}
+function view(x){return'<div class="view"><div class="emb"><div class="eh"><i style="background:'+PF[x[0]][1]+'"></i>@'+E(x[1])+' · '+PF[x[0]][0]+'</div><div class="ei" style="background:'+PF[x[0]][1]+';opacity:.85"></div><div class="et">(여기에 '+PF[x[0]][0]+' 원문이 그대로 뜹니다 — 사진 · 글 · 좋아요 · 댓글)</div></div><div class="vt"><h3>'+E(x[2])+'</h3><p>'+FLAG[x[3]]+' '+x[3]+' · '+E(x[4])+' · '+x[5]+'<br>글과 사진, 댓글은 '+PF[x[0]][0]+'에 있고 저작권은 쓴 회원에게 있습니다. 회원이 원문을 지우면 여기서도 사라집니다.</p><a href="#" onclick="return false">'+PF[x[0]][0]+'에서 원문 보기 ↗</a><div class="nb">문제가 있는 글은 [신고]하면 운영진이 링크를 내립니다. · 정식 버전에서는 공식 퍼오기(oEmbed)로 실제 원문을 띄웁니다.</div></div></div>'}
+function det(u){u=u.trim();if(/instagram\.com\/(p|reel)\//.test(u))return"ig";if(/(facebook\.com|fb\.watch)/.test(u))return"fb";if(/(x\.com|twitter\.com)\/[^/]+\/status\//.test(u))return"x";if(/(youtube\.com\/watch|youtu\.be\/|youtube\.com\/shorts)/.test(u))return"yt";if(/blog\.naver\.com\//.test(u))return"nv";if(/threads\.(net|com)\//.test(u))return"th";return""}
+function chk(){var u=document.getElementById("url").value,t=document.getElementById("ttl").value.trim(),p=det(u),pv=document.getElementById("pv"),hn=document.getElementById("hint");if(!u.trim()){pv.innerHTML="주소를 넣으면 여기에 미리보기";hn.textContent="공개 글만 띄울 수 있습니다. 국가 · 차종은 내 정보 카드에서 자동으로 붙습니다.";document.getElementById("ok").disabled=true;return}
+ if(!p){pv.innerHTML="⚠️ 알 수 없는 주소";hn.innerHTML='<span style="color:#FF8A80">인스타그램 · 페이스북 · X · 유튜브 · 네이버 블로그 · 스레드 글 주소만 됩니다.</span>';document.getElementById("ok").disabled=true;return}
+ pv.innerHTML='<div class="th" style="width:100%;height:100%;border-radius:0;background:'+PF[p][1]+'"><span class="pb">'+PF[p][0]+' 글 · 미리보기</span></div>';hn.textContent=PF[p][0]+" 글을 찾았습니다. 제목 한 줄을 넣고 [올리기]를 누르십시오.";document.getElementById("ok").disabled=!t}
+document.addEventListener("input",function(e){if(e.target.id==="url"||e.target.id==="ttl")chk();if(e.target.id==="q"){Q=e.target.value.trim().toLowerCase();PG=1;OPEN=-1;list()}});
+document.addEventListener("click",function(e){var t=e.target;if(t.id==="wb"){var b=document.getElementById("box");b.classList.toggle("fo");t.textContent=b.classList.contains("fo")?"× 닫기":"+ SNS 글 소개하기";if(b.classList.contains("fo"))document.getElementById("url").focus();return}
+ if(t.id==="cx"){document.getElementById("box").classList.remove("fo");document.getElementById("wb").textContent="+ SNS 글 소개하기";return}
+ if(t.id==="ok"){var u=document.getElementById("url").value,p=det(u),m=u.match(/\.com\/([A-Za-z0-9_.]+)/);D.unshift([p,"나",document.getElementById("ttl").value.trim(),"KR","W140 S600 1997","11.20",0]);document.getElementById("url").value="";document.getElementById("ttl").value="";chk();document.getElementById("box").classList.remove("fo");document.getElementById("wb").textContent="+ SNS 글 소개하기";PG=1;OPEN=-1;list();rk();return}
+ var pb=t.closest("[data-p]");if(pb){PG=+pb.dataset.p;OPEN=-1;list();return}
+ var it=t.closest(".it");if(it){var i=+it.dataset.i;OPEN=OPEN===i?-1:i;list();var el=document.querySelector('.it[data-i="'+i+'"]');if(el&&OPEN===i){var y=document.querySelector(".tt").getBoundingClientRect().top+scrollY-8;if(scrollY>y)scrollTo(0,y)}}});
+rk();list();
+</script></body></html>
