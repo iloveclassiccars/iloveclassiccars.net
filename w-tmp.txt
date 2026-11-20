@@ -28,6 +28,7 @@ function html(L,d,link){const t=T[L],body=BODY[d.code]||"sedan",r=(k,v,raw)=>`<t
 <tr><td style="padding:14px 28px 20px;border-top:1px solid #2a3142;font-size:13.6px;color:#8C94A3"><a href="${SITE}" style="color:#7FD99A">iloveclassiccars.net</a></td></tr></table></td></tr></table></body></html>`}
 
 // ===== SNS 본인 확인 (카카오·네이버) — 회원 SNS 아이디는 해시로만 저장 =====
+const GOOGLE_CID="1018614625759-nupfh4i9bm6pclmm4ctics5k086etdhv.apps.googleusercontent.com";
 const KAKAO_ID="48d88a5e91787559624d32c572904eb2";
 const AUTH_CB=k=>`https://icc-mail.futurenix.workers.dev/auth/${k}`;
 const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
@@ -37,7 +38,7 @@ const back=(r,q)=>Response.redirect(`${SITE}${r&&r.startsWith("/")?r:"/namecard/
 async function authStart(u,env,prov){const eh=u.searchParams.get("eh")||"",r=u.searchParams.get("r")||"/namecard/";const p=b64u(new TextEncoder().encode(JSON.stringify({eh,r,t:Date.now(),n:crypto.randomUUID()})));const st=p+"."+await hmac(env.RESEND_KEY||env.NAVER_SECRET||"x",p);
  if(prov==="kakao")return Response.redirect(`https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_ID}&redirect_uri=${encodeURIComponent(AUTH_CB("kakao"))}&response_type=code&state=${encodeURIComponent(st)}`,302);
  if(prov==="naver"&&env.NAVER_ID)return Response.redirect(`https://nid.naver.com/oauth2.0/authorize?client_id=${env.NAVER_ID}&redirect_uri=${encodeURIComponent(AUTH_CB("naver"))}&response_type=code&state=${encodeURIComponent(st)}`,302);
- if(prov==="google"&&env.GOOGLE_ID)return Response.redirect(`https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(env.GOOGLE_ID)}&redirect_uri=${encodeURIComponent(AUTH_CB("google"))}&response_type=code&scope=openid&prompt=select_account&state=${encodeURIComponent(st)}`,302);
+ if(prov==="google")return Response.redirect(`https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent((env.GOOGLE_ID||GOOGLE_CID))}&redirect_uri=${encodeURIComponent(AUTH_CB("google"))}&response_type=code&scope=openid&prompt=select_account&state=${encodeURIComponent(st)}`,302);
  if(prov==="facebook"&&env.FB_ID)return Response.redirect(`https://www.facebook.com/v21.0/dialog/oauth?client_id=${env.FB_ID}&redirect_uri=${encodeURIComponent(AUTH_CB("facebook"))}&response_type=code&scope=public_profile&state=${encodeURIComponent(st)}`,302);
  return back(r,"sns=fail")}
 async function authCb(u,env,prov){const code=u.searchParams.get("code"),st=u.searchParams.get("state")||"";const[p,sg]=st.split(".");
@@ -49,7 +50,7 @@ async function authCb(u,env,prov){const code=u.searchParams.get("code"),st=u.sea
    fetch("https://kapi.kakao.com/v1/user/logout",{method:"POST",headers:{authorization:`Bearer ${t.access_token}`}}).catch(()=>{})}
   if(prov==="naver"){const t=await (await fetch(`https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${env.NAVER_ID}&client_secret=${env.NAVER_SECRET}&code=${encodeURIComponent(code)}&state=${encodeURIComponent(st)}`)).json();
    const me=await (await fetch("https://openapi.naver.com/v1/nid/me",{headers:{authorization:`Bearer ${t.access_token}`}})).json();if(me.response&&me.response.id)sid="naver:"+me.response.id}
-  if(prov==="google"){const t=await (await fetch("https://oauth2.googleapis.com/token",{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},body:new URLSearchParams({grant_type:"authorization_code",client_id:env.GOOGLE_ID,client_secret:env.GOOGLE_SECRET||"",redirect_uri:AUTH_CB("google"),code})})).json();
+  if(prov==="google"){const t=await (await fetch("https://oauth2.googleapis.com/token",{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},body:new URLSearchParams({grant_type:"authorization_code",client_id:(env.GOOGLE_ID||GOOGLE_CID),client_secret:env.GOOGLE_SECRET||"",redirect_uri:AUTH_CB("google"),code})})).json();
    const me=await (await fetch("https://openidconnect.googleapis.com/v1/userinfo",{headers:{authorization:`Bearer ${t.access_token}`}})).json();if(me.sub)sid="google:"+me.sub}
   if(prov==="facebook"){const t=await (await fetch(`https://graph.facebook.com/v21.0/oauth/access_token?client_id=${env.FB_ID}&client_secret=${env.FB_SECRET}&redirect_uri=${encodeURIComponent(AUTH_CB("facebook"))}&code=${encodeURIComponent(code)}`)).json();
    const me=await (await fetch(`https://graph.facebook.com/me?fields=id&access_token=${encodeURIComponent(t.access_token||"")}`)).json();if(me.id)sid="facebook:"+me.id}}catch(e){}
