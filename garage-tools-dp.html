@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>디피 — My Garage 공구함 (W140)</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#171B26;color:#E8EAEE;font:14px/1.55 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.note{background:#d9a441;color:#1d1d1d;font-weight:600;font-size:12.5px;text-align:center;padding:5px}
+header{background:#1F4D36;height:56px;display:flex;align-items:center;padding:0 16px;gap:10px}header b{font-size:17px}header i{color:#FF4D55;font-style:normal}
+main{max-width:1168px;margin:0 auto;padding:18px 16px 40px}
+.tt{display:flex;align-items:center;gap:8px;margin:0 0 12px}.ico{width:32px;height:32px;border-radius:9px;background:#4B5D73;display:flex;align-items:center;justify-content:center}
+.tt b{font-size:13.5px}.tt small{color:#9AA3B2}
+.car{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px}.car span{flex:none;white-space:nowrap;height:34px;display:flex;align-items:center;padding:0 12px;border:1px solid rgba(255,255,255,.2);border-radius:17px;font-size:13px}.car .on{border-color:#2AA84B;background:rgba(42,168,75,.16)}
+.tabs{display:inline-flex;border:1px solid rgba(255,255,255,.25);border-radius:8px;overflow:hidden;margin-bottom:14px}.tabs button{height:34px;padding:0 16px;background:none;border:0;border-right:1px solid rgba(255,255,255,.18);color:#E8EAEE;font:600 13px inherit;font-family:inherit;cursor:pointer}.tabs button:last-child{border-right:0}.tabs .on{background:#1B8438;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{border:1px solid rgba(124,145,170,.45);background:rgba(75,93,115,.10);border-radius:12px;padding:14px}
+.card h3{margin:0 0 4px;font-size:15px}.card .sub{color:#9AA3B2;font-size:12.5px;margin:0 0 10px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;white-space:nowrap}th{color:#9AA3B2;font-weight:500;font-size:12px}td:last-child,th:last-child{text-align:right}td:nth-child(1),td:nth-child(3){white-space:normal}td{font-size:12.5px}.card{min-width:0}
+.st{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11.5px;font-weight:700}.ok{background:#1c3a2a;color:#7FD99A}.soon{background:#3a3218;color:#f3c55b}.over{background:#3a1c22;color:#FF8A80}
+label{display:block;color:#9AA3B2;font-size:12.5px;margin:8px 0 3px}input,select{width:100%;height:36px;background:#12151e;border:1px solid #2a3142;border-radius:6px;color:#E8EAEE;padding:0 10px;font:inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.res{margin-top:12px;padding:10px 12px;border-radius:8px;background:#12151e;font-size:13.5px}.res b{font-size:18px}
+.ad{margin-top:12px;border:1px dashed #8a6d2b;border-radius:8px;padding:9px 11px;font-size:12.5px;color:#C9CEDA}.ad em{font-style:normal;font-size:11px;font-weight:700;color:#F2C46B;border:1px solid #C99A3B;border-radius:3px;padding:0 5px;margin-right:6px}
+.warn{color:#9AA3B2;font-size:12px;margin-top:8px}
+.chk li{margin:4px 0}.chk{padding-left:18px;margin:6px 0 0;font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.tabs{display:flex}.tabs button{flex:1;padding:0 4px}}
+</style></head><body>
+<div class="note">디피 — My Garage 공구함 1단계 (실제 사이트에는 아직 넣지 않았습니다)</div>
+<header><b>I <i>♥</i> CLASSIC CARS</b></header>
+<main>
+<div class="tt"><span class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M7 20v-6h10v6M7 17h10"/></svg></span><b>My Garage</b><small>내 차고 · 공구함</small></div>
+<div class="car"><span class="on">MB W140 S600 (테스트) 1997</span><span>W124 E220 (테스트)</span><span>W126 560SEL (테스트)</span></div>
+<div class="tabs"><button>정비 기록</button><button>사진 보관함</button><button>내 견적</button><button class="on">공구함</button></div>
+
+<div class="grid">
+<section class="card"><h3>① 정비 주기표 · 교환 알림</h3><p class="sub">내 정비 기록의 마지막 날짜로 자동 계산합니다. 오늘 기준.</p>
+<label>지금 주행거리 (km, 선택)</label><input id="km" inputmode="numeric" placeholder="예: 168000">
+<table id="sched"><thead><tr><th>항목</th><th>마지막</th><th>다음</th><th>상태</th></tr></thead><tbody></tbody></table>
+<div class="ad" id="ad" style="display:none"><em>제휴 예시</em>엔진오일 교환 때가 됐습니다. W140 S600(M120)에 맞는 <b>MB 229.5 규격</b> 오일만 보여 드립니다. (2단계에서 제휴처가 생기면 여기에 1개만 표시)</div>
+<p class="warn">주기는 일반 권장값입니다. 차량 설명서·정비 매뉴얼이 우선입니다. 오일 양은 엔진·필터 교환 여부에 따라 달라 정비 매뉴얼로 확인하십시오.</p></section>
+
+<section class="card"><h3>② 공임 어림 계산 · 견적 점검</h3><p class="sub">견적서의 작업 시간과 정비소 시간당 공임으로 적정 공임을 계산합니다.</p>
+<label>작업</label><select id="job"><option>엔진오일·필터 교환</option><option>점화 코일 교체</option><option>브레이크 패드 (앞)</option><option>냉각수 교환</option><option>기타</option></select>
+<div class="two"><div><label>견적서의 작업 시간 (시간)</label><input id="hr" inputmode="decimal" value="1.0"></div><div><label>시간당 공임 (원)</label><input id="rate" inputmode="numeric" value="80000"></div></div>
+<label>견적서의 공임 금액 (원)</label><input id="quote" inputmode="numeric" value="150000">
+<div class="res" id="res"></div>
+<p class="warn">작업 시간은 정비소가 쓰는 표준 시간표(제조사 공임 시간)를 물어보고 넣으십시오. 차종별 표준 시간표는 채림·제민이 공개 자료로 모으는 중입니다.</p></section>
+
+<section class="card"><h3>③ 견적서 점검 목록</h3><p class="sub">정비소에 맡기기 전과 받은 견적을 확인할 때.</p>
+<ul class="chk" id="chk">
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 부품마다 부품번호가 적혀 있다</label></li>
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 순정·OEM·애프터 구분이 적혀 있다</label></li>
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 부품값과 공임이 따로 적혀 있다</label></li>
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 견적에 없는 작업은 내 동의를 받기로 했다</label></li>
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 떼어 낸 헌 부품을 돌려받기로 했다</label></li>
+<li><label style="display:inline;color:#E8EAEE"><input type="checkbox" style="width:auto;height:auto"> 맡기기 전 사진·계기판 주행거리를 찍었다</label></li></ul>
+<div class="res" id="cres">0 / 6 확인</div>
+<p class="warn">정비업체는 점검·정비 견적서와 명세서를 발급해야 합니다(자동차관리법). 문제가 생기면 상담실로 오십시오.</p></section>
+</div>
+</main>
+<script>
+var LOG=[{d:"2026-11-02",t:"점화 코일 교체"},{d:"2026-09-14",t:"엔진오일·필터 교환"},{d:"2026-06-20",t:"맵센서 클립 교체"}];
+var S=[["엔진오일·필터","오일",12,10000],["에어 필터","에어 필터",24,30000],["브레이크액","브레이크액",24,0],["냉각수","냉각수",36,0],["점화 코일·플러그 점검","점화",48,0]];
+var today=new Date("2026-11-20");
+function last(k){var x=LOG.filter(function(l){return l.t.indexOf(k)>=0}).sort(function(a,b){return b.d.localeCompare(a.d)})[0];return x?x.d:null}
+function add(d,m){var t=new Date(d);t.setMonth(t.getMonth()+m);return t}
+function f(t){return t.getFullYear()+"."+("0"+(t.getMonth()+1)).slice(-2)+"."+("0"+t.getDate()).slice(-2)}
+function sched(){var tb=document.querySelector("#sched tbody");tb.innerHTML="";var adOn=false;S.forEach(function(s){var l=last(s[1]);var st,nx;if(!l){st='<span class="st over">기록 없음</span>';nx="지금 점검"}else{var n=add(l,s[2]);var dd=(n-today)/864e5;st=dd<0?'<span class="st over">지남</span>':dd<60?'<span class="st soon">곧</span>':'<span class="st ok">좋음</span>';nx=f(n)+(s[3]?"<br><small style=\"color:#9AA3B2\">또는 "+(s[3]/10000)+"만km</small>":"");if(s[0].indexOf("엔진오일")===0&&dd<60)adOn=true}tb.insertAdjacentHTML("beforeend","<tr><td>"+s[0]+"</td><td>"+(l?l.replace(/-/g,"."):"—")+"</td><td>"+nx+"</td><td>"+st+"</td></tr>")});document.getElementById("ad").style.display=adOn?"":"none"}
+function calc(){var h=+document.getElementById("hr").value||0,r=+document.getElementById("rate").value||0,q=+document.getElementById("quote").value||0;var fair=h*r;var w=function(n){return Math.round(n).toLocaleString("ko-KR")+"원"};var diff=q-fair;var msg=fair?(Math.abs(diff)<=fair*0.15?'<span class="st ok">적정 범위</span>':diff>0?'<span class="st over">'+w(diff)+' 높음 — 작업 시간·항목을 물어보십시오</span>':'<span class="st soon">'+w(-diff)+' 낮음 — 빠진 작업이 없는지 확인</span>'):"";document.getElementById("res").innerHTML="적정 공임 <b>"+w(fair)+"</b> · 견적 "+w(q)+"<br>"+msg}
+["hr","rate","quote"].forEach(function(i){document.getElementById(i).addEventListener("input",calc)});
+document.getElementById("chk").addEventListener("change",function(){var n=document.querySelectorAll("#chk input:checked").length;document.getElementById("cres").textContent=n+" / 6 확인"+(n===6?" — 맡겨도 좋습니다":"")});
+sched();calc();
+</script></body></html>
