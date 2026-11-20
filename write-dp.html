@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>디피 — 네임카드로 글쓰기 | I ♥ Classic Cars</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#1a1e28;font:17px/1.55 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#E8EAEE}.bar{background:#1F4D36;padding:10px 16px;font-weight:800}.bar small{font-weight:500;opacity:.8;margin-left:8px}
+.w{max-width:1100px;margin:14px auto;padding:0 12px}.f{background:#1f2430;border:1px solid #2a3142;border-radius:16px;padding:20px}.hint{color:#F2C46B;font-size:15px;margin:0 0 14px}
+.lb{font-size:15px;color:#9AA3B2;margin:16px 0 6px;font-weight:700}.seg{display:inline-flex;border:1px solid #3a4256;border-radius:10px;overflow:hidden}.seg button{height:48px;padding:0 20px;border:0;background:none;color:#E8EAEE;font:inherit;font-weight:700;cursor:pointer}.seg button.on{background:#1B8438}
+.me{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#24402f,#1c2433);border:1px solid #2AA84B;border-radius:14px;padding:12px 16px}.me img{width:52px;height:52px;border-radius:12px}.me .n{font-size:22px;font-weight:900}.me .s{font-size:15px;color:#C9CEDA}.me a{color:#7FD99A;font-size:15px;margin-left:auto;white-space:nowrap}
+.cars{display:flex;gap:8px;flex-wrap:wrap}.cars button{min-height:48px;padding:0 18px;border-radius:24px;border:1px solid #3a4256;background:#0f131b;color:#E8EAEE;font:inherit;font-weight:700;cursor:pointer}.cars button.on{background:#1B8438;border-color:#1B8438}.cars .x{border-style:dashed;color:#7FD99A}
+input{width:100%;height:54px;border-radius:10px;border:1px solid #3a4256;background:#0f131b;color:#fff;font:inherit;padding:0 14px}.sm{font-size:14px;color:#9AA3B2;margin-top:6px}.ok{color:#7FD99A}
+.bt{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.bt button{height:52px;padding:0 24px;border-radius:10px;font:inherit;font-weight:800;cursor:pointer}.c{background:none;border:1px solid #3a4256;color:#E8EAEE}.g{background:#1B8438;border:0;color:#fff}
+.cmp{max-width:1100px;margin:16px auto;padding:12px 16px;border:1px solid #C99A3B;border-radius:10px;color:#F2C46B;font-size:15px}.cmp b{color:#fff}
+@media(max-width:600px){.me a{display:none}.f{padding:14px}}</style></head><body>
+<div class="bar">I ♥ Classic Cars <small>디피 — 네임카드로 글쓰기 (실제 게시판 아님)</small></div>
+<div class="cmp">바뀐 점: <b>나라·제조사·코드·모델·연식 드롭다운 4개를 없앴습니다.</b> 내 네임카드에서 자동으로 가져오고, 차가 여러 대면 <b>단추로 어느 차 글인지만</b> 고릅니다. 남은 칸은 <b>SNS 글 주소 · 제목</b> 2개뿐입니다.</div>
+<div class="w"><div class="f">
+<p class="hint">내 SNS에 올린 글을 소개합니다. 저작권과 원문은 내 SNS에 그대로 남습니다.</p>
+<div class="me"><img src="/icons/icon-192.png" alt=""><div><div class="n">춘식이형</div><div class="s">대한민국 · X @koreain · 🔒 로그인됨</div></div><a href="/namecard-make-dp.html">✏️ 네임카드 고치기</a></div>
+<div class="lb">말머리</div><div class="seg" id="hd"><button class="on">모임</button><button>후기</button><button>질문</button></div>
+<div class="lb">어느 차 이야기입니까?</div><div class="cars" id="cars"><button class="on">🚗 W140 S600 · 1997</button><button>🚗 964 Carrera 2 · 1991</button><button class="x">차 상관없음</button></div>
+<div class="lb">내 SNS 글 주소</div><input id="u" placeholder="https:// 네이버 블로그 · 카페 · 인스타그램 · 페이스북 · X · 유튜브 · 스레드"><div class="sm" id="um">글과 사진은 내 SNS에 그대로 두고, 여기에는 주소만 붙여 넣으십시오. 공개 글만 보입니다.</div>
+<div class="lb">제목</div><input placeholder="제목 한 줄 (목록에 보입니다)">
+<div class="bt"><button class="c">취소</button><button class="g">소개하기</button></div>
+</div></div>
+<script>
+function one(id){var b=document.getElementById(id);b.onclick=function(e){var t=e.target.closest("button");if(!t)return;[].forEach.call(b.children,function(x){x.classList.toggle("on",x==t)})}}one("hd");one("cars");
+var P=[["naver.com","네이버"],["instagram.com","인스타그램"],["facebook.com","페이스북"],["x.com","X"],["twitter.com","X"],["youtube.com","유튜브"],["youtu.be","유튜브"],["threads.net","스레드"]];
+document.getElementById("u").oninput=function(){var v=this.value,m=document.getElementById("um"),f=P.filter(function(p){return v.indexOf(p[0])>=0})[0];m.className="sm"+(f?" ok":"");m.textContent=f?"✓ "+f[1]+" 글로 확인됐습니다. 소개하기를 누르면 원문이 그대로 보입니다.":"글과 사진은 내 SNS에 그대로 두고, 여기에는 주소만 붙여 넣으십시오. 공개 글만 보입니다."};
+</script></body></html>
