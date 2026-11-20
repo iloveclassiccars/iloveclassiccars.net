@@ -33,7 +33,7 @@ function fillMd(){var x=car();$("md").innerHTML=x[3].map(function(v){return"<opt
 function autoBd(){var x=car(),md=$("md").value;var b=BODY[x[1]]||"sedan";if(/T[E]?$|TE|T$/.test(md)&&b=="sedan")b="wagon";if(/SEC|CE|CL6|CLK/.test(md))b="coupe";if(/^SL/.test(md))b="roadster";$("bd").value=b;draw()}
 $("mk").onchange=fillCd;$("cd").onchange=fillMd;$("md").onchange=autoBd;
 ["nk","cc","yr","bd","sn","ac","em"].forEach(function(i){$(i).oninput=$(i).onchange=draw});
-var IM={},logo=new Image();logo.src="/icons/icon-192.png";logo.onload=draw;
+var IM={},logo=new Image();logo.src="/icons/icon-512.png";logo.onload=draw;
 Object.keys(BN).forEach(function(k){IM[k]=new Image();IM[k].src="/img/nc/"+k+".png";IM[k].onload=draw});
 function rr(x,c,y,w,h,r){x.beginPath();x.moveTo(c+r,y);x.arcTo(c+w,y,c+w,y+h,r);x.arcTo(c+w,y+h,c,y+h,r);x.arcTo(c,y+h,c,y,r);x.arcTo(c,y,c+w,y,r);x.closePath()}
 var F='-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
