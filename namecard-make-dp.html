@@ -21,7 +21,7 @@ function $(i){return document.getElementById(i)}
 var dn;try{dn=new Intl.DisplayNames(["ko"],{type:"region"})}catch(e){}
 var CC="KR US JP DE GB FR IT CN TW HK SG AU CA NL SE CH BE AT ES NZ TH MY PH VN ID IN AE BR MX".split(" ");
 function fl(c){return String.fromCodePoint.apply(null,c.split("").map(function(x){return 127397+x.charCodeAt(0)}))}
-$("cc").innerHTML=CC.map(function(c){return'<option value="'+c+'">'+fl(c)+" "+(dn?dn.of(c):c)+"</option>"}).join("");
+$("cc").innerHTML=CC.map(function(c){return'<option value="'+c+'">'+(dn?dn.of(c):c)+"</option>"}).join("");
 var MK=[];CARS.forEach(function(x){if(MK.indexOf(x[0])<0)MK.push(x[0])});
 $("mk").innerHTML=MK.map(function(m){return"<option>"+m+"</option>"}).join("");
 function fillCd(){var m=$("mk").value;$("cd").innerHTML=CARS.filter(function(x){return x[0]==m}).map(function(x){return"<option>"+x[1]+"</option>"}).join("");fillMd()}
