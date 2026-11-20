@@ -37,15 +37,15 @@ var IM={},logo=new Image();logo.src="/icons/icon-192.png";logo.onload=draw;
 Object.keys(BN).forEach(function(k){IM[k]=new Image();IM[k].src="/img/nc/"+k+".png";IM[k].onload=draw});
 function rr(x,c,y,w,h,r){x.beginPath();x.moveTo(c+r,y);x.arcTo(c+w,y,c+w,y+h,r);x.arcTo(c+w,y+h,c,y+h,r);x.arcTo(c,y+h,c,y,r);x.arcTo(c,y,c+w,y,r);x.closePath()}
 var F='-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif';
-function draw(){var cv=$("c"),P=matchMedia("(max-width:820px)").matches,W=P?720:1080,H=P?1260:640;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle="#171B26";x.fillRect(0,0,W,H);
+function draw(){var cv=$("c"),P=matchMedia("(max-width:820px)").matches,W=P?720:1080,H=P?1400:640;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle="#171B26";x.fillRect(0,0,W,H);
 var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#24402f");g.addColorStop(1,"#1c2433");rr(x,0,0,W,H,36);x.fillStyle=g;x.fill();x.lineWidth=4;x.strokeStyle="#2AA84B";rr(x,2,2,W-4,H-4,34);x.stroke();
 x.fillStyle="#7FD99A";x.font="700 26px "+F;x.fillText("MEMBER NAME CARD",56,90);
 x.fillStyle="#fff";x.font="900 "+(P?84:76)+"px "+F;x.fillText(($("nk").value||"닉네임").slice(0,16),52,P?190:168);
 var o=$("cc").selectedOptions[0];x.fillStyle="#C9CEDA";x.font="500 "+(P?38:34)+"px "+F;x.fillText(o?o.textContent:"",56,P?250:222);
-if(logo.complete&&logo.naturalWidth){var L=P?116:108;x.save();rr(x,W-L-48,44,L,L,22);x.clip();x.drawImage(logo,W-L-48,44,L,L);x.restore()}
-var b=$("bd").value,im=IM[b];if(PH&&PH.naturalWidth){var a=P?[50,276,620,256]:[W-470,196,420,178];cover(x,PH,a[0],a[1],a[2],a[3])}else if(im&&im.complete&&im.naturalWidth){if(P)x.drawImage(im,50,310,620,183);else x.drawImage(im,W-450,214,400,118)}
-var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["이메일",mk($("em").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
-rows.forEach(function(r,i){if(P){var y=600+i*136;x.fillStyle="#9AA3B2";x.font="500 32px "+F;x.fillText(r[0],56,y);x.fillStyle="#fff";x.font="700 42px "+F;fit(x,r[1],56,y+54,W-112)}else{var y=424+i*52;x.fillStyle="#9AA3B2";x.font="500 30px "+F;x.fillText(r[0],56,y);x.fillStyle="#fff";x.font="700 33px "+F;fit(x,r[1],210,y,W-266)}});
+
+var b=$("bd").value,im=IM[b];if(PH&&PH.naturalWidth){var a=P?[50,272,620,460]:[W-450,40,410,H-110];cover(x,PH,a[0],a[1],a[2],a[3])}else if(im&&im.complete&&im.naturalWidth){if(P)x.drawImage(im,50,380,620,183);else x.drawImage(im,W-450,214,400,118)}
+if(logo.complete&&logo.naturalWidth){var L=P?116:108;x.save();rr(x,W-L-48,44,L,L,22);x.clip();x.drawImage(logo,W-L-48,44,L,L);x.restore()}var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["이메일",mk($("em").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
+rows.forEach(function(r,i){if(P){var y=800+i*132;x.fillStyle="#9AA3B2";x.font="500 32px "+F;x.fillText(r[0],56,y);x.fillStyle="#fff";x.font="700 42px "+F;fit(x,r[1],56,y+54,W-112)}else{var y=424+i*52;x.fillStyle="#9AA3B2";x.font="500 30px "+F;x.fillText(r[0],56,y);x.fillStyle="#fff";x.font="700 33px "+F;fit(x,r[1],210,y,(PH&&PH.naturalWidth)?W-450-230:W-266)}});
 x.fillStyle="#E8EAEE";x.font="900 "+(P?30:24)+"px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-56,H-(P?50:34));x.textAlign="left"}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
 function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sx=(im.naturalWidth-sw)/2,sy=(im.naturalHeight-sh)*.3;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle="#2AA84B";rr(x,X,Y,w,h,18);x.stroke()}
