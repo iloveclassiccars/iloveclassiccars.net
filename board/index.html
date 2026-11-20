@@ -806,5 +806,23 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 document.addEventListener("input",function(e){if(!e.target||["wtt","wbd","wurl"].indexOf(e.target.id)<0||!S.wk)return;try{localStorage.setItem("icc_draft_"+S.wk,JSON.stringify({t:$("wtt").value,b:$("wbd").value,u:$("wurl")?$("wurl").value:""}))}catch(x){}});
 var oSP=window.submitPost;window.submitPost=function(){var k=S.wk,n=D[k].items.length;oSP();if(D[k].items.length>n)try{localStorage.removeItem("icc_draft_"+k)}catch(x){}};
 if(/^#[a-z]+-write$/.test(location.hash)&&typeof route==="function")setTimeout(route,0);
+})();</script><style id="icc-pedit">#pedit,#pdel{margin-left:8px}#pdel.arm{background:#C8102E!important;border-color:#C8102E!important;color:#fff!important}.pm .edtag{margin-left:8px;font-size:12px;color:#9AA3B2}</style><script id="icc-peditjs">(function(){function key(){try{return JSON.parse(localStorage.getItem("icc_mykey")||"null")}catch(e){return null}}
+var oP=window.post;window.post=function(k,n){oP(k,n);var it=D[k].items[D[k].items.length-n];var pa=document.querySelector("#post .pact");["pedit","pdel"].forEach(function(i){var x=$(i);if(x)x.remove()});if(!it||!it.mine||!pa)return;
+ var e1=document.createElement("button");e1.type="button";e1.id="pedit";e1.textContent="수정";var e2=document.createElement("button");e2.type="button";e2.id="pdel";e2.textContent="삭제";pa.appendChild(e1);pa.appendChild(e2);
+ if(it.ed){var pm=$("pm");if(pm&&!pm.querySelector(".edtag")){var sp=document.createElement("span");sp.className="edtag";sp.textContent="(수정됨 "+it.ed+")";pm.appendChild(sp)}}};
+function need(k){if(k==="help")return false;return !key()}
+document.addEventListener("click",function(e){var t=e.target;if(!t||!t.id)return;var k=S.pkk,n=S.pn;if(!k||!n)return;var idx=D[k].items.length-n,it=D[k].items[idx];if(!it)return;
+ if(t.id==="pedit"){e.preventDefault();if(need(k)){alertLine("로그인한 본인만 고칠 수 있습니다. [글쓰기]에서 로그인해 주십시오.");return}window.__EDIT={k:k,idx:idx,n:n};location.hash="#"+k+"-write";return}
+ if(t.id==="pdel"){e.preventDefault();if(need(k)){alertLine("로그인한 본인만 지울 수 있습니다.");return}if(!t.classList.contains("arm")){t.classList.add("arm");t.textContent="정말 지울까요? 한 번 더 누르십시오";setTimeout(function(){if(t.isConnected){t.classList.remove("arm");t.textContent="삭제"}},4000);return}D[k].items.splice(idx,1);saveLS();location.hash="#"+k}});
+function alertLine(m){var pa=document.querySelector("#post .pact"),x=$("pmsg");if(!x){x=document.createElement("div");x.id="pmsg";x.style.cssText="margin-top:8px;color:#F2C46B;font-size:13px";pa.parentNode.insertBefore(x,pa.nextSibling)}x.textContent=m}
+var oWF=window.writeForm;window.writeForm=function(k){oWF(k);var E2=window.__EDIT;if(!E2||E2.k!==k)return;if(need(k)){window.__EDIT=null;return}var it=D[k].items[E2.idx];if(!it){window.__EDIT=null;return}
+ var c=$("wcard");if(c)c.style.display="none";$("wform").style.display="";$("wko").textContent=NM(k)+" 글 고치기";
+ $("wtt").value=it.t||"";$("wbd").value=it.body||"";if($("wurl")){$("wurl").value=it.url||"";$("wurl").dispatchEvent(new Event("input"))}
+ if(it.cc)$("wcc").value=it.cc;try{$("c4mk").value="__";$("c4mk").dispatchEvent(new Event("change"));$("c4free").value=(it.car||"")+(it.yr?" "+(+it.yr>30?"19":"20")+it.yr:"")}catch(x){}
+ var sg=document.querySelectorAll("#wseg button");sg.forEach(function(b){if(b.textContent===it.h)b.click()});
+ var go=$("wform").querySelector("button.go");if(go)go.textContent="고치기";var hn=$("wform").querySelector(".hint");if(hn)hn.textContent="내 글을 고칩니다. 날짜는 처음 쓴 날 그대로 두고 '수정됨'을 붙입니다."};
+var oSP=window.submitPost;window.submitPost=function(){var E2=window.__EDIT;if(!E2||E2.k!==S.wk)return oSP();var k=E2.k,n0=D[k].items.length;oSP();if(D[k].items.length===n0)return;var nw=D[k].items.shift(),old=D[k].items[E2.idx];if(!old){window.__EDIT=null;return}
+ ["h","cc","car","yr","t","sns","body","url","pf"].forEach(function(f){if(nw[f]!==undefined)old[f]=nw[f]});var d=new Date();old.ed=("0"+(d.getMonth()+1)).slice(-2)+"."+("0"+d.getDate()).slice(-2);window.__EDIT=null;saveLS();location.hash="#"+k+"-"+E2.n};
+addEventListener("hashchange",function(){if(window.__EDIT&&!/-write$/.test(location.hash))window.__EDIT=null});
 })();</script></body>
 </html>
