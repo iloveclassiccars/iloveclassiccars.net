@@ -272,6 +272,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .clbadge::before{content:'';position:absolute;inset:3px;border-radius:11px;border:1px solid rgba(255,255,255,.22);pointer-events:none}
 .clbadge::after{content:'';position:absolute;left:0;right:0;bottom:0;height:7px;background:linear-gradient(90deg,var(--f1) 0 33.3%,var(--f2) 33.3% 66.6%,var(--f3) 66.6%)}
 .clbadge b{position:relative;top:-2px;color:#fff;font:800 15px/1 'Noto Sans KR',-apple-system,sans-serif;letter-spacing:.03em;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.clbadge.haslogo{background:#F4F4F4!important}.clbadge.haslogo b{display:none}.clbadge .cllogo{position:relative;width:70%;height:70%;object-fit:contain;top:-3px}
 .clbadge.big{width:76px!important;height:76px!important;border-radius:19px!important}.clbadge.big::before{border-radius:16px}.clbadge.big b{font-size:22px}.clbadge.big::after{height:9px}
 .clbadge.sm{width:40px!important;height:40px!important;border-radius:11px!important}.clbadge.sm::before{inset:2px;border-radius:9px}.clbadge.sm b{font-size:11.5px}.clbadge.sm::after{height:5px}
 @media (max-width:640px){.clbadge{width:46px!important;height:46px!important;border-radius:12px!important}.clbadge b{font-size:13px}}
@@ -466,8 +467,10 @@ var CLB=[
  {id:'subaru',nm:'스바루',full:'스바루',cc:'JP',ab:'SB',col:'#1f3f7a',intro:'임프레자 오너들의 클럽입니다.',subs:[['gc8','임프레자 GC8','1992~2000',['임프레자']]]},
  {id:'dodge',nm:'닷지',full:'닷지',cc:'US',ab:'DG',col:'#6b1f1f',intro:'차저와 챌린저 오너들의 클럽입니다.',subs:[['charger','차저 (2세대)','1968~1970',['차저']]]}
 ];
+/* 회사 마크: 사용 허락을 받은 파일을 /board/logos/<id>.png 또는 .svg 로 넣고 아래에 등록 (예: benz:'svg') */
+var LOGOS={};
 var FLAGC={DE:['#111','#DD0000','#FFCE00'],IT:['#009246','#F4F4F4','#CE2B37'],GB:['#012169','#F4F4F4','#C8102E'],JP:['#F4F4F4','#BC002D','#F4F4F4'],US:['#B22234','#F4F4F4','#3C3B6E'],KR:['#F4F4F4','#CD2E3A','#0047A0'],SE:['#006AA7','#FECC00','#006AA7'],FR:['#0055A4','#F4F4F4','#EF4135']};
-function badge(c,cls){var b=el('span','clbadge'+(cls?' '+cls:''));var f=FLAGC[c.cc]||['#444','#666','#888'];b.style.setProperty('--bc',c.col);b.style.setProperty('--f1',f[0]);b.style.setProperty('--f2',f[1]);b.style.setProperty('--f3',f[2]);b.appendChild(el('b','',c.ab));b.title=c.full+' 클럽';return b}
+function badge(c,cls){var b=el('span','clbadge'+(cls?' '+cls:''));var f=FLAGC[c.cc]||['#444','#666','#888'];b.style.setProperty('--bc',c.col);b.style.setProperty('--f1',f[0]);b.style.setProperty('--f2',f[1]);b.style.setProperty('--f3',f[2]);b.appendChild(el('b','',c.ab));b.title=c.full+' 클럽';if(LOGOS[c.id]){var im=new Image();im.alt=c.full;im.className='cllogo';im.onload=function(){b.classList.add('haslogo');b.appendChild(im)};im.src='/board/logos/'+c.id+'.'+LOGOS[c.id]}return b}
 function clbFind(id){for(var i=0;i<CLB.length;i++)if(CLB[i].id===id)return CLB[i];return null}
 function subMatch(sb,car){car=car||'';for(var i=0;i<sb[3].length;i++)if(car.indexOf(sb[3][i])===0)return true;return false}
 function clbCount(sb){var n=0;D.club.items.forEach(function(it){if(subMatch(sb,it.car))n++});return n}
