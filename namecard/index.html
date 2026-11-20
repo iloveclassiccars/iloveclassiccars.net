@@ -122,6 +122,7 @@ c.addEventListener("pointermove",function(e){if(!PT[e.pointerId])return;var p=po
 function up(e){if(PT[e.pointerId]){delete PT[e.pointerId];PD=0;save()}}c.addEventListener("pointerup",up);c.addEventListener("pointercancel",up);
 c.addEventListener("wheel",function(e){var p=pos(e);if(!inBox(p))return;e.preventDefault();ZM=Math.max(1,Math.min(3,ZM*(e.deltaY<0?1.08:1/1.08)));save();draw()},{passive:false});
 })();
+(function(){var mob=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));if(!mob){$("shr").style.display="none"}})();
 $("shr").onclick=function(){$("c").toBlob(function(bl){var f=new File([bl],"namecard.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"I ♥ Classic Cars 네임카드",text:"www.iloveclassiccars.net"}).catch(function(){})}else{saveImg(false);setTimeout(function(){$("msg").textContent="이 기기는 바로 보내기가 안 되어 저장했습니다 — 저장된 사진을 올리십시오"},400)}},"image/png")};
 var IDB=null;function idb(cb){if(IDB)return cb(IDB);try{var r=indexedDB.open("icc_nc",1);r.onupgradeneeded=function(){r.result.createObjectStore("ph")};r.onsuccess=function(){IDB=r.result;cb(IDB)};r.onerror=function(){cb(null)}}catch(e){cb(null)}}
 function phPut(k,v){idb(function(d){if(!d){try{localStorage.setItem(k,v)}catch(e){}return}d.transaction("ph","readwrite").objectStore("ph").put(v,k)})}
