@@ -624,7 +624,7 @@ function route(){var h=(location.hash||'').replace('#','');var bc9=document.getE
   else if(m&&POSTS[k]&&+m[2]>=1&&+m[2]<=D[k].items.length){if(S.cur!==k&&S.last!==k){S.page=1;S.q='';$('bq').value='';S.f=null;}S.cur=k;S.last=k;board(k);post(k,+m[2]);var pe9=$('post'),bh9=document.querySelector('#board .bhead')||document.querySelector('#board .tool');if(pe9&&bh9)bh9.parentNode.insertBefore(pe9,bh9.nextSibling);document.body.classList.add('inboard','inpost');window.__pscroll=1;}
   else if(D[k]){if(S.cur!==k&&S.last!==k){S.page=1;S.q='';$('bq').value='';S.f=null;}S.cur=k;S.last=k;board(k);document.body.classList.add('inboard');centerTab();}
   else{S.cur='';S.last='';}
-  window.scrollTo(0,0);window.__pscroll=0;}
+  if(window.__pscroll){window.__pscroll=0;setTimeout(function(){var bh=document.querySelector('#board .bhead')||$('post');if(!bh)return;var y=bh.getBoundingClientRect().top+window.scrollY;if(document.documentElement.classList.contains('bemb')){try{parent.postMessage({icc:'bscroll',y:y},'*')}catch(e){}}else{var hd=document.querySelector('header');window.scrollTo(0,Math.max(0,y-(hd?hd.getBoundingClientRect().height:0)-8))}},80)}else window.scrollTo(0,0);}
 function copyUrl(bt){try{navigator.clipboard.writeText(location.href).then(function(){bt.textContent='복사했습니다';},function(){bt.textContent='복사하지 못했습니다';});}catch(e){bt.textContent='복사하지 못했습니다';}}
 $('pcopy').addEventListener('click',function(){copyUrl(this);});
 $('pshare').addEventListener('click',function(){var bt=this;if(navigator.share){try{navigator.share({title:$('pt').textContent,url:location.href}).catch(function(){});}catch(e){copyUrl(bt);}}else{copyUrl(bt);}});
