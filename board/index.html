@@ -396,7 +396,7 @@ function centerTab(){var T=$('tabs'),on=T.querySelector('.on');if(!on)return;try
 function filtered(k){var q=S.q.trim().toLowerCase();var a=D[k].items.map(function(it,i){return {it:it,n:D[k].items.length-i};});if(S.f){var f=S.f;a=a.filter(function(o){return f.t==='cc'?o.it.cc===f.v:f.t==='car'?o.it.car===f.v:f.t==='sns'?(o.it.sns||'').split(' @')[0]===f.v:((o.it.sns||'').split('@')[1]===f.v)})}if(S.sort==='hot')a=a.slice().sort(function(x,y){return likes(k,y.n,y.it)-likes(k,x.n,x.it)});else if(S.sort==='talk')a=a.slice().sort(function(x,y){return ncom(k,y.n,y.it)-ncom(k,x.n,x.it)});if(!q)return a;return a.filter(function(o){return (o.it.t+' '+(o.it.car||'')+' '+(o.it.yr||'')+' '+(o.it.body||'')+' '+(o.it.sns||'')+(o.it.test?' 테스트':'')).toLowerCase().indexOf(q)>=0;});}
 function board(k){var b=D[k],w=wide(),isPost=!!POSTS[k];
   tabs(k);
-  $('bdot').style.background=b.col;$('bko').textContent=NM(k);$('ben').textContent=LANG==='ko'?b.en:'';
+  $('bdot').style.background=b.col;$('bko').textContent=NM(k);$('ben').textContent='';
   var unit='글';
   $('bsim').textContent=tr('testing');
   var view=isPost?(S.view||'list'):'table';
