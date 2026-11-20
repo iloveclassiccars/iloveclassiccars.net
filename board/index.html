@@ -865,5 +865,32 @@ var RP={};try{RP=JSON.parse(localStorage.getItem("icc_bt_rp")||"{}")}catch(e){}
 var oP=window.post;window.post=function(k,n){oP(k,n);var it=D[k].items[D[k].items.length-n];var pa=document.querySelector("#post .pact");var o=$("prep");if(o)o.remove();var rv=$("prv");if(rv)rv.remove();if(!it||!pa)return;
  if(it.rv&&it.mine){var d=document.createElement("div");d.id="prv";d.style.cssText="margin:8px 0;font-size:12.5px;color:#F2C46B";d.textContent="이 글에는 확인이 필요한 단어가 있어 운영진 확인 목록에 올라갔습니다. 문제가 없으면 그대로 보입니다.";pa.parentNode.insertBefore(d,pa)}
  if(!it.mine){var b=document.createElement("button");b.type="button";b.id="prep";b.style.marginLeft="8px";var kk=k+"-"+n;b.textContent=RP[kk]?"신고함":"신고";b.disabled=!!RP[kk];b.addEventListener("click",function(){RP[kk]=1;try{localStorage.setItem("icc_bt_rp",JSON.stringify(RP))}catch(x){}b.textContent="신고함";b.disabled=true;var m=$("pmsg")||document.createElement("div");m.id="pmsg";m.style.cssText="margin-top:8px;color:#F2C46B;font-size:13px";m.textContent="신고를 받았습니다. 신고가 3건 쌓이면 운영진 확인 전까지 가립니다.";pa.parentNode.insertBefore(m,pa.nextSibling)});pa.appendChild(b)}};
-})();</script></body>
+})();</script><style id="icc-ncwrite">#wnc{margin:0 0 14px}#wnc .qme{display:flex;gap:12px;align-items:center;background:#171B26;border:2px solid #2AA84B;border-radius:14px;overflow:hidden}#wnc .qhd{background:#1F4D36;padding:10px 12px;align-self:stretch;display:flex;align-items:center}#wnc .qhd img{width:40px;height:40px;border-radius:10px;display:block}#wnc .qtx{flex:1;min-width:0;padding:8px 0}#wnc .qcc{font-size:13px;color:#C9CEDA;white-space:nowrap}#wnc .qcc img{border:0!important;box-shadow:none!important;width:20px;height:15px;border-radius:3px;vertical-align:-2px;margin-right:5px}#wnc .qnk{font-size:20px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#wnc .qsn{font-size:13px;color:#9AA3B2;white-space:nowrap}#wnc .qed{color:#7FD99A;font-size:14px;font-weight:700;padding:0 14px;white-space:nowrap;text-decoration:underline}#wnc .qlb{font-size:14px;color:#9AA3B2;font-weight:700;margin:12px 0 6px}#wnc .qcars{display:flex;gap:8px;flex-wrap:wrap}#wnc .qcars button{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #3a4256;background:#0f131b;color:#E8EAEE;font:inherit;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap}#wnc .qcars button.on{background:#1B8438;border-color:#1B8438;color:#fff}#wnc .qcars .qx{border-style:dashed;color:#7FD99A}#wncgo{margin:0 0 14px;padding:10px 14px;border:1px dashed #2AA84B;border-radius:12px;font-size:14px;color:#C9CEDA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#wncgo a{color:#7FD99A;font-weight:800}.icc-ncon #wcar4,.icc-ncon .fld.ncx{display:none!important}</style>
+<script id="icc-ncwritejs">(function(){
+function $(i){return document.getElementById(i)}
+function J(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+function setSel(id,v){var s=$(id);if(!s)return false;var ok=[].some.call(s.options,function(o){if(o.value==v||o.text==v){s.value=o.value;return true}});if(ok)s.dispatchEvent(new Event("change",{bubbles:true}));return ok}
+function setSns(name,acc){var s=$("wsns");if(s){var al={"카카오":"카카오톡","카톡":"카카오톡","인스타그램":"IG","페이스북":"FB","유튜브":"YT"};if(!setSel("wsns",name))setSel("wsns",al[name]||name)}if($("wacc"))$("wacc").value=acc||""}
+function pick(c){if(!c){setSel("c4mk","__");if($("c4free"))$("c4free").value="차 상관없음";return}setSel("c4mk",c.mk);setSel("c4code",c.cd);setSel("c4mod",c.md);setSel("c4yr",c.yr)||($("c4yr")&&setSel("c4yr",String(c.yr)))}
+function apply(){var f=$("wform");if(!f)return;var nc=J("icc_nc"),cars=J("icc_nc_cars")||[],cur=+(localStorage.getItem("icc_nc_cur")||0);
+ var old=$("wnc");if(old)old.remove();var go=$("wncgo");if(go)go.remove();document.body.classList.remove("icc-ncon");
+ if(!nc||!nc.nk){go=document.createElement("div");go.id="wncgo";go.innerHTML='🪪 <a href="/namecard-make-dp.html">네임카드</a>를 만들면 칸이 2개로 줄어듭니다';f.insertBefore(go,f.firstChild);return}
+ document.body.classList.add("icc-ncon");
+ [$("wcc"),$("wsns")].forEach(function(e){var fl=e&&e.closest(".fld");if(fl)fl.classList.add("ncx")});
+ setSel("wcc",nc.cc);setSns(nc.sn,nc.ac);
+ var cn="";try{cn=new Intl.DisplayNames(["ko"],{type:"region"}).of(nc.cc)}catch(e){cn=nc.cc}
+ var w=document.createElement("div");w.id="wnc";
+ w.innerHTML='<div class="qme"><div class="qhd"><img src="/icons/icon-192.png" alt=""></div><div class="qtx"><div class="qcc"><img src="/img/flags/'+String(nc.cc||"").toLowerCase()+'.png" alt="">'+cn+'</div><div class="qnk"></div><div class="qsn"></div></div><a class="qed" href="/namecard-make-dp.html">✏️ 고치기</a></div><div class="qlb">어느 차 이야기입니까?</div><div class="qcars"></div>';
+ w.querySelector(".qnk").textContent=nc.nk;w.querySelector(".qsn").textContent=(nc.sn||"")+" @"+(nc.ac||"");
+ var box=w.querySelector(".qcars");
+ cars.forEach(function(c,i){var b=document.createElement("button");b.type="button";b.textContent="🚗 "+c.cd+" "+c.md+(c.yr?" · "+c.yr:"");b.onclick=function(){on(b);pick(c)};box.appendChild(b);if(i==cur){b.classList.add("on");setTimeout(function(){pick(c)},0)}});
+ var x=document.createElement("button");x.type="button";x.className="qx";x.textContent="차 상관없음";x.onclick=function(){on(x);pick(null)};box.appendChild(x);
+ function on(b){[].forEach.call(box.children,function(e){e.classList.toggle("on",e==b)})}
+ var mine=$("wmine");if(mine)mine.style.display="none";
+ f.insertBefore(w,f.firstChild)}
+function seed(){var nc=J("icc_nc");if(!nc||!nc.nk)return;try{if(!localStorage.getItem("icc_mykey"))localStorage.setItem("icc_mykey",JSON.stringify({pv:nc.em||"",at:Date.now(),test:1,from:"namecard"}));var m=J("icc_mycard")||{};if(!m.nick){m.nick=nc.nk;m.cc=nc.cc;m.sns=nc.sn;m.acc=nc.ac;m.em=nc.em;localStorage.setItem("icc_mycard",JSON.stringify(m))}}catch(e){}}
+seed();var oWF=window.writeForm;window.writeForm=function(k){seed();oWF(k);try{apply()}catch(e){}};
+if(/^#[a-z]+-write$/.test(location.hash))setTimeout(function(){try{route()}catch(e){}},0);
+})();</script>
+</body>
 </html>

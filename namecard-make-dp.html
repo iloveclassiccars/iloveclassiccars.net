@@ -8,7 +8,7 @@
 <label>제조사 · 차종 코드</label><div class="row"><select id="mk"></select><select id="cd"></select></div>
 <label>모델 · 연식</label><div class="row"><select id="md"></select><input id="yr" inputmode="numeric" maxlength="4" value="1997"></div>
 <select id="bd" hidden><option value="sedan"></option><option value="coupe"></option><option value="roadster"></option><option value="suv"></option><option value="wagon"></option><option value="hatch"></option></select>
-<div class="nkr" style="margin:14px 0 8px;line-height:1.7;font-size:14px;letter-spacing:-.3px">✅ 본인 · 내 차 · 가족 · 반려견까지만 허용합니다.<br>🚫 연예인 · 광고 · 퍼온 사진은 금합니다.</div><div class="row"><button type="button" class="pbtn" id="phb">📷 사진 넣기</button><button type="button" class="pbtn" id="phx">사진 빼기</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="u">⬆ 위로</button><button type="button" class="pbtn" data-mv="d">⬇ 아래로</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="l">⬅ 왼쪽</button><button type="button" class="pbtn" data-mv="r">➡ 오른쪽</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="zi">➕ 크게</button><button type="button" class="pbtn" data-mv="zo">➖ 작게</button></div><input id="ph" type="file" accept="image/*" hidden>
+<div class="nkr" style="margin:14px 0 8px;line-height:1.7;font-size:14px;letter-spacing:-.3px">✅ 본인 · 내 차 · 가족 · 반려견까지만 허용합니다.<br>🚫 연예인 · 광고 · 퍼온 사진은 금합니다.</div><div class="row"><button type="button" class="pbtn" id="phc">📸 사진 찍기</button><button type="button" class="pbtn" id="phb">🖼 앨범에서</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" id="phx">사진 빼기</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="u">⬆ 위로</button><button type="button" class="pbtn" data-mv="d">⬇ 아래로</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="l">⬅ 왼쪽</button><button type="button" class="pbtn" data-mv="r">➡ 오른쪽</button></div><div class="row" style="margin-top:6px"><button type="button" class="pbtn" data-mv="zi">➕ 크게</button><button type="button" class="pbtn" data-mv="zo">➖ 작게</button></div><input id="ph" type="file" accept="image/*" hidden><input id="phcam" type="file" accept="image/*" capture="environment" hidden>
 <label>이메일</label><input id="em" type="email" value="futurenix@gmail.com">
 
 <label>SNS</label><div class="row"><select id="sn"></select><input id="ac" value="koreain" placeholder="아이디"></div>
@@ -99,12 +99,14 @@ function PYK(){return"icc_nc_pos_"+(MY[CUR]?MY[CUR].id:"0")}
 function loadPos(){var v=(lsg(PYK())||".5,.4,1").split(",");PX=+v[0];PY=+v[1];ZM=+(v[2]||1)}
 document.addEventListener("click",function(e){var b=e.target.closest("[data-mv]");if(!b)return;var m=b.dataset.mv,st=.1;if(m=="u")PY=Math.min(1,PY+st);if(m=="d")PY=Math.max(0,PY-st);if(m=="l")PX=Math.min(1,PX+st);if(m=="r")PX=Math.max(0,PX-st);if(m=="zi")ZM=Math.min(3,Math.round((ZM+.2)*10)/10);if(m=="zo")ZM=Math.max(1,Math.round((ZM-.2)*10)/10);PX=Math.round(PX*10)/10;PY=Math.round(PY*10)/10;lss(PYK(),PX+","+PY+","+ZM);draw()});
 
-$("phb").onclick=function(){var b=this;if(lsg("icc_nc_rule")){$("ph").click();return}
- if(!b.dataset.ok){b.dataset.ok=1;b.textContent="✔ 본인·내 차·가족·반려견 사진입니다 (누르기)";setTimeout(function(){delete b.dataset.ok;b.textContent="📷 사진 넣기"},6000);return}
- lss("icc_nc_rule","1");b.textContent="📷 사진 넣기";delete b.dataset.ok;$("ph").click()};
+$("phb").onclick=function(){ruleOk(this,function(){$("ph").click()},"🖼 앨범에서")};
 
 var MINI=false;function miniDraw(){if(!MINI)return;var m=$("mini");m.getContext("2d").drawImage($("c"),0,0,m.width,m.height)}
 if("IntersectionObserver" in window){new IntersectionObserver(function(es){MINI=!es[0].isIntersecting;$("mini").classList.toggle("on",MINI);miniDraw()},{threshold:.15}).observe($("c"))}
+
+function ruleOk(b,go,lab){if(lsg("icc_nc_rule")){go();return}if(!b.dataset.ok){b.dataset.ok=1;b.textContent="✔ 본인·내 차·가족·반려견 (누르기)";setTimeout(function(){delete b.dataset.ok;b.textContent=lab},6000);return}lss("icc_nc_rule","1");b.textContent=lab;delete b.dataset.ok;go()}
+$("phc").onclick=function(){ruleOk(this,function(){$("phcam").click()},"📸 사진 찍기")};
+$("phcam").onchange=function(){$("ph").onchange.call(this)};
 function fit(x,t,X,Y,M){var f=x.font,n=parseInt(f.match(/(\d+)px/)[1]);while(x.measureText(t).width>M&&n>16){n--;x.font=f.replace(/\d+px/,n+"px")}x.fillText(t,X,Y)}
 addEventListener("resize",draw);
 function saveImg(np){NOPH=np;draw();$("c").toBlob(function(bl){NOPH=false;draw();var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent=(np?"사진을 뺀 카드를 ":"카드를 ")+"저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")}
