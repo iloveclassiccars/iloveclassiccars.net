@@ -1768,5 +1768,36 @@ document.addEventListener("click",function(e){var t=e.target.closest&&e.target.c
  if(t.dataset.cdel!=null){var k=+t.dataset.cdel;var a=x.albums[k];if(t.dataset.sure!=="1"){t.dataset.sure="1";t.textContent="한 번 더 누르면 지웁니다 (되돌릴 수 없음)";return}a.items.forEach(function(it){del(it.pid)});x.albums.splice(k,1);save();toast("지웠습니다");close();return}},true);
 document.addEventListener("change",function(e){var t=e.target;if(!t.dataset||t.dataset.cstep==null||!W)return;var step=+t.dataset.cstep;if(!W.t0){W.t0=Date.now();if(W.type==="acc")loc()}var nmv=document.getElementById("ccnm");if(nmv)W.name=nmv.value;var fs=[].slice.call(t.files||[]);Promise.all(fs.map(function(f){return shrink(f).then(function(b){var id="p"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);return put({id:id,b:b}).then(function(){W.items.push({pid:id,step:step,at:Date.now()})})})})).then(function(){W.type==="acc"?drawAcc():drawMeet()}).catch(function(){toast("이 브라우저에서는 사진을 저장할 수 없습니다")})},true);
 })();</script>
+<style id="icc-aplus">
+@media (max-width:759px){
+html:root body .hero .hrow{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+html:root body .hero .hrow select{height:44px!important;font-size:14px!important;padding-left:10px!important}
+html:root body .h2grid .h2t{min-height:96px!important;padding:6px 0!important;border-radius:14px}
+html:root body .h2grid .h2t:active{background:rgba(255,255,255,.08)}
+}
+.apn{margin:16px 0 8px;border-top:2px solid #E0A43A}
+.apn h3{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 6px;font:700 17px 'Noto Sans KR',sans-serif;color:#fff}.apn h3 small{color:#A6ABA8;font-size:12px;font-weight:500}
+.apn a.r{display:flex;align-items:center;gap:8px;padding:11px 2px;border-bottom:1px solid rgba(255,255,255,.08);color:#E6E8E7;text-decoration:none;font-size:15px}
+.apn a.r i{flex:none;font-style:normal;font:700 11.5px 'Noto Sans KR',sans-serif;color:#fff;border-radius:5px;padding:2px 7px}
+.apn a.r span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.apn a.r b.n{flex:none;font:800 10px sans-serif;color:#fff;background:#C8102E;border-radius:4px;padding:1px 5px}
+.apn a.cta{display:block;padding:12px 2px;color:#7FD99A;font-weight:700;text-decoration:none}
+.hb .hi .apd{float:right;color:#7d827f;font-size:12px;margin-left:8px}.hb .hi .apN{display:inline-block;font:800 10px sans-serif;color:#fff;background:#C8102E;border-radius:4px;padding:0 5px;margin-right:6px;vertical-align:2px}
+@media (min-width:760px){.apn{display:none}}
+</style>
+<script id="icc-aplusjs">(function(){
+var COL={"오너라운지":"#8B5A2B","카밋":"#2E8B57","클럽":"#7E57C2","부품찾기":"#2563B8","정비복원":"#D2691E","사고팔기":"#1E8C8C"};
+function seedDate(h){var m=/^#\/post\/([a-z]+)\/(\d+)/.exec(h||"");if(!m||typeof SEED==="undefined"||!SEED[m[1]])return null;var it=SEED[m[1]][+m[2]];return it&&it[4]?new Date(it[4]):null}
+function md(d){return (d.getMonth()+1)+"."+d.getDate()}
+function isNew(d){return d&&(Date.now()-d.getTime())<7*864e5}
+function run(){var hub=document.querySelector(".hub");if(!hub)return;
+ document.querySelectorAll(".hb .hi:not(.hiw)").forEach(function(a){if(a.dataset.apd)return;a.dataset.apd=1;var d=seedDate(a.getAttribute("href"));if(!d)return;var s=document.createElement("span");s.className="apd";s.textContent=md(d);a.appendChild(s);if(isNew(d)){var n=document.createElement("span");n.className="apN";n.textContent="N";a.insertBefore(n,a.firstChild)}});
+ if(innerWidth>=760||document.querySelector(".apn"))return;var hero=document.querySelector("#app .hero");if(!hero)return;
+ var rows=[];document.querySelectorAll(".hb").forEach(function(b){var nm=((b.querySelector(".hh")||{}).textContent||"").replace(/[A-Za-z&›\s]+$/,"").trim();var its=[].slice.call(b.querySelectorAll(".hi:not(.hiw)")).filter(function(a){return /^#\/(post|col|story)/.test(a.getAttribute("href")||"")}).slice(0,2);its.forEach(function(a){rows.push({nm:nm,a:a,d:seedDate(a.getAttribute("href"))})})});
+ if(!rows.length)return;rows.sort(function(x,y){return (y.d?y.d.getTime():0)-(x.d?x.d.getTime():0)});
+ var w=document.createElement("section");w.className="apn";var h='<h3>새 글<small>게시판 전체</small></h3>';
+ rows.slice(0,8).forEach(function(r){var t=(r.a.childNodes[0]&&r.a.childNodes[0].nodeType===3?r.a.childNodes[0].textContent:r.a.textContent).replace(/\s*\d+\.\d+$/,"");h+='<a class="r" href="'+r.a.getAttribute("href")+'"><i style="background:'+(COL[r.nm]||"#3a3f47")+'">'+r.nm+'</i>'+(isNew(r.d)?'<b class="n">N</b>':'')+'<span>'+t.replace(/[<>&]/g,"").replace(/^N/,"")+'</span></a>'});
+ h+='<a class="cta" href="#/story/new">✎ 내 차 이야기 올려 주세요</a>';w.innerHTML=h;hero.parentNode.insertBefore(w,hero.nextSibling)}
+var t;function q(){clearTimeout(t);t=setTimeout(run,120)}new MutationObserver(q).observe(document.body,{childList:true,subtree:true});addEventListener("hashchange",q);q()})();</script>
 </body>
 </html>
