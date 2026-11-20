@@ -43,7 +43,7 @@ gold:{n:"블랙 골드",base:"#0b0b0d",g1:"#1d1a14",g2:"#0b0b0d",line:"#C9A24B",
 ivory:{n:"아이보리 빈티지",base:"#efe7d6",g1:"#f6f0e2",g2:"#e6dcc6",line:"#1F4D36",acc:"#1F4D36",p1:"#d9cfb7",sub:"#4b4a44",lab:"#7a7466",txt:"#1d1f1c"},
 navy:{n:"네이비 레이싱",base:"#0e1626",g1:"#13284a",g2:"#0e1626",line:"#E5262D",acc:"#ff6b70",p1:"#1b2f52",sub:"#c9d3e6",lab:"#8fa0bf",txt:"#ffffff"}};
 var TH=THS.green;
-function draw(){var cv=$("c"),W=720,H=1220;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle=TH.base;x.fillRect(0,0,W,H);
+function draw(){var cv=$("c"),W=720,H=1200;if(cv.width!=W||cv.height!=H){cv.width=W;cv.height=H}var x=cv.getContext("2d");x.clearRect(0,0,W,H);x.fillStyle=TH.base;x.fillRect(0,0,W,H);
 var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,TH.g1);g.addColorStop(1,TH.g2);rr(x,0,0,W,H,40);x.fillStyle=g;x.fill();x.lineWidth=5;x.strokeStyle=TH.line;rr(x,3,3,W-6,H-6,38);x.stroke();
 x.fillStyle=TH.acc;x.font="800 26px "+F;x.fillText("MEMBER NAME CARD",44,68);if(logo.complete&&logo.naturalWidth){var L=74;x.save();rr(x,W-44-L,20,L,L,16);x.clip();x.drawImage(logo,W-44-L,20,L,L);x.restore()}
 var bx=44,by=108,bw=W-88,bh=560;
@@ -53,7 +53,7 @@ var nx=44;
 x.fillStyle=TH.txt;x.font="900 60px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);fit(x,nkT,nx,812,W-nx-44);
 var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
 rows.forEach(function(r,i){var y=900+i*80;x.fillStyle=TH.lab;x.font="500 31px "+F;x.fillText(r[0],46,y);x.fillStyle=TH.txt;x.font="800 36px "+F;fit(x,r[1],170,y,W-170-44)});
-x.fillStyle=TH.txt;x.font="900 30px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-46,H-44);x.textAlign="left"}
+x.fillStyle=TH.acc;x.font="900 34px "+F;x.fillText("iloveclassiccars.net",46,1150)}
 function mk(e){var p=e.split("@");if(p.length<2)return e;return p[0].slice(0,Math.min(4,Math.max(1,p[0].length-2)))+"••••@"+p[1]}
 function cover(x,im,X,Y,w,h){var r=Math.max(w/im.naturalWidth,h/im.naturalHeight),sw=w/r,sh=h/r,sx=(im.naturalWidth-sw)/2,sy=(im.naturalHeight-sh)*.3;x.save();rr(x,X,Y,w,h,18);x.clip();x.drawImage(im,sx,sy,sw,sh,X,Y,w,h);x.restore();x.lineWidth=3;x.strokeStyle=TH.line;rr(x,X,Y,w,h,18);x.stroke()}
 var PH=null,NOPH=false;function setPH(u){if(!u){PH=null;draw();return}var i=new Image();i.onload=function(){PH=i;draw()};i.src=u}
