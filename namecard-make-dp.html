@@ -42,9 +42,9 @@ var g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#24402f");g.addColorStop
 x.fillStyle="#7FD99A";x.font="800 26px "+F;x.fillText("MEMBER NAME CARD",44,66);
 var bx=44,by=92,bw=W-88,bh=600;
 if(PH&&PH.naturalWidth&&!NOPH){cover(x,PH,bx,by,bw,bh)}else{var pg=x.createLinearGradient(0,by,0,by+bh);pg.addColorStop(0,"#2c4a39");pg.addColorStop(1,"#1c2433");x.save();rr(x,bx,by,bw,bh,22);x.fillStyle=pg;x.fill();x.restore();var im=IM[$("bd").value];if(im&&im.complete&&im.naturalWidth){var iw=bw*.8,ih=iw*im.naturalHeight/im.naturalWidth;x.drawImage(im,bx+(bw-iw)/2,by+(bh-ih)/2,iw,ih)}x.lineWidth=3;x.strokeStyle="#2AA84B";rr(x,bx,by,bw,bh,22);x.stroke()}
-x.fillStyle="#fff";x.font="900 76px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);var o=$("cc").selectedOptions[0],cT=o?o.textContent:"";x.font="500 34px "+F;var cw=x.measureText(cT).width;x.fillStyle="#fff";x.font="900 76px "+F;fit(x,nkT,44,782,W-88-100-cw-30);var nw=x.measureText(nkT).width;
+x.fillStyle="#fff";x.font="900 76px "+F;var nkT=($("nk").value||"닉네임").slice(0,16);var o=$("cc").selectedOptions[0],cT=o?o.textContent:"";x.font="500 34px "+F;var cw=x.measureText(cT).width;x.fillStyle="#fff";x.font="900 76px "+F;fit(x,nkT,44,782,W-88-100-cw-30-58);var nw=x.measureText(nkT).width;
 if(logo.complete&&logo.naturalWidth){var L=80,lx=44+nw+18,ly=782-L+10;x.save();rr(x,lx,ly,L,L,18);x.clip();x.drawImage(logo,lx,ly,L,L);x.restore()}
-x.fillStyle="#C9CEDA";x.font="500 34px "+F;x.fillText(cT,44+nw+(logo.naturalWidth?80+18:0)+18,780);
+var fx=44+nw+(logo.naturalWidth?80+18:0)+18;fx+=flag(x,$("cc").value,fx,752,34);x.fillStyle="#C9CEDA";x.font="500 34px "+F;x.fillText(cT,fx,780);
 var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" · "+$("md").value+" · "+($("yr").value||"")],["SNS",$("sn").value+" @"+($("ac").value||"")],["가입일",new Date().toISOString().slice(0,10).replace(/-/g,".")]];
 rows.forEach(function(r,i){var y=880+i*76;x.fillStyle="#9AA3B2";x.font="500 30px "+F;x.fillText(r[0],46,y);x.fillStyle="#fff";x.font="800 34px "+F;fit(x,r[1],170,y,W-170-44)});
 x.fillStyle="#E8EAEE";x.font="900 30px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-46,H-44);x.textAlign="left"}
@@ -88,6 +88,7 @@ $("nkb").onclick=function(){var b=this;if(b.disabled)return;
  if(!b.dataset.s){b.dataset.s=1;$("nk").readOnly=false;$("nk").focus();b.textContent="✔ 이 닉네임으로 확정 (1년 동안 못 바꿈)";return}
  if(b.dataset.s==1){b.dataset.s=2;b.textContent="정말 확정합니까? 한 번 더 누르십시오";setTimeout(function(){if(b.dataset.s==2){b.dataset.s=1;b.textContent="✔ 이 닉네임으로 확정 (1년 동안 못 바꿈)"}},4000);return}
  lss("icc_nc_nkAt",String(Date.now()));saveNC();nkInit();draw()};
+var FL={};function flag(x,cc,X,Y,h){if(!cc)return 0;var k=cc.toLowerCase(),im=FL[k];if(!im){im=FL[k]=new Image();im.onload=draw;im.src="/img/flags/"+k+".png"}if(!im.complete||!im.naturalWidth)return 0;var w=h*4/3;x.save();rr(x,X,Y,w,h,5);x.clip();x.drawImage(im,X,Y,w,h);x.restore();x.lineWidth=1.5;x.strokeStyle="rgba(255,255,255,.35)";rr(x,X,Y,w,h,5);x.stroke();return w+12}
 function fit(x,t,X,Y,M){var f=x.font,n=parseInt(f.match(/(\d+)px/)[1]);while(x.measureText(t).width>M&&n>16){n--;x.font=f.replace(/\d+px/,n+"px")}x.fillText(t,X,Y)}
 addEventListener("resize",draw);
 function saveImg(np){NOPH=np;draw();$("c").toBlob(function(bl){NOPH=false;draw();var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent=(np?"사진을 뺀 카드를 ":"카드를 ")+"저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")}
