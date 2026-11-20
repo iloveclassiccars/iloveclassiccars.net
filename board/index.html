@@ -673,5 +673,13 @@ function build(){var h=document.querySelector("header");if(!h||h.querySelector("
  var nv=document.createElement("nav");nv.className="unav";nv.setAttribute("aria-label","메뉴");nv.innerHTML=IT.map(function(x){var href=x[0].charAt(0)==="/"?x[0]:"#"+x[0];return '<a href="'+href+'" data-k="'+x[0]+'"><i style="background:'+x[3]+'">'+svg((x[4][x[2]])||"")+'</i><span>'+x[1]+'</span></a>'}).join("");lg.parentNode.insertBefore(nv,lg.nextSibling);mark()}
 function mark(){var k=((location.hash||"").replace("#","").match(/^[a-z]+/)||[""])[0];document.querySelectorAll("header .unav a").forEach(function(a){a.classList.toggle("on",a.dataset.k===k)})}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",build);else build();addEventListener("hashchange",mark)})();</script>
+<style id="icc-plateA">
+html body header .logo{display:inline-flex!important;align-items:center!important;color:#fff;text-decoration:none;font:900 24px/1 "Arial Black","Helvetica Neue",-apple-system,Arial,sans-serif!important;letter-spacing:.3px!important;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+html body header .logo span{font:inherit!important;letter-spacing:inherit!important;margin:0!important;padding:0!important}html body header .logo{gap:0!important}
+html body header .logo svg{height:.78em!important;width:auto!important;margin:0 .14em!important;position:relative;top:.02em}
+html body header .uicon{width:38px!important;height:38px!important;border-radius:10px!important;box-shadow:0 1px 0 rgba(255,255,255,.15) inset,0 2px 6px rgba(0,0,0,.35)}
+@media (max-width:899px){html body header .logo{font-size:19px!important;letter-spacing:.2px!important}}
+@media (max-width:370px){html body header .logo{font-size:16.5px!important;letter-spacing:0!important}}
+</style>
 </body>
 </html>
