@@ -1707,6 +1707,8 @@ document.addEventListener("click",function(e){var t=e.target.closest&&e.target.c
 function confirmRm(){return true}
 document.addEventListener("submit",function(e){var f=e.target;if(f.id==="g2lf"){e.preventDefault();var t=document.getElementById("g2t").value.trim();if(!t){toast("한 일을 넣어 주십시오");return}var w=parseInt((document.getElementById("g2w").value||"").replace(/[^0-9]/g,""))||0;MEM.garage[G.i].logs=MEM.garage[G.i].logs||[];MEM.garage[G.i].logs.push({d:document.getElementById("g2d").value,t:t,p:document.getElementById("g2p").value.trim(),w:w});save();toast("기록했습니다");re()}
  if(f.id==="g2vf"){e.preventDefault();var v=document.getElementById("g2vin").value.toUpperCase().replace(/[^A-Z0-9]/g,""),r=document.getElementById("g2vr");if(v.length!==17){r.textContent="차대번호는 17자리입니다. 지금 "+v.length+"자리입니다.";return}var m=/^WDB(\d{3})/.exec(v),id=m&&VM[m[1]];if(!id||!car(id)){r.textContent="이 차대번호의 차종은 아직 자료가 없습니다. 아래에서 차종을 직접 골라 주십시오.";return}MEM.garage.push({id:id,m:"",vin:v,logs:[]});G.i=MEM.garage.length-1;G.add=false;save();toast(car(id).code+" 차고에 넣었습니다");re()}},true);
+P.quote=function(){setTimeout(function(){location.replace("#/");setTimeout(function(){var b=[].slice.call(document.querySelectorAll("[data-copen]")).filter(function(x){return x.getBoundingClientRect().width>0})[0];if(b)b.click()},400)},0);return ""};
+if(location.hash==="#/quote"||location.hash==="#/garage")setTimeout(function(){route()},0);
 function wire(){var b=document.getElementById("garb");if(b)b.onclick=function(){location.hash="#/garage"}}
 wire();setTimeout(wire,500);setTimeout(wire,1500)})();</script>
 </body>
