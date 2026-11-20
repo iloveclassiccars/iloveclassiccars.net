@@ -8,7 +8,7 @@
 <label>모델 · 연식</label><div class="row"><select id="md"></select><input id="yr" inputmode="numeric" maxlength="4" value="1997"></div>
 <select id="bd" hidden><option value="sedan"></option><option value="coupe"></option><option value="roadster"></option><option value="suv"></option><option value="wagon"></option><option value="hatch"></option></select>
 <label>이메일</label><input id="em" type="email" value="futurenix@gmail.com">
-<label>SNS</label><div class="row"><select id="sn"><option>X</option><option>Instagram</option><option>Facebook</option><option>YouTube</option><option>네이버</option><option>카카오</option><option>Threads</option><option>LINE</option></select><input id="ac" value="koreain" placeholder="아이디"></div>
+<label>SNS</label><div class="row"><select id="sn"></select><input id="ac" value="koreain" placeholder="아이디"></div>
 </div>
 <div class="cv"><canvas id="c" width="1080" height="640"></canvas>
 <button class="btn" id="sv">📸 카드 이미지로 저장</button>
@@ -46,5 +46,8 @@ var c=car(),rows=[["내 차",c[0].replace("Mercedes-Benz","벤츠")+" "+c[1]+" �
 rows.forEach(function(r,i){var y=440+i*46;x.fillStyle="#9AA3B2";x.font="500 26px "+F;x.fillText(r[0],56,y);x.fillStyle="#fff";x.font="700 28px "+F;x.fillText(r[1],200,y)});
 x.fillStyle="#E8EAEE";x.font="900 24px "+F;x.textAlign="right";x.fillText("iloveclassiccars.net",W-56,H-44);x.textAlign="left"}
 $("sv").onclick=function(){$("c").toBlob(function(bl){var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="namecard-"+($("nk").value||"me")+".png";document.body.appendChild(a);a.click();a.remove();$("msg").textContent="저장했습니다. 휴대폰은 사진/다운로드 폴더를 확인하십시오."},"image/png")};
+var SNSP={"KR":["네이버","카카오","인스타그램","유튜브","X","페이스북"],"JP":["LINE","X","인스타그램","유튜브","믹시","페이스북"],"CN":["위챗","웨이보","더우인","샤오훙수","비리비리","QQ"],"TW":["LINE","페이스북","인스타그램","유튜브","X","스레드"],"TH":["LINE","페이스북","틱톡","인스타그램","유튜브","X"],"VN":["잘로","페이스북","틱톡","유튜브","인스타그램","X"],"RU":["VK","텔레그램","오드노클라스니키","유튜브","왓츠앱","Viber"],"_":["인스타그램","페이스북","유튜브","X","틱톡","왓츠앱"]},SNSALL=["네이버","카카오","X","페이스북","인스타그램","유튜브","틱톡","스레드","구글","애플","LINE","위챗","웨이보","QQ","샤오훙수","비리비리","더우인","VK","오드노클라스니키","텔레그램","왓츠앱","링크드인","핀터레스트","레딧","스냅챗","디스코드","텀블러","블루스카이","마스토돈","잘로","네이버 밴드","다음","믹시","Viber","Signal"];
+function fillSn(){var c=$("cc").value,top=SNSP[c]||SNSP._,cur=$("sn").value;var h='<optgroup label="이 나라에서 많이 씀">'+top.map(function(v){return"<option>"+v+"</option>"}).join("")+'</optgroup><optgroup label="전체">'+SNSALL.filter(function(v){return top.indexOf(v)<0}).map(function(v){return"<option>"+v+"</option>"}).join("")+"</optgroup>";$("sn").innerHTML=h;if(cur&&SNSALL.indexOf(cur)>=0)$("sn").value=cur}
+fillSn();$("cc").addEventListener("change",function(){fillSn();draw()});$("sn").value="X";
 fillCd();
 </script></body></html>
