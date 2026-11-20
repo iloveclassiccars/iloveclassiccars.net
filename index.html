@@ -1799,5 +1799,5 @@ function run(){var hub=document.querySelector(".hub");if(!hub)return;
  rows.slice(0,8).forEach(function(r){var t=(r.a.childNodes[0]&&r.a.childNodes[0].nodeType===3?r.a.childNodes[0].textContent:r.a.textContent).replace(/\s*\d+\.\d+$/,"");h+='<a class="r" href="'+r.a.getAttribute("href")+'"><i style="background:'+(COL[r.nm]||"#3a3f47")+'">'+r.nm+'</i>'+(isNew(r.d)?'<b class="n">N</b>':'')+'<span>'+t.replace(/[<>&]/g,"").replace(/^N/,"")+'</span></a>'});
  h+='<a class="cta" href="#/story/new">✎ 내 차 이야기 올려 주세요</a>';w.innerHTML=h;hero.parentNode.insertBefore(w,hero.nextSibling)}
 var t;function q(){clearTimeout(t);t=setTimeout(run,120)}new MutationObserver(q).observe(document.body,{childList:true,subtree:true});addEventListener("hashchange",q);q()})();</script>
-</body>
+<style id="icc-nvsm">@media (max-width:370px){html:root body header .nvi .nvt,html:root body header .nvt{font-size:10px!important;letter-spacing:-.7px!important}}</style></body>
 </html>
