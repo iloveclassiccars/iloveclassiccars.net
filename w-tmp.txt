@@ -76,17 +76,17 @@ const MEET_CTX="너는 I Love Classic Cars(iloveclassiccars.net, 글로벌 클�
 function env0X(env,k){try{return env[k]}catch{return undefined}}
 async function meet(req,env){let d;try{d=await req.json()}catch{return J({ok:false,err:"bad"},400)}
  const org=req.headers.get("origin")||"";if(!/^https:\/\/(www\.)?iloveclassiccars\.net$/.test(org))return J({ok:false,err:"auth"},401);
- const topic=String(d.topic||"").slice(0,4000).trim();if(!topic)return J({ok:false,err:"topic"},400);
+ const topic=String(d.topic||"").slice(0,6000).trim();const CTX=d.mode==="work"?"너는 I Love Classic Cars(글로벌 클래식카 사이트) 제작팀원이다. 팀원은 제민(Gemini)·채림(ChatGPT)·규록(Grok), 정리는 춘삼(Claude). 요청받은 결과물만 요청한 형식 그대로 출력하라. 결론·이유·위험 같은 머리말이나 설명은 쓰지 마라.":MEET_CTX;if(!topic)return J({ok:false,err:"topic"},400);
  if(env.RL){const k="m:"+new Date().toISOString().slice(0,10),n=+(await env.RL.get(k)||0);if(n>=30)return J({ok:false,err:"limit"},429);await env.RL.put(k,String(n+1),{expirationTtl:172800})}
  const to=(p)=>Promise.race([p,new Promise(r=>setTimeout(()=>r("(응답 시간 초과)"),45000))]);
  const gem=async()=>{if(!env.GEMINI_KEY)return"(GEMINI_KEY 없음)";const m=env.GEMINI_MODEL||"gemini-flash-latest";
-  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`,{method:"POST",headers:{"content-type":"application/json","x-goog-api-key":env.GEMINI_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:MEET_CTX+" 너의 이름은 제민."}]},contents:[{role:"user",parts:[{text:topic}]}]})});
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`,{method:"POST",headers:{"content-type":"application/json","x-goog-api-key":env.GEMINI_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:CTX+" 너의 이름은 제민."}]},contents:[{role:"user",parts:[{text:topic}]}]})});
   const j=await r.json().catch(()=>({}));return j.candidates?.[0]?.content?.parts?.map(x=>x.text).join("")||("(오류 "+r.status+": "+(j.error?.message||"")+")")};
  const oai=async()=>{if(!env.OPENAI_KEY)return"(OPENAI_KEY 없음)";const m=env.OPENAI_MODEL||"gpt-5-mini";
-  const r=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+env.OPENAI_KEY},body:JSON.stringify({model:m,instructions:MEET_CTX+" 너의 이름은 채림.",input:topic})});
+  const r=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+env.OPENAI_KEY},body:JSON.stringify({model:m,instructions:CTX+" 너의 이름은 채림.",input:topic})});
   const j=await r.json().catch(()=>({}));return j.output_text||(j.output||[]).flatMap(o=>o.content||[]).map(c=>c.text||"").join("")||("(오류 "+r.status+": "+(j.error?.message||"")+")")};
  const grk=async()=>{const XK=env.XAI_KEY||env0X(env,"xai-key");if(!XK)return"(XAI_KEY 없음)";const m=env.XAI_MODEL||"grok-4.7";
-  const r=await fetch("https://api.x.ai/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+XK},body:JSON.stringify({model:m,messages:[{role:"system",content:MEET_CTX+" 너의 이름은 규록(Grok). SNS 반응과 글로벌 유행 시각에서 말하라."},{role:"user",content:topic}]})});
+  const r=await fetch("https://api.x.ai/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+XK},body:JSON.stringify({model:m,messages:[{role:"system",content:CTX+" 너의 이름은 규록(Grok). SNS 반응과 글로벌 유행 시각에서 말하라."},{role:"user",content:topic}]})});
   const j=await r.json().catch(()=>({}));return j.choices?.[0]?.message?.content||("(오류 "+r.status+": "+(j.error?.message||j.error||"")+")")};
  const [a,b,c]=await Promise.all([to(gem().catch(e=>"(오류)")),to(oai().catch(e=>"(오류)")),to(grk().catch(e=>"(오류)"))]);
  return J({ok:true,jemin:a,chaerim:b,grok:c})}
