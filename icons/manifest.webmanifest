@@ -22,5 +22,40 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "네임카드 보내기",
+      "short_name": "네임카드",
+      "url": "/namecard/?share=1",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png?v=2",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "QR 보여 주기",
+      "short_name": "QR",
+      "url": "/namecard/?qr=1",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png?v=2",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "부품 찾기",
+      "short_name": "부품 찾기",
+      "url": "/#/parts",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png?v=2",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }
