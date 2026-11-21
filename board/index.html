@@ -324,7 +324,14 @@ html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:160px!important;height
 .ncs a.add{justify-content:center!important}.ncs a.add:before{top:18px!important;font-size:28px!important}
 @media(max-width:899px){html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:132px!important;height:76px!important}.ncs a:not(.add) span:first-child{font-size:12.5px!important}.ncs a:not(.add) span+span{font-size:10.5px!important}.ncs a.add:before{top:10px!important;font-size:22px!important}}
 </style><style id="search-big">html.mhome #home .search.mo{height:64px!important;padding-left:20px!important}html.mhome #home .search.mo input{font-size:18px!important}html.mhome #home .search.mo .sgo{height:62px!important;padding:0 30px!important;font-size:18px!important}html.mhome #home .scopy span{font-size:18px!important}
-@media(max-width:899px){html.mhome #home .search.mo{height:58px!important;padding-left:14px!important}html.mhome #home .search.mo input{font-size:16px!important}html.mhome #home .search.mo .sgo{height:56px!important;padding:0 18px!important;font-size:16px!important}html.mhome #home .scopy span{font-size:16px!important}}</style></head>
+@media(max-width:899px){html.mhome #home .search.mo{height:58px!important;padding-left:14px!important}html.mhome #home .search.mo input{font-size:16px!important}html.mhome #home .search.mo .sgo{height:56px!important;padding:0 18px!important;font-size:16px!important}html.mhome #home .scopy span{font-size:16px!important}}</style><style id="rn-css">.row .rn{flex:0 0 auto;width:58px;color:#8C96A1;font-size:13px;font-variant-numeric:tabular-nums;text-align:left;margin-right:-8px}.row .rt{flex:1 1 auto}</style><style id="rn-mo">@media(max-width:899px){.row .rn{display:none!important}}</style><style id="sig-css">
+.ncs a:not(.add):after{content:"I ♥ CLASSIC CARS"!important;letter-spacing:.3px!important}
+.ncs a:not(.add).noph{background:linear-gradient(160deg,#2E8B57 0%,#1E6B42 55%,#14432B 100%)!important}
+.ncs a:not(.add).noph:before{content:""!important;position:absolute!important;inset:auto!important;left:50%!important;top:24%!important;width:36%!important;height:40%!important;transform:translateX(-50%);background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20transform%3D%22translate%287.4%200.2%29%20scale%280.38%29%22%20d%3D%22M12%2021%20C4%2015%200.5%2010.5%200.5%206.5%20C0.5%203%203.2%200.5%206.4%200.5%20C8.8%200.5%2010.9%201.8%2012%203.8%20C13.1%201.8%2015.2%200.5%2017.6%200.5%20C20.8%200.5%2023.5%203%2023.5%206.5%20C23.5%2010.5%2020%2015%2012%2021%20Z%22%20fill%3D%22%23FF4D55%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.6%22/%3E%3Cpath%20d%3D%22M5%2019%20H3.5%20a1%201%200%200%201%20-1%20-1%20v-2%20q0%20-1.6%202%20-1.9%20l3%20-0.5%20l2%20-3%20q0.6%20-0.8%201.6%20-0.8%20h4.2%20q1%200%201.7%200.7%20l2.6%203.1%20l2.2%200.5%20q1.7%200.4%201.7%202%20v1.9%20a1%201%200%200%201%20-1%201%20H19%22/%3E%3Cpath%20d%3D%22M9%2019%20h6%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2219%22%20r%3D%222%22/%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2219%22%20r%3D%222%22/%3E%3C/svg%3E") center/contain no-repeat!important;opacity:.95!important;font-size:0!important}
+</style><style id="tall-css">html.tallv.mhome #home .ncs{display:grid!important;grid-template-columns:repeat(var(--gc,6),1fr);gap:10px!important;overflow:visible!important}
+html.tallv.mhome #home .ncs a{width:auto!important;height:var(--gh,99px)!important}
+html.tallv.mhome #home .ncs a:not(.add) span:first-child{font-size:15px!important}
+html.tallv.mhome #home .ncs a:not(.add) span+span{font-size:12.5px!important}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 지금 보이는 글은 대부분 시험용 글입니다</div>
@@ -952,7 +959,7 @@ function render(){var box=document.getElementById('cards');if(!box||!box.childre
 [].forEach.call(box.querySelectorAll('.board'),function(sec){var a=sec.querySelector('a.bh');if(!a)return;var k=a.getAttribute('href').slice(1),b=D[k];if(!b)return;
 [].forEach.call(sec.querySelectorAll('a.row'),function(r){r.remove()});
 b.items.slice(0,n).forEach(function(it,i){var num=b.items.length-i;var r=document.createElement('a');r.className='row';r.href=(window.POSTS&&POSTS[k])?('#'+k+'-'+num):('#'+k);
-var t;try{t=titleNode(k,it,'rt',num)}catch(e){t=document.createElement('span');t.className='rt';t.textContent=it.t}r.appendChild(t);
+var t;try{t=titleNode(k,it,'rt',num)}catch(e){t=document.createElement('span');t.className='rt';t.textContent=it.t}var rn=document.createElement('span');rn.className='rn';rn.textContent=num;rn.setAttribute('aria-label','글 번호 '+num);r.insertBefore(rn,r.firstChild);r.appendChild(t);
 var l=document.createElement('span');l.className='rlk';l.innerHTML='<i class="hh">♥</i> '+(it.lk||0);r.appendChild(l);sec.appendChild(r)})})}
 function go(){if((location.hash||'#home')!=='#home'&&location.hash!=='')return;last=-1;render()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
@@ -1041,16 +1048,28 @@ function scopy(){var home=document.getElementById('home'),sb=home&&home.querySel
 function hcopy(){var home=document.getElementById('home');if(!home||home.querySelector('.hcopy'))return;var d=document.createElement('div');d.className='hcopy';d.innerHTML=KO?'차 좋아하는 사람들의 놀이터<b>클래식카 · 영타이머</b>':'Where car lovers play<b>Classics · Youngtimers</b>';home.insertBefore(d,home.firstChild)}
 function deck(r){try{fetch('https://icc-mail.futurenix.workers.dev/api/nc/deck').then(function(x){return x.json()}).then(function(j){if(!j||!j.cards||!j.cards.length)return;var box=r.querySelector('.ncs');if(!box)return;var inv=box.querySelector('a.add:last-child');var seen={};[].forEach.call(box.querySelectorAll('a[data-k]'),function(a){seen[a.dataset.k]=1});
  var mine=g('icc_nc',null)||{},mc=String(mine.cd||'').toLowerCase(),mcc=String(mine.cc||'').toUpperCase();var L=j.cards.map(function(c,i){var sc=(mc&&String(c.car||'').toLowerCase().indexOf(mc.split(' ')[0])>=0?2:0)+(mcc&&String(c.c||'').toUpperCase()===mcc?1:0);return{c:c,s:sc,i:i}}).sort(function(a,b){return b.s-a.s||a.i-b.i}).map(function(x){return x.c});var cnt=0;
- L.forEach(function(c){if(cnt>=10)return;var k=(c.n||'')+'|'+(c.car||'');if(seen[k])return;seen[k]=1;cnt++;var a=document.createElement('a');a.href='/namecard/?c='+encodeURIComponent(c.tok);a.dataset.k=k;a.innerHTML='<span>'+fi(c.c)+esc(c.n||'')+'</span><span>'+esc(c.car||'')+'</span>';box.insertBefore(a,inv)});if(!box.querySelector('a.more')){var mo=document.createElement('a');mo.className='add more';mo.href='/namecard/';mo.innerHTML='<span>'+TX.more+' ›</span>';box.insertBefore(mo,inv)}}).catch(function(){})}catch(e){}}
+ L.forEach(function(c){if(cnt>=(document.documentElement.classList.contains('tallv')?40:10))return;var k=(c.n||'')+'|'+(c.car||'');if(seen[k])return;seen[k]=1;cnt++;var a=document.createElement('a');a.href='/namecard/?c='+encodeURIComponent(c.tok);a.dataset.k=k;a.innerHTML='<span>'+fi(c.c)+esc(c.n||'')+'</span><span>'+esc(c.car||'')+'</span>';box.insertBefore(a,inv)});if(!box.querySelector('a.more')){var mo=document.createElement('a');mo.className='add more';mo.href='/namecard/';mo.innerHTML='<span>'+TX.more+' ›</span>';box.insertBefore(mo,inv)}}).catch(function(){})}catch(e){}}
 function phMark(r){[].forEach.call(r.querySelectorAll('.ncs a:not(.add)'),function(a){if(a.querySelector('.ov'))return;var o=document.createElement('i');o.className='ov';a.insertBefore(o,a.firstChild);if(!a.classList.contains('hasph'))a.classList.add('noph')})}
 function myPhoto(r){try{var cars=JSON.parse(localStorage.getItem('icc_nc_cars')||'[]'),cur=+(localStorage.getItem('icc_nc_cur')||0),id=cars[cur]&&cars[cur].id;if(!id)return;var k='icc_nc_photo_'+id,ls=localStorage.getItem(k);
  function put(u){if(!u)return;var a=r.querySelector('.ncs a.me');if(!a)return;a.style.setProperty('--ph','url("'+u+'")');a.classList.remove('noph');a.classList.add('hasph')}
  if(ls)return put(ls);var q=indexedDB.open('icc_nc',1);q.onupgradeneeded=function(){q.result.createObjectStore('ph')};q.onsuccess=function(){try{var g=q.result.transaction('ph').objectStore('ph').get(k);g.onsuccess=function(){put(g.result)}}catch(e){}}}catch(e){}}
+function tallChk(){H.classList.toggle('tallv',innerHeight>=1200)}addEventListener('resize',tallChk);tallChk();
 function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
 new MutationObserver(function(){if(H.classList.contains('mhome')){var c=document.getElementById('cards');if(c&&!c.querySelector('.board.on'))build()}}).observe(document.getElementById('cards')||document.body,{childList:true});
 })();</script>
-</body>
+<script id="gold-js">(function(){var G=1.618,busy=0,last='';
+function gold(){var x=document.querySelector('#home .ncs');if(!x)return;var on=document.documentElement.classList.contains('tallv')&&document.documentElement.classList.contains('mhome');
+var all=[].slice.call(x.children);if(!on){all.forEach(function(e){e.style.display=''});return}
+var W=x.clientWidth,gp=10,cols=Math.max(3,Math.floor((W+gp)/(160+gp))),cw=(W-gp*(cols-1))/cols,ch=Math.round(cw/G);
+var top=x.getBoundingClientRect().top+scrollY,remain=innerHeight-top,area=remain*0.382,rows=Math.max(3,Math.min(4,Math.floor((area+gp)/(ch+gp))));
+x.style.setProperty('--gc',cols);x.style.setProperty('--gh',ch+'px');
+var tail=all.filter(function(e){return e.classList.contains('add')}),cards=all.filter(function(e){return!e.classList.contains('add')});
+var room=cols*rows-tail.length;cards.forEach(function(e,i){e.style.display=i<room?'':'none'});
+var shown=Math.min(cards.length,room)+tail.length;if(shown<cols*rows&&shown>cols){/* trim to full rows */var r=Math.floor(shown/cols)*cols-tail.length;cards.forEach(function(e,i){e.style.display=i<r?'':'none'})}
+var k=cols+'x'+rows+'x'+ch;if(k!==last){last=k;busy=1;dispatchEvent(new Event('resize'));busy=0}}
+var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(gold,60)}).observe(document.body,{childList:true,subtree:true});
+addEventListener('resize',function(){if(!busy){clearTimeout(t);t=setTimeout(gold,60)}});})()</script></body>
 </html>
