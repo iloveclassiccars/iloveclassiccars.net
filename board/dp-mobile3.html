@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>디피 · 휴대폰 첫 화면 시안 3개</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0E1219;color:#E8EAEE;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.top{background:#2E7D4F;padding:12px 16px;font-weight:800}.top small{display:block;font-weight:400;font-size:12.5px;opacity:.9;margin-top:2px}
+.tabs{display:none;gap:6px;padding:10px 12px;position:sticky;top:0;background:#0E1219;z-index:9}
+.tabs button{flex:1;height:42px;border:0;border-radius:10px;background:#262A33;color:#fff;font-weight:800;font-size:14px}.tabs button.on{background:#2AA84B}
+.row{display:flex;gap:22px;justify-content:center;padding:18px 10px 40px;flex-wrap:wrap}
+.col{width:390px;max-width:100%}
+.lab{font-weight:800;font-size:16px;margin:0 0 4px}.lab span{color:#7FD99A}.sub{font-size:12.5px;color:#9AA5B5;margin:0 0 10px;min-height:34px}
+.ph{width:390px;max-width:100%;height:780px;overflow-y:auto;border-radius:28px;border:6px solid #262A33;background:#171B26;position:relative}
+@media(max-width:860px){.tabs{display:flex}.col{display:none}.col.on{display:block}.row{padding-top:8px}}
+/* common phone UI */
+.hd{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#1F4D36}
+.logo{font-weight:900;font-size:17px;flex:1;white-space:nowrap}.logo i{color:#E5262D;font-style:normal}
+.pill{border:1px solid #ffffff66;border-radius:16px;padding:4px 10px;font-size:12.5px}.ic{font-size:19px}
+.srch{display:flex;margin:12px 14px 0;border:1.5px solid #2AA84B;border-radius:10px;overflow:hidden;background:#222A38}
+.srch span{flex:1;padding:12px 10px;font-size:14px;color:#9AA5B5;white-space:nowrap;overflow:hidden}
+.srch b{padding:12px 10px;font-size:17px}.srch em{background:#2AA84B;color:#fff;font-style:normal;font-weight:800;padding:12px 14px;font-size:14px}
+.dd{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 14px 0}.dd div{background:#222A38;border:1px solid #333D50;border-radius:8px;padding:9px 8px;font-size:12.5px;font-weight:700;display:flex;justify-content:space-between}.dd div:after{content:"⌄";color:#2AA84B}
+.m8{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;margin:14px 10px 0;text-align:center}
+.m8 i{display:grid;place-items:center;width:52px;height:52px;margin:0 auto;border-radius:14px;font-style:normal;font-size:24px}
+.m8 b{display:block;font-size:12px;margin-top:5px}.m8 small{display:block;font-size:10.5px;color:#9AA5B5}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 14px 2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips span{flex:none;display:flex;align-items:center;gap:6px;background:#222A38;border:1px solid #333D50;border-radius:20px;padding:7px 12px;font-size:13px;font-weight:700;white-space:nowrap}
+.sl{display:flex;gap:10px;overflow-x:auto;padding:12px 14px 2px;scrollbar-width:none}.sl::-webkit-scrollbar{display:none}
+.sl div{flex:none;width:70px;text-align:center;font-size:11.5px;font-weight:700}.sl i{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 5px;border-radius:16px;font-style:normal;font-size:26px}
+.nc{margin:14px;border-radius:14px;padding:14px;background:linear-gradient(135deg,#1F4D36,#2E7D4F);display:flex;align-items:center;gap:12px}
+.nc .av{width:46px;height:46px;border-radius:12px;background:#ffffff22;display:grid;place-items:center;font-size:24px;flex:none}
+.nc b{display:block;font-size:15px}.nc small{font-size:12px;opacity:.9}.nc em{margin-left:auto;background:#fff;color:#1F4D36;font-style:normal;font-weight:800;border-radius:10px;padding:8px 10px;font-size:12.5px;white-space:nowrap}
+.btab{display:flex;gap:6px;overflow-x:auto;padding:12px 14px 0;scrollbar-width:none}.btab span{flex:none;padding:7px 12px;border-radius:16px;font-size:12.5px;font-weight:700;background:#222A38;white-space:nowrap}.btab span.on{background:#2AA84B}
+.list{margin:8px 14px 0;background:#1E2432;border-radius:12px;padding:4px 12px}
+.li{display:flex;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #2A3245;font-size:13.5px}.li:last-child{border:0}
+.li span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.li em{font-style:normal;color:#E57373;font-size:12.5px;white-space:nowrap}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:16px 14px 0;font-weight:800;font-size:15px}.sec small{color:#7FD99A;font-size:12.5px}
+.card{margin:10px 14px 0;background:#1E2432;border-radius:14px;overflow:hidden}
+.card .im{height:150px;display:grid;place-items:center;font-size:54px}
+.card .tx{padding:10px 12px}.card .tg{font-size:11.5px;font-weight:800;color:#7FD99A}.card b{display:block;font-size:14.5px;margin:3px 0}.card small{color:#9AA5B5;font-size:12px}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 14px 0}.mini div{background:#1E2432;border-radius:12px;overflow:hidden}.mini .im{height:90px;display:grid;place-items:center;font-size:34px}.mini p{margin:0;padding:7px 9px;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fbtn{margin:10px 14px 0;background:#222A38;border:1px solid #333D50;border-radius:10px;padding:11px;font-size:13.5px;font-weight:800;text-align:center}
+.story{display:flex;gap:10px;overflow-x:auto;padding:12px 14px 2px;scrollbar-width:none}.story::-webkit-scrollbar{display:none}
+.story div{flex:none;width:96px;height:132px;border-radius:14px;padding:8px;display:flex;flex-direction:column;justify-content:flex-end;font-size:11.5px;font-weight:800;background:linear-gradient(180deg,#2E7D4F,#14261D);position:relative}
+.story div:before{content:"🚗";position:absolute;top:24px;left:0;right:0;text-align:center;font-size:36px}.story div.add{background:#222A38;border:1.5px dashed #2AA84B;justify-content:flex-end;text-align:center}.story div.add:before{content:"＋";top:30px;color:#2AA84B}
+.bnav{position:sticky;bottom:0;display:flex;background:#121722;border-top:1px solid #2A3245;margin-top:16px}.bnav div{flex:1;text-align:center;padding:8px 0 10px;font-size:11px;color:#9AA5B5}.bnav div i{display:block;font-style:normal;font-size:19px}.bnav .on{color:#7FD99A}
+.ft{text-align:center;color:#8C97AA;font-size:12px;padding:16px 0 18px}
+.c1{background:#8B5A2B}.c2{background:#2E7D4F}.c3{background:#7B4FCF}.c4{background:#2F6FD8}.c5{background:#D9651E}.c6{background:#1E8A93}.c7{background:#B23A48}.c8{background:#4B5D73}
+.note{max-width:1230px;margin:0 auto;padding:0 16px 30px;font-size:13px;color:#B9C2D0;line-height:1.7}
+</style></head><body>
+<div class="top">디피 · 휴대폰 첫 화면 시안 3개<small>제민 · 채림 · 규록이 하나씩 제안한 시안입니다. 각 휴대폰 화면 안에서 위아래로 밀어 보십시오.</small></div>
+<div class="tabs"><button class="on" data-i="0">A 제민</button><button data-i="1">B 채림</button><button data-i="2">C 규록</button></div>
+<div class="row">
+
+<!-- A 제민 -->
+<div class="col on"><p class="lab"><span>A</span> 제민 · 글로벌 원스톱</p><p class="sub">검색과 부품 찾기를 맨 위에 두고, 메뉴 8칸은 한 번만. 게시판은 탭으로 바꿔 봅니다.</p>
+<div class="ph">
+<div class="hd"><div class="logo">I <i>♥</i> CLASSIC CARS</div><span class="pill">🌐 EN</span><span class="ic">☰</span></div>
+<div class="srch"><b>🔍</b><span>VIN · Part no. · Name</span><b>📷</b><em>Search</em></div>
+<div class="dd"><div>Make</div><div>Code</div><div>Model</div><div>Year</div><div>Part</div><div>Color</div></div>
+<div class="m8">
+<div><i class="c1">☕</i><b>Lounge</b><small>오너라운지</small></div><div><i class="c2">🚗</i><b>Car Meet</b><small>카밋</small></div><div><i class="c3">🚩</i><b>Clubs</b><small>클럽</small></div><div><i class="c4">🔍</i><b>Parts</b><small>부품찾기</small></div>
+<div><i class="c5">🔧</i><b>Restore</b><small>정비복원</small></div><div><i class="c6">🤝</i><b>Buy &amp; Sell</b><small>사고팔기</small></div><div><i class="c7">🛡</i><b>Help</b><small>상담실</small></div><div><i class="c8">🏠</i><b>Garage</b><small>My Garage</small></div></div>
+<div class="nc"><div class="av">🪪</div><div><b>Make your car's name card</b><small>내차 명함 · 30초</small></div><em>Start</em></div>
+<div class="btab"><span class="on">Lounge</span><span>Car Meet</span><span>Clubs</span><span>Parts</span><span>Restore</span><span>Buy &amp; Sell</span></div>
+<div class="list">
+<div class="li"><span>R129 SL500 아내가 처음으로 운전대를…</span><em>♥ 104</em></div>
+<div class="li"><span>Tico fuel log — one year summary</span><em>♥ 177</em></div>
+<div class="li"><span>쏘나타2 아내가 처음으로 시동을…</span><em>♥ 389</em></div>
+<div class="li"><span>E30 325i first engine bay clean</span><em>♥ 384</em></div>
+<div class="li"><span>W124 E220 오너 모임에서 만난…</span><em>♥ 95</em></div>
+</div>
+<div class="ft">I ♥ Classic Cars · v1.02</div>
+</div></div>
+
+<!-- B 채림 -->
+<div class="col"><p class="lab"><span>B</span> 채림 · 컴팩트 허브</p><p class="sub">메뉴는 가로로 밀어 보는 아이콘 줄, 필터는 접어 두고, 게시글은 큰 카드 한 줄씩.</p>
+<div class="ph">
+<div class="hd"><span class="ic">☰</span><div class="logo">I <i>♥</i> CLASSIC CARS</div><span class="pill">🌐 EN</span></div>
+<div class="srch"><b>🔍</b><span>VIN · Part no. · Name</span><b>📷</b><em>Search</em></div>
+<div class="sl">
+<div><i class="c1">☕</i>Lounge</div><div><i class="c2">🚗</i>Car Meet</div><div><i class="c3">🚩</i>Clubs</div><div><i class="c4">🔍</i>Parts</div><div><i class="c5">🔧</i>Restore</div><div><i class="c6">🤝</i>Buy &amp; Sell</div><div><i class="c7">🛡</i>Help</div><div><i class="c8">🏠</i>Garage</div></div>
+<div class="fbtn">⚙️ Find by car · 6 filters ⌄</div>
+<div class="sec">Latest posts <small>All boards ›</small></div>
+<div class="card"><div class="im c2">🚘</div><div class="tx"><div class="tg">CAR MEET</div><b>W126 560SEL 지방 오너 모임 후기</b><small>♥ 154 · 💬 9 · 🇰🇷</small></div></div>
+<div class="card"><div class="im c5">🔧</div><div class="tx"><div class="tg">RESTORE</div><b>Galloper timing belt — done it myself</b><small>♥ 130 · 💬 12 · 🇺🇸</small></div></div>
+<div class="card"><div class="im c3">🚩</div><div class="tx"><div class="tg">CLUBS</div><b>Jaguar XJ6 club members wanted</b><small>♥ 111 · 💬 7 · 🇬🇧</small></div></div>
+<div class="nc" style="position:sticky;bottom:58px;margin-bottom:0"><div class="av">🪪</div><div><b>My car name card</b><small>내차 명함 만들기</small></div><em>Make</em></div>
+<div class="bnav"><div class="on"><i>🏠</i>Home</div><div><i>🔍</i>Search</div><div><i>✏️</i>Write</div><div><i>🪪</i>Card</div><div><i>🚗</i>Garage</div></div>
+</div></div>
+
+<!-- C 규록 -->
+<div class="col"><p class="lab"><span>C</span> 규록 · 그린 피드</p><p class="sub">SNS처럼: 얇은 머리줄, 메뉴는 칩 한 줄, 네임카드는 스토리처럼, 게시글은 사진 피드.</p>
+<div class="ph">
+<div class="hd"><div class="logo">I <i>♥</i> CLASSIC CARS</div><span class="pill">🌐 EN</span><span class="ic">🔔</span></div>
+<div class="srch"><b>🔍</b><span>VIN · Part no. · Name</span><b>📷</b><em>Search</em></div>
+<div class="chips"><span>☕ Lounge</span><span>🚗 Car Meet</span><span>🚩 Clubs</span><span>🔍 Parts</span><span>🔧 Restore</span><span>🤝 Buy &amp; Sell</span><span>🛡 Help</span><span>🏠 Garage</span></div>
+<div class="story"><div class="add">My card</div><div>🇰🇷 춘식이형<br>W140</div><div>🇯🇵 Kenji<br>E34 M5</div><div>🇩🇪 Lukas<br>R107</div><div>🇺🇸 Mike<br>Mustang</div></div>
+<div class="fbtn">🔧 Find parts by car ⌄</div>
+<div class="sec">For you <small>See all ›</small></div>
+<div class="card"><div class="im c6">🚙</div><div class="tx"><div class="tg">BUY &amp; SELL</div><b>W123 300D — original paint, 1984</b><small>♥ 246 · 💬 7 · 🇩🇪</small></div></div>
+<div class="mini"><div><div class="im c2">🏁</div><p>Saturday dawn coffee meet</p></div><div><div class="im c5">🛠</div><p>XJ6 winter storage tips</p></div><div><div class="im c1">☕</div><p>R129 첫 운전 이야기</p></div><div><div class="im c3">🚩</div><p>E34 club overseas</p></div></div>
+<div class="bnav"><div class="on"><i>🏠</i>Home</div><div><i>🧭</i>Explore</div><div><i>➕</i>Post</div><div><i>💬</i>Chat</div><div><i>🚗</i>Garage</div></div>
+</div></div>
+
+</div>
+<div class="note">
+<b>세 시안 공통:</b> 메뉴 중복 제거 · 테스트 띠 제거 · 게시글이 첫 화면에 보임 · 검색 문구 한 줄 · 영어 기본(🌐로 한국어 등 전환).<br>
+<b>A 제민</b>은 지금 구조를 가장 적게 바꿉니다(부품 찾는 사람에게 유리). <b>B 채림</b>은 하단 메뉴바가 생겨 앱처럼 쓰입니다. <b>C 규록</b>은 네임카드를 스토리처럼 앞에 내세워 홍보 효과가 가장 큽니다.
+</div>
+<script>document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');document.querySelectorAll('.col').forEach(function(c,i){c.classList.toggle('on',i==b.dataset.i)})}})</script>
+</body></html>
