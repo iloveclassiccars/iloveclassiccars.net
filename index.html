@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head><script id="icc-embhead">(function(){
+<head><script id="front-to-board">(function(){function h(){var x=location.hash;return !x||x==="#"||x==="#/"}if(h()){location.replace("/board/#home");return}addEventListener("hashchange",function(){if(h())location.replace("/board/#home")})})();</script><script id="icc-embhead">(function(){
 window.__BB=location.pathname.replace(/[^\/]*$/,"")+"board/";
 function bh(){var m=/^#\/b\/(.*)$/.exec(location.hash||"");return m?m[1]:null}
 addEventListener("hashchange",function(e){var h=bh(),f=document.getElementById("bfr");if(h!==null&&f&&f.contentWindow){e.stopImmediatePropagation();try{if((f.contentWindow.location.hash||"").slice(1)!==h)f.contentWindow.location.hash=h}catch(x){}window.__bmark&&window.__bmark()}});
