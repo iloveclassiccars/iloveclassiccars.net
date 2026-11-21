@@ -295,7 +295,7 @@ html body .dock .dkt{font-size:13px!important;font-weight:700!important;line-hei
 .mcpb small{color:#A6ABA8;font-weight:500}.mcpb.on{border-color:#2AA84B;background:rgba(42,168,75,.16)}.mcpb.cur{background:#2AA84B;border-color:#2AA84B;color:#fff}.mcpb.cur small,.mcpb.on small{color:#d9eadf}.mcpb.off{opacity:.45;pointer-events:none}
 .mcsep{color:#6c7270}.mccnt{color:#7FD99A;font:700 13px 'Noto Sans KR',sans-serif;white-space:nowrap}
 </style>
-<style id="icc-bembgap">@media (min-width:900px){html.bemb body #board{padding-top:6px!important}}</style><style id="icc-gutter">@media (min-width:900px) and (hover:hover){html{overflow-y:scroll;scrollbar-gutter:stable}html.bemb{overflow-y:hidden;scrollbar-gutter:auto}}</style><script id="icc-btophead">if(/[?&]top=1/.test(location.search))document.documentElement.classList.add("btop");</script><style id="icc-btopcss">html.btop body #list,html.btop body #lhead,html.btop body #pager,html.btop body .bfoot,html.btop body #post,html.btop body #write,html.btop body #home{display:none!important}html.btop body .pager{display:none!important}html.btop body #board{padding-bottom:0!important}</style><style id="planb8">.menu{grid-template-columns:repeat(4,minmax(0,1fr))!important}@media (min-width:900px){.menu{grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:24px 12px!important}}</style></head>
+<style id="icc-bembgap">@media (min-width:900px){html.bemb body #board{padding-top:6px!important}}</style><style id="icc-gutter">@media (min-width:900px) and (hover:hover){html{overflow-y:scroll;scrollbar-gutter:stable}html.bemb{overflow-y:hidden;scrollbar-gutter:auto}}</style><script id="icc-btophead">if(/[?&]top=1/.test(location.search))document.documentElement.classList.add("btop");</script><style id="icc-btopcss">html.btop body #list,html.btop body #lhead,html.btop body #pager,html.btop body .bfoot,html.btop body #post,html.btop body #write,html.btop body #home{display:none!important}html.btop body .pager{display:none!important}html.btop body #board{padding-bottom:0!important}</style><style id="planb8">.menu{grid-template-columns:repeat(4,minmax(0,1fr))!important}@media (min-width:900px){.menu{grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:24px 12px!important}}</style><style id="planbA">@media (min-width:900px){.boards{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px!important}}.board.mg .row .rt{color:#E8EAEE}.board.mg .row .rd{color:#7FD99A;white-space:nowrap}.board.mg .ben{white-space:nowrap}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 제목 끝에 T가 붙은 글은 테스트 글이며 정식 오픈 전에 모두 지웁니다</div>
@@ -894,5 +894,9 @@ function seed(){var nc=J("icc_nc");if(!nc||!nc.nk||!localStorage.getItem("icc_nc
 seed();var oWF=window.writeForm;window.writeForm=function(k){seed();oWF(k);try{apply()}catch(e){}};
 if(/^#[a-z]+-write$/.test(location.hash))setTimeout(function(){try{route()}catch(e){}},0);
 })();</script>
-</body>
+<script id="planbA-js">(function(){function add(){var box=document.getElementById('cards');if(!box||box.querySelector('.mg'))return;if(!box.children.length)return setTimeout(add,200);
+var R=[["정비 기록","남기기"],["내 견적","보기"],["사진 보관함","열기"],["정비 주기표","확인"],["공임 어림 계산","계산"],["견적서 점검","점검"],["내 클럽","가기"]];
+var h='<a class="bh" href="/#/garage"><span class="dot" style="background:#4B5D73"></span><h2>My Garage</h2><span class="ben">이 기기에만 저장</span></a>'+R.map(function(r){return '<a class="row" href="/#/garage"><span class="rt">'+r[0]+'</span><span class="rd">'+r[1]+' ›</span></a>'}).join('');
+var sec=document.createElement('section');sec.className='board mg';sec.innerHTML=h;box.appendChild(sec)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();addEventListener('hashchange',function(){setTimeout(add,50)})})();</script></body>
 </html>
