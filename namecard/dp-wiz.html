@@ -208,8 +208,8 @@ function render(){wz.innerHTML=dots();
  if(step===1){wz.insertAdjacentHTML('beforeend','<h2>내 차 사진 한 장</h2><p class="s">없으면 건너뛰어도 됩니다</p><div class="big"><button type="button" id="wcam">📷<br>찍기</button><button type="button" id="walb">🖼<br>앨범</button></div>');
   wz.querySelector('#wcam').onclick=function(){$('phc').click()};wz.querySelector('#walb').onclick=function(){$('phb').click()};
   wz.appendChild(preview());wz.insertAdjacentHTML('beforeend','<p class="s" style="margin-top:10px">👆 카드 사진은 나중에 손가락으로 맞출 수 있습니다</p>');wz.appendChild(nav(false))}
- if(step===2){wz.insertAdjacentHTML('beforeend','<h2>이름과 나라</h2><p class="s">본명이나 닉네임 모두 됩니다</p>');
-  var nk=document.createElement('input');nk.maxLength=16;nk.placeholder='이름 또는 닉네임';nk.value=$('nk').value;if($('nk').readOnly&&!fresh){nk.readOnly=true}
+ if(step===2){wz.insertAdjacentHTML('beforeend','<h2>닉네임과 나라</h2><p class="s">카드와 게시판에 보이는 이름입니다</p>');
+  var nk=document.createElement('input');nk.maxLength=16;nk.placeholder='닉네임';nk.value=$('nk').value;if($('nk').readOnly&&!fresh){nk.readOnly=true}
   nk.oninput=function(){$('nk').value=nk.value;ev($('nk'),'input')};var cc=cloneSel($('cc'));cc.onchange=function(){$('cc').value=cc.value;ev($('cc'),'change')};
   wz.appendChild(nk);wz.appendChild(cc);wz.appendChild(preview());wz.appendChild(nav(false))}
  if(step===3){wz.insertAdjacentHTML('beforeend','<h2>내 SNS</h2><p class="s">카드의 QR을 찍으면 이 SNS로 갑니다</p>');
