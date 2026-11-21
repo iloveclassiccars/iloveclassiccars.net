@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>팀 작업 내역 · I ♥ CC</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#0E1219;color:#E8EAEE;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.top{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 16px;background:#2E7D4F;font-weight:800}.top small{font-weight:400;opacity:.9}.top span{margin-left:auto;font-size:12px;font-weight:400}
+.w{max-width:1100px;margin:0 auto;padding:12px}
+.e{background:#1B2333;border:1px solid #2C3850;border-radius:12px;margin:0 0 14px;overflow:hidden}
+.eh{display:flex;gap:8px;align-items:center;padding:10px 14px;background:#26324A;font-size:13px}.eh b{padding:2px 8px;border-radius:6px;background:#2AA84B;color:#fff;font-size:12px}.eh b.meet{background:#4B5D73}
+.q{padding:10px 14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap;color:#C9D3E0;border-bottom:1px solid #2C3850;max-height:140px;overflow:auto}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.c{padding:10px 14px;font-size:13.5px;line-height:1.6;white-space:pre-wrap;border-right:1px solid #2C3850}.c:last-child{border-right:0}.c h4{margin:0 0 6px;font-size:13px;color:#7FD99A}
+.none{text-align:center;padding:40px;color:#8C97AA}</style></head><body>
+<div class="top">팀 작업 내역 <small>제민 · 채림 · 규록에게 묻고 받은 답 그대로 (최근 40건)</small><span id="st">불러오는 중…</span></div>
+<div class="w" id="w"></div>
+<script>
+var W=document.getElementById('w'),S=document.getElementById('st');
+function e(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
+function f(ts){var d=new Date(ts);return d.toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}
+function load(){fetch('https://icc-mail.futurenix.workers.dev/api/meet/log').then(function(r){return r.json()}).then(function(j){var L=(j&&j.log)||[];
+ W.innerHTML=L.length?L.map(function(x){return '<div class="e"><div class="eh"><b class="'+x.m+'">'+(x.m==='work'?'작업':'회의')+'</b>'+f(x.t)+'</div><div class="q">'+e(x.q)+'</div><div class="g"><div class="c"><h4>제민 (Gemini)</h4>'+e(x.jemin)+'</div><div class="c"><h4>채림 (ChatGPT)</h4>'+e(x.chaerim)+'</div><div class="c"><h4>규록 (Grok)</h4>'+e(x.grok)+'</div></div></div>'}).join(''):'<div class="none">아직 기록이 없습니다. 다음 회의부터 여기에 쌓입니다.</div>';
+ S.textContent='업데이트 '+new Date().toLocaleTimeString('ko-KR')+' · 15초마다 자동 갱신'}).catch(function(){S.textContent='불러오기 실패'})}
+load();setInterval(load,15000);
+</script></body></html>
