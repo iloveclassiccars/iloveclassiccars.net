@@ -338,7 +338,7 @@ html.tallv.mhome #home .ncs a:not(.add) span+span{font-size:12.5px!important}</s
 <header>
 <a class="logo" href="#home" aria-label="I Love Classic Cars 첫 화면"><span>I</span><svg aria-hidden="true" viewBox="0 0 24 22"><path d="M12 21 C4 15 0.5 10.5 0.5 6.5 C0.5 3 3.2 0.5 6.4 0.5 C8.8 0.5 10.9 1.8 12 3.8 C13.1 1.8 15.2 0.5 17.6 0.5 C20.8 0.5 23.5 3 23.5 6.5 C23.5 10.5 20 15 12 21 Z" fill="#E5262D"></path></svg><span>CLASSIC CARS</span></a>
 <label class="search pc"><svg class="s20" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg><input type="search" aria-label="부품 검색" placeholder="부품 이름·번호 검색"><button type="button" class="cam" aria-label="사진으로 찾기"><svg class="s24" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></button></label>
-<div class="btns"><button type="button" id="langb" aria-label="Language">한국어</button><button type="button">앱</button></div>
+<div class="btns"><button type="button" id="langb" aria-label="Language">한국어</button><button type="button" id="colorb" aria-haspopup="true">컬러</button><button type="button">앱</button></div>
 </header>
 <main>
 <div id="home">
@@ -1156,6 +1156,8 @@ html.mhome #home .ncs a:not(.add).noph:before{display:none!important}
 #mhero.slim .tx{padding-right:70px}
 html.mhome #home>.hrow select{height:44px!important}
 html.mhome #home>.hrow:not(.open) select:nth-of-type(n+5){display:none!important}
+html.mhome #home>.hrow:not(.ccopen) select:nth-of-type(6){display:none!important}
+html.mhome #home>.hrow.ccopen select:nth-of-type(6){display:block!important;grid-column:span 2}
 html.mhome #home>.hrow{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 html.mhome #home>.hrow select{padding-left:10px!important;padding-right:24px!important;background-position:right 6px center!important;text-overflow:ellipsis}
 @media(max-width:379px){html.mhome #home>.hrow select{font-size:12.5px!important;padding-left:7px!important;padding-right:18px!important;background-position:right 3px center!important;background-size:12px!important}}
@@ -1179,7 +1181,7 @@ var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var L=ko?['홈','검색','글�
 b.addEventListener('click',function(e){var t=e.target.closest('a');if(!t)return;if(t.classList.contains('wr')){e.preventDefault();var h=(location.hash||'').slice(1),mm=h.match(/^([a-z]+)/),k=mm&&mm[1];if(!(k&&typeof POSTS==='object'&&POSTS[k])){k='lounge';var bt=document.querySelectorAll('#home .btabs button');for(var q=0;q<bt.length;q++){if(bt[q].classList.contains('on')&&typeof ORDER==='object'&&ORDER[q]){k=ORDER[q];break}}}location.hash='#'+k+'-write';return}if(t.dataset.k==='top'||t.dataset.k==='s'){e.preventDefault();if(location.hash&&location.hash!=='#home')location.hash='#home';scrollTo({top:0,behavior:'smooth'});if(t.dataset.k==='s'){var i=document.querySelector('#home .search input');if(i)setTimeout(function(){i.focus()},350)}}});
 document.body.appendChild(b)}
 function onS(){var b=document.getElementById('mbar');if(!b)return;var hh=location.hash||'#home',hm=(hh==='#home'||hh==='#'),wr=/-write$/.test(hh);[].forEach.call(b.children,function(a,i){a.classList.toggle('cur',(i===0&&hm)||(i===2&&wr))});var lim=100;b.classList.toggle('on',innerWidth<900&&scrollY>lim)}
-document.documentElement.classList.toggle('lang-en',(typeof LANG==='string'?LANG:'ko')!=='ko');function hm(){if(innerWidth>899)return;var h=document.querySelector('#home>.hrow');if(!h||document.getElementById('hmore'))return;var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var b=document.createElement('button');b.id='hmore';b.type='button';var c=ko?'＋ 2개 더 (파트별 · 컬러코드)':'＋ 2 more (Part · Color)',x=ko?'접기 ▲':'Less ▲';b.textContent=c;b.onclick=function(){var o=h.classList.toggle('open');b.textContent=o?x:c};h.appendChild(b)}
+document.documentElement.classList.toggle('lang-en',(typeof LANG==='string'?LANG:'ko')!=='ko');function hm(){if(innerWidth>899)return;var h=document.querySelector('#home>.hrow');if(!h||document.getElementById('hmore'))return;var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var b=document.createElement('button');b.id='hmore';b.type='button';var c=ko?'＋ 1개 더 (파트별)':'＋ 1 more (Part)',x=ko?'접기 ▲':'Less ▲';b.textContent=c;b.onclick=function(){var o=h.classList.toggle('open');b.textContent=o?x:c};h.appendChild(b)}
 var t;function go(){clearTimeout(t);t=setTimeout(function(){hero();bar();hm();onS()},150)}
 addEventListener('load',go);addEventListener('hashchange',go);addEventListener('resize',go);addEventListener('scroll',onS,{passive:true});addEventListener('hashchange',onS);
 new MutationObserver(function(m){for(var i=0;i<m.length;i++){var x=m[i].target;if(x.closest&&x.closest('#mhero,#mbar'))continue;go();return}}).observe(document.documentElement,{childList:true,subtree:true});})()</script><style id="mq-css">@media(max-width:899px){#mquick{order:3;margin:0;background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:10px 10px 12px}
@@ -1201,5 +1203,22 @@ var d=document.createElement('div');d.id='mquick';var x='<div class="hd">'+T[0]+
 I.forEach(function(r){x+='<a'+(r[0]?' class="'+r[0]+'"':'')+' href="'+r[1]+'"><i>'+r[2]+'</i>'+(ko?r[3]:r[4])+'</a>'});d.innerHTML=x+'</div>';
 h.parentNode.insertBefore(d,h.nextSibling)}
 var n=0,t=setInterval(function(){mk();if(document.getElementById('mquick')||++n>40)clearInterval(t)},150);addEventListener('resize',mk)})();</script>
+<style id="color-css">#colorm{position:fixed;z-index:9999;min-width:210px;background:#1b2232;border:1px solid #2e3a52;border-radius:14px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.45);display:none}
+#colorm.on{display:block}#colorm button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#e8eefc;font:600 14px 'Noto Sans KR',sans-serif;padding:11px 12px;border-radius:10px;text-align:left;cursor:pointer;white-space:nowrap}
+#colorm button:hover{background:#26304a}#colorm .sk{display:flex;gap:6px;padding:4px 12px 10px}#colorm .sk span{flex:1;text-align:center;font-size:12px;padding:7px 0;border-radius:8px;border:1px solid #2e3a52;color:#cfd8ea;cursor:pointer}
+#colorm .sk span.cur{border-color:#2ea05a;color:#7ee2a8}
+html.skin-light{filter:invert(1) hue-rotate(180deg)}html.skin-light img,html.skin-light video,html.skin-light [style*="background-image"],html.skin-light .ph.hasph{filter:invert(1) hue-rotate(180deg)}
+html.skin-sepia{filter:sepia(.45) saturate(1.1)}</style>
+<script id="color-js">(function(){var b=document.getElementById('colorb');if(!b)return;var ko=(typeof LANG==='string'?LANG:'ko')==='ko';
+var m=document.createElement('div');m.id='colorm';m.setAttribute('role','menu');
+m.innerHTML='<button type="button" data-a="cc">🎨 '+(ko?'차 컬러코드 찾기':'Find paint color code')+'</button><button type="button" data-a="sk" disabled style="cursor:default;opacity:.9">🖌 '+(ko?'사이트 스킨':'Site skin')+'</button><div class="sk"><span data-s="" class="cur">'+(ko?'기본':'Default')+'</span><span data-s="skin-light">'+(ko?'밝게':'Light')+'</span><span data-s="skin-sepia">'+(ko?'클래식':'Classic')+'</span></div>';
+document.body.appendChild(m);
+function pos(){var r=b.getBoundingClientRect();m.style.top=(r.bottom+6)+'px';m.style.right=Math.max(8,innerWidth-r.right)+'px'}
+b.addEventListener('click',function(e){e.stopPropagation();pos();m.classList.toggle('on')});
+document.addEventListener('click',function(e){if(!m.contains(e.target))m.classList.remove('on')});
+m.addEventListener('click',function(e){var t=e.target.closest('[data-a],[data-s]');if(!t)return;
+if(t.dataset.a==='cc'){m.classList.remove('on');if(location.hash&&location.hash!=='#home')location.hash='#home';var h=document.querySelector('#home>.hrow');if(h){h.classList.add('ccopen');var sel=h.querySelectorAll('select')[5];setTimeout(function(){scrollTo({top:Math.max(0,h.getBoundingClientRect().top+scrollY-90),behavior:'smooth'});if(sel){sel.focus();sel.style.outline='2px solid #2ea05a'}},120)}}
+if(t.hasAttribute('data-s')){var c=document.documentElement;c.classList.remove('skin-light','skin-sepia');if(t.dataset.s)c.classList.add(t.dataset.s);[].forEach.call(m.querySelectorAll('.sk span'),function(x){x.classList.toggle('cur',x===t)})}});
+addEventListener('resize',pos)})();</script>
 </body>
 </html>
