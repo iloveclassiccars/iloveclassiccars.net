@@ -1157,7 +1157,7 @@ html.mhome #home .ncs a:not(.add).noph:before{display:none!important}
 html.mhome #home>.hrow select{height:44px!important}
 html.mhome #home>.hrow:not(.open) select:nth-of-type(n+5){display:none!important}
 html.mhome #home>.hrow:not(.ccopen) select:nth-of-type(6){display:none!important}
-html.mhome #home>.hrow{grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:9px!important}
+html.mhome #home>.hrow{grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:9px!important;margin-top:10px!important}
 html.mhome #home>.hrow select{padding-left:10px!important;padding-right:24px!important;background-position:right 6px center!important;text-overflow:ellipsis}
 @media(max-width:379px){html.mhome #home>.hrow select{font-size:12.5px!important;padding-left:7px!important;padding-right:18px!important;background-position:right 3px center!important;background-size:12px!important}}
 #hmore{display:none!important;grid-column:1/-1;height:38px;border:1px dashed #2aa84b88;background:transparent;color:#7FD99A;border-radius:8px;font:700 13px 'Noto Sans KR',sans-serif}
@@ -1217,9 +1217,26 @@ html.mhome #home>.ncrow{background:#171e2c;border:1px solid #2a3550;border-radiu
 html.mhome #home>.ncrow .nh{display:flex;justify-content:flex-start;gap:4px;align-items:center;font:700 13px 'Noto Sans KR',sans-serif!important;color:#e8eefc;margin:0 2px 8px!important;white-space:nowrap}
 html.mhome #home>.ncrow .nh a{margin-left:auto;font-size:11px!important;font-weight:600;color:#5fd38d}
 html.mhome #home>.ncrow .nh::before{content:'🪪'}
-html.mhome #home>.ncrow .ncs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px!important;overflow:visible!important}
-html.mhome #home>.ncrow .ncs>a{width:auto!important;min-width:0!important;min-height:70px!important;border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important}
+html.mhome #home>.ncrow .ncs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px!important;overflow:visible!important}
+html.mhome #home>.ncrow .ncs>a:not(.ncx){display:flex!important}
+html.mhome #home>.ncrow .ncs>a.ncx{display:none!important}
+html.mhome #home>.ncrow .ncs>a:not(.add){height:92px!important;min-height:92px!important;padding:6px 7px!important}
+html.mhome #home>.ncrow .ncs>a.add,html.mhome #home>.ncrow .ncs>a.more{height:92px!important;min-height:92px!important}
+html.mhome #home>.ncrow .ncs>a:not(.add) span:first-child{font-size:11.5px!important}html.mhome #home>.ncrow .ncs>a:not(.add) span+span{font-size:10px!important}
+html.mhome #home>.ncrow .ncs>a{width:auto!important;min-width:0!important;border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important}
 html.mhome #home>.ncrow .ncs>a.add{border:1px dashed #2ea05a88!important}
 html.mhome #home>.btabs{display:none!important}}</style>
+<script id="nccap-js">(function(){function f(){var n=document.querySelector('#home>.ncrow .ncs');if(!n)return;var c=0;[].forEach.call(n.children,function(a){if(a.classList.contains('add')||a.classList.contains('more'))return;c++;a.classList.toggle('ncx',innerWidth<900&&c>13)})}
+var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(f,60)}).observe(document.documentElement,{childList:true,subtree:true});addEventListener('resize',f);f()})();</script>
+<style id="card-std-css">@media(min-width:900px){
+html.mhome #home>.menu{background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:12px!important;gap:10px!important}
+html.mhome #home>.menu .tile{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px;min-height:104px;padding:10px 4px!important;border-radius:12px;background:#1e2535;border:1px solid #2e3a52;text-decoration:none;transition:border-color .15s,background .15s}
+html.mhome #home>.menu .tile:hover{border-color:#2ea05a;background:#222b3d}
+html.mhome #home>.menu .ico{width:48px!important;height:48px!important;border-radius:50%!important;margin:0!important;display:flex;align-items:center;justify-content:center}
+html.mhome #home>.menu .ico svg{width:26px!important;height:26px!important}
+html.mhome #home>.menu .ko{font-size:14px!important;font-weight:600;margin:0!important;color:#e8eefc}
+html.mhome #home>.menu .en{font-size:11px!important;color:#8a97ad;margin:0!important}
+html.mhome #home>.ncrow{background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:12px!important}
+html.mhome #home>.ncrow .nh{margin:0 2px 10px!important}}</style>
 </body>
 </html>
