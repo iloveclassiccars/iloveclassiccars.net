@@ -1145,7 +1145,25 @@ html.mhome #home .ncs a:not(.add).noph:before{display:none!important}
 #mbar a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#C5CDD6;text-decoration:none;font:600 10.5px 'Noto Sans KR',sans-serif}
 #mbar a b{font-size:18px;line-height:1}#mbar a.wr b{background:#2aa84b;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
 }
-@media(min-width:900px){#mhero,#mbar{display:none!important}}</style>
+@media(max-width:899px){
+#mhero.slim{height:auto;min-height:56px;padding:9px 14px}
+#mhero.slim .ph{display:none}
+#mhero.slim .tx{padding:0}
+#mhero.slim .car{font-size:16px;margin:1px 0 0}
+#mhero.slim .t{display:none}
+#mhero.slim .rx{position:absolute;right:14px;top:50%;transform:translateY(-50%);margin:0}
+#mhero.slim .rx span+span{display:none}
+#mhero.slim .tx{padding-right:70px}
+html.mhome #home>.search{height:48px!important;min-height:48px!important}
+html.mhome #home>.hrow select{height:44px!important}
+html.mhome #home>.hrow:not(.open) select:nth-of-type(n+4){display:none!important}
+#hmore{grid-column:1/-1;height:38px;border:1px dashed #2aa84b88;background:transparent;color:#7FD99A;border-radius:8px;font:700 13px 'Noto Sans KR',sans-serif}
+html.mhome #home>.menu .tile{min-height:56px}
+html.mhome #home>.btabs button{min-height:40px}
+#mbar{transform:none!important}
+body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+}
+@media(min-width:900px){#mhero,#mbar,#hmore{display:none!important}}</style>
 <script id="mob-c-js">(function(){function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var KO=document.documentElement.lang!=='en';
 function hero(){if(innerWidth>899||typeof D!=='object')return;var home=document.getElementById('home');if(!home||document.getElementById('mhero'))return;
@@ -1153,13 +1171,14 @@ var all=[];Object.keys(D).forEach(function(k){(D[k].items||[]).forEach(function(
 var o=all[0],x=o.x,a=document.createElement('a');a.id='mhero';a.href='#'+o.k+(window.POSTS&&POSTS[o.k]?'-'+o.n:'');
 var ph=x.img||x.photo||'';
 a.innerHTML='<div class="ph'+(ph?' hasph':'')+'"'+(ph?' style="--hp:url(\''+esc(ph)+'\')"':'')+'><i></i></div><div class="tx"><span class="lb">'+((typeof LANG==='string'?LANG:'ko')==='ko'?'🔥 오늘 뜬 차':'🔥 Today\'s hot car')+'</span><span class="car">'+(x.cc?'<img src="/img/flags/'+String(x.cc).toLowerCase()+'.png" alt="">':'')+esc((x.yr?"\'"+x.yr+' ':'')+x.car)+'</span><span class="t">'+esc(x.t)+'</span><span class="rx"><span><b>♥</b> '+(+x.lk||0)+'</span><span>💬 '+(+x.nc||0)+'</span></span></div>';
-home.insertBefore(a,home.firstChild)}
+if(!ph)a.classList.add('slim');home.insertBefore(a,home.firstChild)}
 function bar(){if(document.getElementById('mbar'))return;var b=document.createElement('nav');b.id='mbar';b.setAttribute('aria-label','빠른 메뉴');
 var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var L=ko?['홈','검색','글쓰기','네임카드']:['Home','Search','Write','Cards'];b.innerHTML='<a href="#home" data-k="top"><b>⌂</b>'+L[0]+'</a><a href="#home" data-k="s"><b>⌕</b>'+L[1]+'</a><a href="#lounge" class="wr"><b>+</b>'+L[2]+'</a><a href="/namecard/"><b>▭</b>'+L[3]+'</a><a href="/#/garage"><b>◉</b>My Garage</a>';
 b.addEventListener('click',function(e){var t=e.target.closest('a');if(!t)return;if(t.classList.contains('wr')){e.preventDefault();var h=(location.hash||'').slice(1),mm=h.match(/^([a-z]+)/),k=mm&&mm[1];if(!(k&&typeof POSTS==='object'&&POSTS[k])){k='lounge';var bt=document.querySelectorAll('#home .btabs button');for(var q=0;q<bt.length;q++){if(bt[q].classList.contains('on')&&typeof ORDER==='object'&&ORDER[q]){k=ORDER[q];break}}}location.hash='#'+k+'-write';return}if(t.dataset.k==='top'||t.dataset.k==='s'){e.preventDefault();if(location.hash&&location.hash!=='#home')location.hash='#home';scrollTo({top:0,behavior:'smooth'});if(t.dataset.k==='s'){var i=document.querySelector('#home .search input');if(i)setTimeout(function(){i.focus()},350)}}});
 document.body.appendChild(b)}
 function onS(){var b=document.getElementById('mbar');if(!b)return;var hh=location.hash||'#home',hm=(hh==='#home'||hh==='#'),wr=/-write$/.test(hh);[].forEach.call(b.children,function(a,i){a.classList.toggle('cur',(i===0&&hm)||(i===2&&wr))});var lim=100;b.classList.toggle('on',innerWidth<900&&scrollY>lim)}
-document.documentElement.classList.toggle('lang-en',(typeof LANG==='string'?LANG:'ko')!=='ko');var t;function go(){clearTimeout(t);t=setTimeout(function(){hero();bar();onS()},150)}
+document.documentElement.classList.toggle('lang-en',(typeof LANG==='string'?LANG:'ko')!=='ko');function hm(){if(innerWidth>899)return;var h=document.querySelector('#home>.hrow');if(!h||document.getElementById('hmore'))return;var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var b=document.createElement('button');b.id='hmore';b.type='button';var c=ko?'＋ 3개 더 (연식 · 파트별 · 컬러코드)':'＋ 3 more (Year · Part · Color)',x=ko?'접기 ▲':'Less ▲';b.textContent=c;b.onclick=function(){var o=h.classList.toggle('open');b.textContent=o?x:c};h.appendChild(b)}
+var t;function go(){clearTimeout(t);t=setTimeout(function(){hero();bar();hm();onS()},150)}
 addEventListener('load',go);addEventListener('hashchange',go);addEventListener('resize',go);addEventListener('scroll',onS,{passive:true});addEventListener('hashchange',onS);
 new MutationObserver(function(m){for(var i=0;i<m.length;i++){var x=m[i].target;if(x.closest&&x.closest('#mhero,#mbar'))continue;go();return}}).observe(document.documentElement,{childList:true,subtree:true});})()</script></body>
 </html>
