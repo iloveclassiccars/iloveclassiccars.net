@@ -300,13 +300,16 @@ html body .dock .dkt{font-size:13px!important;font-weight:700!important;line-hei
 #home .hrow select:focus{outline:2px solid #2AA84B}
 @media (max-width:899px){#home .hrow{grid-template-columns:repeat(3,minmax(0,1fr))}#home .hrow select{font-size:14px;padding-left:10px}}</style><style id="planb-tight">#home{gap:20px!important}#home>.sp{display:none!important}</style><style id="planb-likes">#cards .row .badge{display:none!important}#cards .row .rlk{color:#FF5A64;font-weight:700;font-size:14px;white-space:nowrap;flex-shrink:0}#cards .row .rt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}</style><style id="foot-attach">main{flex:0 0 auto!important;padding-bottom:20px!important}footer{background:#262A33!important;height:44px!important;width:min(1056px,calc(100% - 40px))!important;margin:0 auto 24px!important;border:1px solid rgba(255,255,255,.08)}footer .fver{color:#8C94A3;font-family:Inter,sans-serif;font-size:12.5px;font-weight:600;margin-left:4px}</style><style id="tool-dd">#fbar>button:not(.chip),#views>button{display:none!important}
 .tdd{height:38px;padding:0 32px 0 12px;background:#1d2230 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232AA84B' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 11px center;border:1px solid rgba(255,255,255,.22);border-radius:8px;color:#fff;font:700 14.5px 'Noto Sans KR',sans-serif;-webkit-appearance:none;appearance:none;cursor:pointer;flex-shrink:0}
-.tdd:focus{outline:2px solid #2AA84B}#views{border:0!important;background:none!important;padding:0!important}</style><link rel="icon" href="/icons/favicon.ico?v=2" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2"><link rel="manifest" href="/icons/manifest.webmanifest?v=2"><meta name="apple-mobile-web-app-title" content="클래식카"><meta name="application-name" content="클래식카"><style id="no-tmark">.tmark{display:none!important}</style><style id="calm-red">#cards .row .rlk{color:#9AA3AD!important;font-weight:600!important;font-size:14.5px!important}#cards .row .rlk .hh{color:#D96A70;font-style:normal}#cards .row .cmn{color:#AAB4BF!important}#cards .row .tx{color:#E5E9EF}</style><style id="nc-card-css">@media(max-width:899px){
+.tdd:focus{outline:2px solid #2AA84B}#views{border:0!important;background:none!important;padding:0!important}</style><link rel="icon" href="/icons/favicon.ico?v=2" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2"><link rel="manifest" href="/icons/manifest.webmanifest?v=2"><meta name="apple-mobile-web-app-title" content="클래식카"><meta name="application-name" content="클래식카"><style id="no-tmark">.tmark{display:none!important}</style><style id="calm-red">#cards .row .rlk{color:#9AA3AD!important;font-weight:600!important;font-size:14.5px!important}#cards .row .rlk .hh{color:#D96A70;font-style:normal}#cards .row .cmn{color:#AAB4BF!important}#cards .row .tx{color:#E5E9EF}</style><style id="nc-card-css">@media all{
 .ncs a:not(.add){width:118px;height:156px;padding:9px;border:1px solid #2AA84B55;background:linear-gradient(160deg,#245C40 0%,#16301F 60%,#0F1E15 100%);box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .ncs a:not(.add):after{content:"I ♥ CC";position:absolute;top:8px;left:9px;font:900 9.5px 'Noto Sans KR',sans-serif;letter-spacing:.5px;color:#7FD99A}
 .ncs a:not(.add):before{top:30px;font-size:44px}
 .ncs a:not(.add) span:first-child{font-size:13px}
 .ncs a:not(.add) span+span{font-weight:600;color:#BFE8CB;font-size:11.5px}
-.ncs a.add{width:118px;height:156px}}</style></head>
+.ncs a.add{width:118px;height:156px}}</style><style id="pc-unify">@media(min-width:900px){html.mhome #home .hrow{grid-template-columns:repeat(6,minmax(0,1fr))!important}html.mhome #home .ncs a{width:140px!important;height:180px!important}html.mhome #home #cards .rt{font-size:15.5px!important}html.mhome #home #cards .row{padding:13px 0!important}}</style><style id="hcopy-css">.hcopy{display:none}html.mhome #home .hcopy{display:block;order:0;margin:4px 0 -6px;font:900 26px/1.25 'Noto Sans KR',sans-serif;color:#fff;letter-spacing:-.3px}
+html.mhome #home .hcopy b{display:inline-block;margin-left:10px;font-size:17px;font-weight:700;color:#7FD99A;letter-spacing:0}
+@media(max-width:899px){html.mhome #home .hcopy{font-size:21px;margin:2px 0 -8px}html.mhome #home .hcopy b{display:block;margin:4px 0 0;font-size:14.5px}}
+html.mhome #home .search{order:1}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 지금 보이는 글은 대부분 시험용 글입니다</div>
@@ -945,7 +948,7 @@ function btns2(){return [].filter.call(box.querySelectorAll('button'),function(x
 var opts=btns.map(function(x,i){return '<option value="'+i+'"'+(x.classList.contains('on')||x.getAttribute('aria-pressed')==='true'?' selected':'')+'>'+x.textContent+'</option>'}).join('');if(s.innerHTML!==opts)s.innerHTML=opts}
 function run(){sync(document.getElementById('fbar'),'tsort','정렬');sync(document.getElementById('views'),'tview','보기 방식')}
 var mo=new MutationObserver(function(){mo.disconnect();run();obs()});function obs(){var t=document.getElementById('board');if(t)mo.observe(t,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-pressed']})}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){run();obs()});else{run();obs()}})();</script><style id="mfront-mix-css">@media(max-width:899px){
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){run();obs()});else{run();obs()}})();</script><style id="mfront-mix-css">@media all{
 html.mhome header .unav{display:none!important}
 html.mhome #home .search input{font-size:14.5px!important}
 html.mhome .simbar{display:none!important}
@@ -974,18 +977,18 @@ html.mhome #home #cards .tmark{display:none}
 html.mhome #home #cards .rlk{flex:none;white-space:nowrap;font-size:13px;color:#E8EAEE}html.mhome #home #cards .rlk .hh{color:#E57373;font-style:normal}
 }
 .hfold{display:none}
-@media(max-width:899px){html.mhome #home .hfold{order:2;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:34px;padding:0;background:none;border:0;color:#7FD99A;font:700 13.5px 'Noto Sans KR',sans-serif;cursor:pointer;margin:-14px 0 -6px}
+@media all{html.mhome #home .hfold{order:2;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:34px;padding:0;background:none;border:0;color:#7FD99A;font:700 13.5px 'Noto Sans KR',sans-serif;cursor:pointer;margin:-14px 0 -6px}
 html.mhome #home .hfold:after{content:"⌄";color:#2AA84B;font-size:18px;transition:transform .2s}html.mhome #home .hfold.open:after{transform:rotate(180deg)}
 html.mhome #home .hrow{order:2;display:grid!important}html.mhome #home .menu{order:3}}
-@media(max-width:899px){html.mhome #home .search{position:relative;overflow:hidden}
+@media all{html.mhome #home .search{position:relative;overflow:hidden}
 .scopy{position:absolute;left:44px;right:0;top:0;bottom:0;display:flex;align-items:center;pointer-events:none;overflow:hidden;z-index:2}
 .scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 7s linear 1 forwards}
 .scopy span b{color:#7FD99A;font-weight:700}
 @keyframes scopy{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 html.mhome #home .search.scopying input::placeholder{color:transparent}}
-@media(min-width:900px){.ncrow,.btabs{display:none!important}}</style>
+</style>
 <script id="mfront-mix-js">(function(){
-var mq=matchMedia('(max-width:899px)'),H=document.documentElement;
+var mq=matchMedia('all'),H=document.documentElement;
 function isHome(){var h=location.hash;return !h||h==='#'||h==='#home'}
 function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}
 function fl(c){c=(c||'').toUpperCase();return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(127397+c.charCodeAt(0),127397+c.charCodeAt(1)):''}
@@ -1019,7 +1022,8 @@ function scopy(){var home=document.getElementById('home'),sb=home&&home.querySel
  w.innerHTML=KO?'<span>차 좋아하는 사람들의 놀이터 · <b>클래식카 · 영타이머</b></span>':'<span>Where car lovers play · <b>Classics · Youngtimers</b></span>';
  if(inp){w.style.left=inp.offsetLeft+'px';w.style.right=Math.max(0,sb.clientWidth-inp.offsetLeft-inp.offsetWidth)+'px'}sb.classList.add('scopying');sb.appendChild(w);function end(){if(w.parentNode)w.remove();sb.classList.remove('scopying')}
  w.firstChild.addEventListener('animationend',end);setTimeout(end,8000);if(inp)inp.addEventListener('focus',end,{once:true})}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
+function hcopy(){var home=document.getElementById('home');if(!home||home.querySelector('.hcopy'))return;var d=document.createElement('div');d.className='hcopy';d.innerHTML=KO?'차 좋아하는 사람들의 놀이터<b>클래식카 · 영타이머</b>':'Where car lovers play<b>Classics · Youngtimers</b>';home.insertBefore(d,home.firstChild)}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();hcopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
