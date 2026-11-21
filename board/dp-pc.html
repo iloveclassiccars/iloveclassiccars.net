@@ -306,7 +306,10 @@ html body .dock .dkt{font-size:13px!important;font-weight:700!important;line-hei
 .ncs a:not(.add):before{top:30px;font-size:44px}
 .ncs a:not(.add) span:first-child{font-size:13px}
 .ncs a:not(.add) span+span{font-weight:600;color:#BFE8CB;font-size:11.5px}
-.ncs a.add{width:118px;height:156px}}</style><style id="pc-unify">@media(min-width:900px){html.mhome #home .hrow{grid-template-columns:repeat(6,minmax(0,1fr))!important}html.mhome #home .ncs a{width:140px!important;height:180px!important}html.mhome #home #cards .rt{font-size:15.5px!important}html.mhome #home #cards .row{padding:13px 0!important}}</style></head>
+.ncs a.add{width:118px;height:156px}}</style><style id="pc-unify">@media(min-width:900px){html.mhome #home .hrow{grid-template-columns:repeat(6,minmax(0,1fr))!important}html.mhome #home .ncs a{width:140px!important;height:180px!important}html.mhome #home #cards .rt{font-size:15.5px!important}html.mhome #home #cards .row{padding:13px 0!important}}</style><style id="hcopy-css">.hcopy{display:none}html.mhome #home .hcopy{display:block;order:0;margin:4px 0 -6px;font:900 26px/1.25 'Noto Sans KR',sans-serif;color:#fff;letter-spacing:-.3px}
+html.mhome #home .hcopy b{display:inline-block;margin-left:10px;font-size:17px;font-weight:700;color:#7FD99A;letter-spacing:0}
+@media(max-width:899px){html.mhome #home .hcopy{font-size:21px;margin:2px 0 -8px}html.mhome #home .hcopy b{display:block;margin:4px 0 0;font-size:14.5px}}
+html.mhome #home .search{order:1}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 지금 보이는 글은 대부분 시험용 글입니다</div>
@@ -1019,7 +1022,8 @@ function scopy(){var home=document.getElementById('home'),sb=home&&home.querySel
  w.innerHTML=KO?'<span>차 좋아하는 사람들의 놀이터 · <b>클래식카 · 영타이머</b></span>':'<span>Where car lovers play · <b>Classics · Youngtimers</b></span>';
  if(inp){w.style.left=inp.offsetLeft+'px';w.style.right=Math.max(0,sb.clientWidth-inp.offsetLeft-inp.offsetWidth)+'px'}sb.classList.add('scopying');sb.appendChild(w);function end(){if(w.parentNode)w.remove();sb.classList.remove('scopying')}
  w.firstChild.addEventListener('animationend',end);setTimeout(end,8000);if(inp)inp.addEventListener('focus',end,{once:true})}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
+function hcopy(){var home=document.getElementById('home');if(!home||home.querySelector('.hcopy'))return;var d=document.createElement('div');d.className='hcopy';d.innerHTML=KO?'차 좋아하는 사람들의 놀이터<b>클래식카 · 영타이머</b>':'Where car lovers play<b>Classics · Youngtimers</b>';home.insertBefore(d,home.firstChild)}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();hcopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
