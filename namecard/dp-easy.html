@@ -3,8 +3,8 @@
 .qrfull canvas,.qrfull img{width:min(78vw,78vh);height:auto;image-rendering:pixelated}.qrfull b{font:800 22px 'Noto Sans KR',sans-serif;color:#171B26}.qrfull small{font:600 15px 'Noto Sans KR',sans-serif;color:#555}
 .qrfull button{height:52px;padding:0 28px;border:0;background:#1F4D36;color:#fff;font:800 18px 'Noto Sans KR',sans-serif}
 .sendbig{position:fixed;left:0;right:0;bottom:0;z-index:9998;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:#1F4D36;display:flex;gap:10px;justify-content:center;box-shadow:0 -6px 24px rgba(0,0,0,.4)}
-.sendbig button{flex:1;max-width:320px;height:56px;border:0;font:800 18px 'Noto Sans KR',sans-serif;cursor:pointer}.sendbig .s1{background:#2AA84B;color:#fff}.sendbig .s2{background:#fff;color:#1F4D36}
-.welcome{background:#2AA84B;color:#fff;padding:12px 16px;text-align:center;font:700 16px 'Noto Sans KR',sans-serif}</style></head><body>
+.sendbig button{flex:1;max-width:320px;height:56px;white-space:nowrap;border:0;font:800 18px 'Noto Sans KR',sans-serif;cursor:pointer}.sendbig .s1{background:#2AA84B;color:#fff}.sendbig .s2{background:#fff;color:#1F4D36}
+.welcome{background:#2AA84B;color:#fff;padding:12px 10px;text-align:center;font:700 15px 'Noto Sans KR',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}</style></head><body>
 <div class="bar">I ♥ Classic Cars <small>내 차 명함 만들기 · 회원 가입</small></div>
 <div class="wr"><div class="f">
 <label>이름 또는 닉네임</label><input id="nk" maxlength="16" value="춘식이형" placeholder="본인 이름 또는 닉네임" readonly><div class="nkr" id="nkr"></div><button type="button" class="pbtn" id="nkb" style="width:100%;margin-top:6px!important">이름 바꾸기</button>
@@ -166,8 +166,8 @@ function qrShow(){var v=document.createElement('div');v.className='qrfull';var s
 var box=document.createElement('div');try{var u=(typeof snsUrl==='function')?snsUrl():'https://iloveclassiccars.net/namecard/';var qr=qrcode(0,'M');qr.addData(u);qr.make();box.innerHTML=qr.createImgTag(10,10)}catch(e){box.textContent='QR을 만들 수 없습니다'}
 v.innerHTML='<b>제 차 명함 QR입니다</b>';v.appendChild(box);var sm=document.createElement('small');sm.textContent='상대가 휴대폰 카메라로 찍으면 됩니다';v.appendChild(sm);var bt=document.createElement('button');bt.type='button';bt.textContent='닫기';bt.onclick=function(){v.remove()};v.appendChild(bt);document.body.appendChild(v)}
 window.__qrShow=qrShow;
-if(/[?&]from=card/.test(q)){var w=document.createElement('div');w.className='welcome';w.textContent='친구가 보낸 내 차 명함입니다 — 나도 30초 만에 만들어 보세요 👇';document.body.insertBefore(w,document.body.firstChild)}
-var bar=document.createElement('div');bar.className='sendbig';bar.innerHTML='<button type="button" class="s1">📤 내 차 명함 보내기</button><button type="button" class="s2">📷 QR 보여 주기</button>';
+if(/[?&]from=card/.test(q)){var w=document.createElement('div');w.className='welcome';w.textContent='친구가 보낸 명함 · 나도 30초 만에 만들기 👇';document.body.insertBefore(w,document.body.firstChild)}
+var bar=document.createElement('div');bar.className='sendbig';bar.innerHTML='<button type="button" class="s1">📤 명함 보내기</button><button type="button" class="s2">📷 QR 보여 주기</button>';
 bar.querySelector('.s1').onclick=function(){var b=document.getElementById('shr');if(b)b.click()};bar.querySelector('.s2').onclick=qrShow;
 if(/[?&](share|qr)=1/.test(q)||window.matchMedia('(max-width:899px)').matches){document.body.appendChild(bar);document.body.style.paddingBottom='96px'}
 if(/[?&]qr=1/.test(q))setTimeout(qrShow,600)})();</script></body></html>
