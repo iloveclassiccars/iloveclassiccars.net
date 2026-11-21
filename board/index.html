@@ -1116,7 +1116,7 @@ addEventListener('resize',go);addEventListener('hashchange',go);addEventListener
 new MutationObserver(function(m){for(var i=0;i<m.length;i++){var t=m[i].target;if(t.closest&&t.closest('#rl,#rr'))continue;go();return}}).observe(document.documentElement,{childList:true,subtree:true});
 })()</script>
 <style id="mob-c">@media(max-width:899px){
-#mhero{display:flex;gap:12px;align-items:stretch;height:104px;margin:-8px 0 0;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#2E8B57 0%,#1E6B42 55%,#14432B 100%);color:#fff;text-decoration:none;position:relative;order:-10}
+#mhero{display:flex;gap:12px;align-items:stretch;height:104px;margin:0;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#2E8B57 0%,#1E6B42 55%,#14432B 100%);color:#fff;text-decoration:none;position:relative;order:3}
 #mhero .ph{flex:0 0 96px;background:rgba(0,0,0,.18) var(--hp,none) center/cover no-repeat;display:flex;align-items:center;justify-content:center}
 #mhero .ph i{width:62%;aspect-ratio:1;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20transform%3D%22translate%287.4%200.2%29%20scale%280.38%29%22%20d%3D%22M12%2021%20C4%2015%200.5%2010.5%200.5%206.5%20C0.5%203%203.2%200.5%206.4%200.5%20C8.8%200.5%2010.9%201.8%2012%203.8%20C13.1%201.8%2015.2%200.5%2017.6%200.5%20C20.8%200.5%2023.5%203%2023.5%206.5%20C23.5%2010.5%2020%2015%2012%2021%20Z%22%20fill%3D%22%23FF4D55%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.6%22/%3E%3Cpath%20d%3D%22M5%2019%20H3.5%20a1%201%200%200%201%20-1%20-1%20v-2%20q0%20-1.6%202%20-1.9%20l3%20-0.5%20l2%20-3%20q0.6%20-0.8%201.6%20-0.8%20h4.2%20q1%200%201.7%200.7%20l2.6%203.1%20l2.2%200.5%20q1.7%200.4%201.7%202%20v1.9%20a1%201%200%200%201%20-1%201%20H19%22/%3E%3Cpath%20d%3D%22M9%2019%20h6%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2219%22%20r%3D%222%22/%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2219%22%20r%3D%222%22/%3E%3C/svg%3E") center/contain no-repeat}
 #mhero .ph.hasph i{display:none}
@@ -1154,7 +1154,6 @@ html.mhome #home .ncs a:not(.add).noph:before{display:none!important}
 #mhero.slim .rx{position:absolute;right:14px;top:50%;transform:translateY(-50%);margin:0}
 #mhero.slim .rx span+span{display:none}
 #mhero.slim .tx{padding-right:70px}
-html.mhome #home>.search{height:48px!important;min-height:48px!important}
 html.mhome #home>.hrow select{height:44px!important}
 html.mhome #home>.hrow:not(.open) select:nth-of-type(n+4){display:none!important}
 #hmore{grid-column:1/-1;height:38px;border:1px dashed #2aa84b88;background:transparent;color:#7FD99A;border-radius:8px;font:700 13px 'Noto Sans KR',sans-serif}
@@ -1171,7 +1170,7 @@ var all=[];Object.keys(D).forEach(function(k){(D[k].items||[]).forEach(function(
 var o=all[0],x=o.x,a=document.createElement('a');a.id='mhero';a.href='#'+o.k+(window.POSTS&&POSTS[o.k]?'-'+o.n:'');
 var ph=x.img||x.photo||'';
 a.innerHTML='<div class="ph'+(ph?' hasph':'')+'"'+(ph?' style="--hp:url(\''+esc(ph)+'\')"':'')+'><i></i></div><div class="tx"><span class="lb">'+((typeof LANG==='string'?LANG:'ko')==='ko'?'🔥 오늘 뜬 차':'🔥 Today\'s hot car')+'</span><span class="car">'+(x.cc?'<img src="/img/flags/'+String(x.cc).toLowerCase()+'.png" alt="">':'')+esc((x.yr?"\'"+x.yr+' ':'')+x.car)+'</span><span class="t">'+esc(x.t)+'</span><span class="rx"><span><b>♥</b> '+(+x.lk||0)+'</span><span>💬 '+(+x.nc||0)+'</span></span></div>';
-if(!ph)a.classList.add('slim');home.insertBefore(a,home.firstChild)}
+if(!ph)a.classList.add('slim');home.appendChild(a)}
 function bar(){if(document.getElementById('mbar'))return;var b=document.createElement('nav');b.id='mbar';b.setAttribute('aria-label','빠른 메뉴');
 var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var L=ko?['홈','검색','글쓰기','네임카드']:['Home','Search','Write','Cards'];b.innerHTML='<a href="#home" data-k="top"><b>⌂</b>'+L[0]+'</a><a href="#home" data-k="s"><b>⌕</b>'+L[1]+'</a><a href="#lounge" class="wr"><b>+</b>'+L[2]+'</a><a href="/namecard/"><b>▭</b>'+L[3]+'</a><a href="/#/garage"><b>◉</b>My Garage</a>';
 b.addEventListener('click',function(e){var t=e.target.closest('a');if(!t)return;if(t.classList.contains('wr')){e.preventDefault();var h=(location.hash||'').slice(1),mm=h.match(/^([a-z]+)/),k=mm&&mm[1];if(!(k&&typeof POSTS==='object'&&POSTS[k])){k='lounge';var bt=document.querySelectorAll('#home .btabs button');for(var q=0;q<bt.length;q++){if(bt[q].classList.contains('on')&&typeof ORDER==='object'&&ORDER[q]){k=ORDER[q];break}}}location.hash='#'+k+'-write';return}if(t.dataset.k==='top'||t.dataset.k==='s'){e.preventDefault();if(location.hash&&location.hash!=='#home')location.hash='#home';scrollTo({top:0,behavior:'smooth'});if(t.dataset.k==='s'){var i=document.querySelector('#home .search input');if(i)setTimeout(function(){i.focus()},350)}}});
