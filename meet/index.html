@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>3자 회의 · I ♥ CC</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#171B26;color:#E8EAEE;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.top{background:#2E5E4E;padding:14px 16px;font-weight:800;font-size:18px}.top small{display:block;font-weight:400;font-size:13px;opacity:.85}
+.w{max-width:900px;margin:0 auto;padding:16px}
+textarea,input{width:100%;background:#0F131C;color:#fff;border:1px solid #3A4252;border-radius:12px;padding:12px;font-size:16px;font-family:inherit}
+textarea{min-height:130px}
+button{height:54px;border:0;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;padding:0 18px}
+.go{width:100%;background:#2AA84B;color:#fff;margin-top:10px}.go:disabled{opacity:.5}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:16px}
+.c{background:#1F2A26;border-radius:14px;padding:14px;white-space:pre-wrap;line-height:1.6;font-size:15px;min-height:80px}
+.c b{display:block;font-size:16px;margin-bottom:6px;color:#7FD99A}
+.cp{width:100%;background:#4B5D73;color:#fff;margin-top:14px}
+.tk{display:flex;gap:8px;margin-bottom:12px}.tk input{flex:1}.tk button{background:#262A33;color:#fff;height:46px;font-size:14px}
+.m{font-size:13px;opacity:.75;margin-top:8px}
+</style></head><body>
+<div class="top">3자 회의 (제민 · 채림)<small>주제만 쓰면 두 AI 의견을 공식 통로로 받아 옵니다</small></div>
+<div class="w">
+<div class="tk" id="tkr"><input id="tk" type="password" placeholder="회의 암호 (처음 한 번만)"><button id="tks">저장</button></div>
+<textarea id="tp" placeholder="회의 주제를 쓰십시오 (예: 카밋 초대 기능, 어떤 순서로 만들까?)"></textarea>
+<button class="go" id="go">🗣 회의 시작</button>
+<div class="m" id="msg"></div>
+<div class="g"><div class="c"><b>제민 (Gemini)</b><span id="a">—</span></div><div class="c"><b>채림 (ChatGPT)</b><span id="b">—</span></div></div>
+<button class="cp" id="cp">📋 결과 복사 → 춘삼이에게 붙여 넣기</button>
+</div>
+<script>
+var API="https://icc-mail.futurenix.workers.dev/api/meet",$=function(i){return document.getElementById(i)};
+function tk(){try{return localStorage.getItem("icc_meet_tk")||""}catch(e){return""}}
+function showTk(){$("tkr").style.display=tk()?"none":"flex"}showTk();
+$("tks").onclick=function(){try{localStorage.setItem("icc_meet_tk",$("tk").value.trim())}catch(e){}$("tk").value="";showTk()};
+$("go").onclick=function(){var t=$("tp").value.trim();if(!t){$("msg").textContent="주제를 먼저 쓰십시오";return}
+ if(!tk()){$("msg").textContent="회의 암호를 먼저 저장하십시오";return}
+ $("go").disabled=true;$("msg").textContent="두 AI에게 묻는 중입니다 (최대 45초)";$("a").textContent=$("b").textContent="…";
+ fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token:tk(),topic:t})}).then(function(r){return r.json()}).then(function(j){
+  $("go").disabled=false;if(!j.ok){$("msg").textContent=j.err==="auth"?"회의 암호가 맞지 않습니다":j.err==="limit"?"오늘 회의 횟수(40회)를 다 썼습니다":"오류가 났습니다";if(j.err==="auth"){try{localStorage.removeItem("icc_meet_tk")}catch(e){}showTk()}return}
+  $("msg").textContent="회의 완료";$("a").textContent=j.jemin;$("b").textContent=j.chaerim}).catch(function(){$("go").disabled=false;$("msg").textContent="연결 오류가 났습니다"})};
+$("cp").onclick=function(){var s="[3자 회의] 주제: "+$("tp").value.trim()+"\n\n[제민]\n"+$("a").textContent+"\n\n[채림]\n"+$("b").textContent;try{navigator.clipboard.writeText(s);$("msg").textContent="복사했습니다 — 춘삼이 대화창에 붙여 넣으십시오"}catch(e){}};
+</script></body></html>
