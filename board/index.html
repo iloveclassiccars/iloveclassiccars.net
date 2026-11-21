@@ -309,7 +309,22 @@ html body .dock .dkt{font-size:13px!important;font-weight:700!important;line-hei
 .ncs a.add{width:92px;height:122px}}</style><style id="pc-unify">@media(min-width:900px){html.mhome #home .hrow{grid-template-columns:repeat(6,minmax(0,1fr))!important}html.mhome #home .ncs a{width:104px!important;height:136px!important}html.mhome #home #cards .rt{font-size:15.5px!important}html.mhome #home #cards .row{padding:13px 0!important}}</style><style id="hcopy-css">.hcopy{display:none}html.mhome #home .hcopy{display:block;order:0;margin:4px 0 -6px;font:900 26px/1.25 'Noto Sans KR',sans-serif;color:#fff;letter-spacing:-.3px}
 html.mhome #home .hcopy b{display:inline-block;margin-left:10px;font-size:17px;font-weight:700;color:#7FD99A;letter-spacing:0}
 @media(max-width:899px){html.mhome #home .hcopy{font-size:21px;margin:2px 0 -8px}html.mhome #home .hcopy b{display:block;margin:4px 0 0;font-size:14.5px}}
-html.mhome #home .search{order:1}</style></head>
+html.mhome #home .search{order:1}</style><style id="ncph">
+.ncs a span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ncs a.more:before{content:"›"!important;font-size:30px!important}
+html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:160px!important;height:96px!important;padding:8px 10px!important;border-radius:12px!important;justify-content:flex-end!important;overflow:hidden}
+.ncs a:not(.add){background:#1d2a24 var(--ph,none) center/cover no-repeat!important;border:1px solid #2AA84B66!important}
+.ncs a:not(.add).noph{background:linear-gradient(160deg,#245C40,#0F1E15)!important}
+.ncs a:not(.add).noph:before{content:"";position:absolute;inset:6px 10px 34px;background:url(/img/nc/sedan.png) center/contain no-repeat;opacity:.55;font-size:0!important;top:6px!important}
+.ncs a:not(.add).hasph:before{display:none}
+.ncs a:not(.add) .ov{position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(transparent,rgba(0,0,0,.82));pointer-events:none}
+.ncs a:not(.add):after{z-index:2;top:6px!important;left:8px!important;text-shadow:0 1px 2px #000}
+.ncs a span{position:relative;z-index:2;text-shadow:0 1px 3px #000}
+.ncs a:not(.add) span:first-child{font-size:13.5px!important}.ncs a:not(.add) span+span{font-size:11.5px!important;color:#DDF3E4!important}
+.ncs a.add{justify-content:center!important}.ncs a.add:before{top:18px!important;font-size:28px!important}
+@media(max-width:899px){html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:132px!important;height:76px!important}.ncs a:not(.add) span:first-child{font-size:12.5px!important}.ncs a:not(.add) span+span{font-size:10.5px!important}.ncs a.add:before{top:10px!important;font-size:22px!important}}
+</style><style id="search-big">html.mhome #home .search.mo{height:64px!important;padding-left:20px!important}html.mhome #home .search.mo input{font-size:18px!important}html.mhome #home .search.mo .sgo{height:62px!important;padding:0 30px!important;font-size:18px!important}html.mhome #home .scopy span{font-size:18px!important}
+@media(max-width:899px){html.mhome #home .search.mo{height:58px!important;padding-left:14px!important}html.mhome #home .search.mo input{font-size:16px!important}html.mhome #home .search.mo .sgo{height:56px!important;padding:0 18px!important;font-size:16px!important}html.mhome #home .scopy span{font-size:16px!important}}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 지금 보이는 글은 대부분 시험용 글입니다</div>
@@ -982,7 +997,7 @@ html.mhome #home .hfold:after{content:"⌄";color:#2AA84B;font-size:18px;transit
 html.mhome #home .hrow{order:2;display:grid!important}html.mhome #home .menu{order:3}}
 @media all{html.mhome #home .search{position:relative;overflow:hidden}
 .scopy{position:absolute;left:44px;right:0;top:0;bottom:0;display:flex;align-items:center;pointer-events:none;overflow:hidden;z-index:2}
-.scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 7s linear 1 forwards}
+.scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 13s linear 1 forwards}
 .scopy span b{color:#7FD99A;font-weight:700}
 @keyframes scopy{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 html.mhome #home .search.scopying input::placeholder{color:transparent}}
@@ -997,17 +1012,17 @@ function esc(t){var d=document.createElement('div');d.textContent=t==null?'':Str
 function build(){var home=document.getElementById('home');if(!home)return;
  
  if(!home.querySelector('.ncrow')){var me=g('icc_nc',null),F=g('icc_nc_friends',[]),h='';
-  if(me&&me.nk)h+='<a href="/namecard/"><span>'+fi(me.cc)+esc(me.nk)+'</span><span>'+esc(me.cd||'')+'</span></a>';else h+='<a class="add" href="/namecard/?new=1"><span>'+TX.mk+'</span></a>';
-  (F||[]).slice(0,20).forEach(function(f){h+='<a href="/namecard/"><span>'+fi(f.c)+esc(f.n||'')+'</span><span>'+esc((f.car||'').split(' · ')[0])+'</span></a>'});
+  if(me&&me.nk)h+='<a class="me" href="/namecard/"><span>'+fi(me.cc)+esc(me.nk)+'</span><span>'+esc(me.cd||'')+'</span></a>';else h+='<a class="add" href="/namecard/?new=1"><span>'+TX.mk+'</span></a>';
+  (F||[]).slice(0,9).forEach(function(f){h+='<a href="/namecard/"><span>'+fi(f.c)+esc(f.n||'')+'</span><span>'+esc((f.car||'').split(' · ')[0])+'</span></a>'});
   h+='<a class="add" href="/namecard/?share=1"><span>'+TX.inv+'</span></a>';
-  var r=document.createElement('div');r.className='ncrow';r.innerHTML='<div class="nh">'+TX.nc+' <a href="/namecard/">'+TX.ncl+'</a></div><div class="ncs">'+h+'</div>';home.appendChild(r)}
+  var r=document.createElement('div');r.className='ncrow';setTimeout(function(){deck(r)},0);r.innerHTML='<div class="nh">'+TX.nc+' <a href="/namecard/">'+TX.ncl+'</a></div><div class="ncs">'+h+'</div>';home.appendChild(r);phMark(r);myPhoto(r);new MutationObserver(function(){phMark(r)}).observe(r,{childList:true,subtree:true})}
  var cards=document.getElementById('cards');if(cards&&!home.querySelector('.btabs')){var bs=[].slice.call(cards.children).filter(function(b){return b.classList.contains('board')});if(bs.length){
   var t=document.createElement('div');t.className='btabs';bs.forEach(function(b,i){var hd=b.querySelector('h2,h3,.ct,b'),nm=hd?hd.childNodes[0]&&hd.childNodes[0].textContent||hd.textContent:'';nm=(nm||'').trim()||('Board '+(i+1));
    var bt=document.createElement('button');bt.type='button';bt.textContent=nm;bt.onclick=function(){bs.forEach(function(x){x.classList.remove('on')});[].forEach.call(t.children,function(x){x.classList.remove('on')});b.classList.add('on');bt.classList.add('on');try{dispatchEvent(new Event('resize'))}catch(e){}};t.appendChild(bt)});
   home.insertBefore(t,cards);t.children[0].click()}}
  else if(cards){var on=cards.querySelector('.board.on');if(!on){var f=cards.querySelector('.board');if(f)f.classList.add('on')}}}
 var L=(typeof LANG==='string'?LANG:'ko'),KO=L==='ko';
-var TX=KO?{ph:'VIN·부품번호·부품명',go:'검색',nc:'네임카드',ncl:'내차 명함 ›',mk:'내 카드 만들기',inv:'친구 초대',fold:'＋ 연식 · 파트별 · 컬러코드',fold2:'접기',hr:['제조사','코드명','모델명','연식','파트별','컬러코드']}:{ph:'VIN or part no.',go:'Search',nc:'Name cards',ncl:'My car card ›',mk:'Make my card',inv:'Invite a friend',fold:'＋ Year · Part · Color',fold2:'Less',hr:['Make','Code','Model','Year','Part','Color']};
+var TX=KO?{ph:'VIN·부품번호·부품명',go:'검색',nc:'네임카드',ncl:'내차 명함 ›',mk:'내 카드 만들기',inv:'친구 초대',more:'더 보기',empty:'친구를 초대해 보십시오',fold:'＋ 연식 · 파트별 · 컬러코드',fold2:'접기',hr:['제조사','코드명','모델명','연식','파트별','컬러코드']}:{ph:'VIN or part no.',go:'Search',nc:'Name cards',ncl:'My car card ›',mk:'Make my card',inv:'Invite a friend',more:'View more',empty:'No friends yet · invite one',fold:'＋ Year · Part · Color',fold2:'Less',hr:['Make','Code','Model','Year','Part','Color']};
 function i18n(){var home=document.getElementById('home');if(!home)return;
  var se=home.querySelector('.search input');if(se)se.setAttribute('placeholder',TX.ph);[].forEach.call(document.querySelectorAll('header a,header button'),function(x){if(!KO&&x.textContent.trim()==='앱')x.textContent='App'});var go=home.querySelector('.search .sgo');if(go&&go.textContent!==TX.go)go.textContent=TX.go;
  if(!KO){[].forEach.call(home.querySelectorAll('.menu a'),function(a){var k=a.querySelector('.ko'),e=a.querySelector('.en');if(!k||!e||a.dataset.lx)return;a.dataset.lx=1;var en=/[가-힣]/.test(e.textContent)?k.textContent:e.textContent;if(en==="Owners' Lounge")en='Lounge';k.textContent=en;e.style.display='none'});
@@ -1018,13 +1033,20 @@ function fold(){var home=document.getElementById('home'),hr=home&&home.querySele
  function set(v){op=v;b.textContent=v?TX.fold2:TX.fold;b.classList.toggle('open',v);hr.classList.toggle('open',v);try{sessionStorage.setItem('icc_hfold',v?'1':'0')}catch(e){}}
  b.onclick=function(){set(!op)};hr.parentNode.insertBefore(b,hr.nextSibling);set(op)}
 function scopy(){var home=document.getElementById('home'),sb=home&&home.querySelector('.search');if(!sb||sb.dataset.sc)return;sb.dataset.sc=1;
- try{if(sessionStorage.getItem('icc_scopy'))return;sessionStorage.setItem('icc_scopy','1')}catch(e){}
+ 
  var inp=sb.querySelector('input');var w=document.createElement('div');w.className='scopy';
  w.innerHTML=KO?'<span>차 좋아하는 사람들의 놀이터 · <b>클래식카 · 영타이머</b></span>':'<span>Where car lovers play · <b>Classics · Youngtimers</b></span>';
  if(inp){w.style.left=inp.offsetLeft+'px';w.style.right=Math.max(0,sb.clientWidth-inp.offsetLeft-inp.offsetWidth)+'px'}sb.classList.add('scopying');sb.appendChild(w);function end(){if(w.parentNode)w.remove();sb.classList.remove('scopying')}
- w.firstChild.addEventListener('animationend',end);setTimeout(end,8000);if(inp)inp.addEventListener('focus',end,{once:true})}
+ w.firstChild.addEventListener('animationend',end);setTimeout(end,14000);if(inp)inp.addEventListener('focus',end,{once:true})}
 function hcopy(){var home=document.getElementById('home');if(!home||home.querySelector('.hcopy'))return;var d=document.createElement('div');d.className='hcopy';d.innerHTML=KO?'차 좋아하는 사람들의 놀이터<b>클래식카 · 영타이머</b>':'Where car lovers play<b>Classics · Youngtimers</b>';home.insertBefore(d,home.firstChild)}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();hcopy()}}
+function deck(r){try{fetch('https://icc-mail.futurenix.workers.dev/api/nc/deck').then(function(x){return x.json()}).then(function(j){if(!j||!j.cards||!j.cards.length)return;var box=r.querySelector('.ncs');if(!box)return;var inv=box.querySelector('a.add:last-child');var seen={};[].forEach.call(box.querySelectorAll('a[data-k]'),function(a){seen[a.dataset.k]=1});
+ var mine=g('icc_nc',null)||{},mc=String(mine.cd||'').toLowerCase(),mcc=String(mine.cc||'').toUpperCase();var L=j.cards.map(function(c,i){var sc=(mc&&String(c.car||'').toLowerCase().indexOf(mc.split(' ')[0])>=0?2:0)+(mcc&&String(c.c||'').toUpperCase()===mcc?1:0);return{c:c,s:sc,i:i}}).sort(function(a,b){return b.s-a.s||a.i-b.i}).map(function(x){return x.c});var cnt=0;
+ L.forEach(function(c){if(cnt>=10)return;var k=(c.n||'')+'|'+(c.car||'');if(seen[k])return;seen[k]=1;cnt++;var a=document.createElement('a');a.href='/namecard/?c='+encodeURIComponent(c.tok);a.dataset.k=k;a.innerHTML='<span>'+fi(c.c)+esc(c.n||'')+'</span><span>'+esc(c.car||'')+'</span>';box.insertBefore(a,inv)});if(!box.querySelector('a.more')){var mo=document.createElement('a');mo.className='add more';mo.href='/namecard/';mo.innerHTML='<span>'+TX.more+' ›</span>';box.insertBefore(mo,inv)}}).catch(function(){})}catch(e){}}
+function phMark(r){[].forEach.call(r.querySelectorAll('.ncs a:not(.add)'),function(a){if(a.querySelector('.ov'))return;var o=document.createElement('i');o.className='ov';a.insertBefore(o,a.firstChild);if(!a.classList.contains('hasph'))a.classList.add('noph')})}
+function myPhoto(r){try{var cars=JSON.parse(localStorage.getItem('icc_nc_cars')||'[]'),cur=+(localStorage.getItem('icc_nc_cur')||0),id=cars[cur]&&cars[cur].id;if(!id)return;var k='icc_nc_photo_'+id,ls=localStorage.getItem(k);
+ function put(u){if(!u)return;var a=r.querySelector('.ncs a.me');if(!a)return;a.style.setProperty('--ph','url("'+u+'")');a.classList.remove('noph');a.classList.add('hasph')}
+ if(ls)return put(ls);var q=indexedDB.open('icc_nc',1);q.onupgradeneeded=function(){q.result.createObjectStore('ph')};q.onsuccess=function(){try{var g=q.result.transaction('ph').objectStore('ph').get(k);g.onsuccess=function(){put(g.result)}}catch(e){}}}catch(e){}}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
