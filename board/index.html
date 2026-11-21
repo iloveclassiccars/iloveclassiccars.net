@@ -939,5 +939,57 @@ function btns2(){return [].filter.call(box.querySelectorAll('button'),function(x
 var opts=btns.map(function(x,i){return '<option value="'+i+'"'+(x.classList.contains('on')||x.getAttribute('aria-pressed')==='true'?' selected':'')+'>'+x.textContent+'</option>'}).join('');if(s.innerHTML!==opts)s.innerHTML=opts}
 function run(){sync(document.getElementById('fbar'),'tsort','정렬');sync(document.getElementById('views'),'tview','보기 방식')}
 var mo=new MutationObserver(function(){mo.disconnect();run();obs()});function obs(){var t=document.getElementById('board');if(t)mo.observe(t,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-pressed']})}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){run();obs()});else{run();obs()}})();</script></body>
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){run();obs()});else{run();obs()}})();</script><style id="mfront-mix-css">@media(max-width:899px){
+html.mhome header .unav{display:none!important}
+html.mhome #home .search input{font-size:14.5px!important}
+html.mhome .simbar{display:none!important}
+html.mhome #home .hero,html.mhome #home>.sp{display:none!important}
+html.mhome #home .search{order:1}html.mhome #home .hrow{order:2}html.mhome #home .menu{order:3}
+html.mhome #home .ncrow{order:4}html.mhome #home .btabs{order:5}html.mhome #home #cards{order:6;display:block!important}
+html.mhome #home #cards>.board{display:none!important;margin:0!important}html.mhome #home #cards>.board.on{display:block!important}
+.ncrow{margin:6px 0 0}.ncrow .nh{display:flex;justify-content:space-between;align-items:baseline;font:800 16px 'Noto Sans KR',sans-serif;color:#fff;margin:0 2px 8px}.ncrow .nh a{font-size:13px;color:#7FD99A;text-decoration:none}
+.ncs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.ncs::-webkit-scrollbar{display:none}
+.ncs a{flex:none;width:100px;height:136px;border-radius:14px;padding:8px;display:flex;flex-direction:column;justify-content:flex-end;font:800 12px/1.35 'Noto Sans KR',sans-serif;color:#fff;text-decoration:none;background:linear-gradient(180deg,#2E7D4F,#14261D);position:relative;overflow:hidden}
+.ncs a:before{content:"🚗";position:absolute;top:26px;left:0;right:0;text-align:center;font-size:38px}
+.ncs a.add{background:#222A38;border:1.5px dashed #2AA84B;text-align:center}.ncs a.add:before{content:"＋";color:#2AA84B;font-weight:400;top:30px}
+.ncs a span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 0}.btabs::-webkit-scrollbar{display:none}
+.btabs button{flex:none;height:36px;padding:0 14px;border:0;border-radius:18px;background:#222A38;color:#E8EAEE;font:700 13.5px 'Noto Sans KR',sans-serif;cursor:pointer;white-space:nowrap}.btabs button.on{background:#2AA84B;color:#fff}
+html.mhome #home #cards>.board.on{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:4px 14px!important}
+html.mhome #home #cards .bh{display:none!important}
+html.mhome #home #cards .row{display:flex!important;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;color:#E8EAEE}
+html.mhome #home #cards .row:last-child{border-bottom:0}
+html.mhome #home #cards .rt{flex:1;min-width:0;display:flex!important;align-items:center;gap:6px;font-size:14.5px}
+html.mhome #home #cards .rt .tx{flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.mhome #home #cards .rt .badge{display:none}
+html.mhome #home #cards .cmn{flex:none;font-size:12.5px;color:#9AA5B5}
+html.mhome #home #cards .lgt{flex:none;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.12);color:#C9D0DA}
+html.mhome #home #cards .tmark{display:none}
+html.mhome #home #cards .rlk{flex:none;white-space:nowrap;font-size:13px;color:#E8EAEE}html.mhome #home #cards .rlk .hh{color:#E57373;font-style:normal}
+}
+@media(min-width:900px){.ncrow,.btabs{display:none!important}}</style>
+<script id="mfront-mix-js">(function(){
+var mq=matchMedia('(max-width:899px)'),H=document.documentElement;
+function isHome(){var h=location.hash;return !h||h==='#'||h==='#home'}
+function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}
+function fl(c){c=(c||'').toUpperCase();return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(127397+c.charCodeAt(0),127397+c.charCodeAt(1)):''}
+function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
+function build(){var home=document.getElementById('home');if(!home)return;
+ var se=home.querySelector('.search input');if(se&&!se.dataset.mx){se.dataset.mx=1;se.setAttribute('placeholder','VIN·부품번호·부품명')}
+ if(!home.querySelector('.ncrow')){var me=g('icc_nc',null),F=g('icc_nc_friends',[]),h='';
+  if(me&&me.nk)h+='<a href="/namecard/"><span>'+esc(fl(me.cc)+' '+me.nk)+'</span><span>'+esc(me.cd||'')+'</span></a>';else h+='<a class="add" href="/namecard/?new=1"><span>내 카드 만들기</span></a>';
+  (F||[]).slice(0,20).forEach(function(f){h+='<a href="/namecard/"><span>'+esc(fl(f.c)+' '+(f.n||''))+'</span><span>'+esc((f.car||'').split(' · ')[0])+'</span></a>'});
+  h+='<a class="add" href="/namecard/?share=1"><span>친구 초대</span></a>';
+  var r=document.createElement('div');r.className='ncrow';r.innerHTML='<div class="nh">네임카드 <a href="/namecard/">내차 명함 ›</a></div><div class="ncs">'+h+'</div>';home.appendChild(r)}
+ var cards=document.getElementById('cards');if(cards&&!home.querySelector('.btabs')){var bs=[].slice.call(cards.children).filter(function(b){return b.classList.contains('board')});if(bs.length){
+  var t=document.createElement('div');t.className='btabs';bs.forEach(function(b,i){var hd=b.querySelector('h2,h3,.ct,b'),nm=hd?hd.childNodes[0]&&hd.childNodes[0].textContent||hd.textContent:'';nm=(nm||'').trim()||('Board '+(i+1));
+   var bt=document.createElement('button');bt.type='button';bt.textContent=nm;bt.onclick=function(){bs.forEach(function(x){x.classList.remove('on')});[].forEach.call(t.children,function(x){x.classList.remove('on')});b.classList.add('on');bt.classList.add('on');try{dispatchEvent(new Event('resize'))}catch(e){}};t.appendChild(bt)});
+  home.insertBefore(t,cards);t.children[0].click()}}
+ else if(cards){var on=cards.querySelector('.board.on');if(!on){var f=cards.querySelector('.board');if(f)f.classList.add('on')}}}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(on)build()}
+addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
+new MutationObserver(function(){if(H.classList.contains('mhome')){var c=document.getElementById('cards');if(c&&!c.querySelector('.board.on'))build()}}).observe(document.getElementById('cards')||document.body,{childList:true});
+})();</script>
+</body>
 </html>
