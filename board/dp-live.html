@@ -310,6 +310,7 @@ html body .dock .dkt{font-size:13px!important;font-weight:700!important;line-hei
 html.mhome #home .hcopy b{display:inline-block;margin-left:10px;font-size:17px;font-weight:700;color:#7FD99A;letter-spacing:0}
 @media(max-width:899px){html.mhome #home .hcopy{font-size:21px;margin:2px 0 -8px}html.mhome #home .hcopy b{display:block;margin:4px 0 0;font-size:14.5px}}
 html.mhome #home .search{order:1}</style><style id="ncph">
+.ncs a span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .ncs a.more:before{content:"›"!important;font-size:30px!important}
 html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:160px!important;height:96px!important;padding:8px 10px!important;border-radius:12px!important;justify-content:flex-end!important;overflow:hidden}
 .ncs a:not(.add){background:#1d2a24 var(--ph,none) center/cover no-repeat!important;border:1px solid #2AA84B66!important}
@@ -322,7 +323,8 @@ html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:160px!important;height
 .ncs a:not(.add) span:first-child{font-size:13.5px!important}.ncs a:not(.add) span+span{font-size:11.5px!important;color:#DDF3E4!important}
 .ncs a.add{justify-content:center!important}.ncs a.add:before{top:18px!important;font-size:28px!important}
 @media(max-width:899px){html.mhome #home .ncs a,.ncs a:not(.add),.ncs a.add{width:132px!important;height:76px!important}.ncs a:not(.add) span:first-child{font-size:12.5px!important}.ncs a:not(.add) span+span{font-size:10.5px!important}.ncs a.add:before{top:10px!important;font-size:22px!important}}
-</style></head>
+</style><style id="search-big">html.mhome #home .search.mo{height:64px!important;padding-left:20px!important}html.mhome #home .search.mo input{font-size:18px!important}html.mhome #home .search.mo .sgo{height:62px!important;padding:0 30px!important;font-size:18px!important}html.mhome #home .scopy span{font-size:18px!important}
+@media(max-width:899px){html.mhome #home .search.mo{height:58px!important;padding-left:14px!important}html.mhome #home .search.mo input{font-size:16px!important}html.mhome #home .search.mo .sgo{height:56px!important;padding:0 18px!important;font-size:16px!important}html.mhome #home .scopy span{font-size:16px!important}}</style></head>
 <body>
 <div class="page">
 <div class="simbar" role="note">테스트 기간 · 지금 보이는 글은 대부분 시험용 글입니다</div>
@@ -995,7 +997,7 @@ html.mhome #home .hfold:after{content:"⌄";color:#2AA84B;font-size:18px;transit
 html.mhome #home .hrow{order:2;display:grid!important}html.mhome #home .menu{order:3}}
 @media all{html.mhome #home .search{position:relative;overflow:hidden}
 .scopy{position:absolute;left:44px;right:0;top:0;bottom:0;display:flex;align-items:center;pointer-events:none;overflow:hidden;z-index:2}
-.scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 7s linear 1 forwards}
+.scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 13s linear 1 forwards}
 .scopy span b{color:#7FD99A;font-weight:700}
 @keyframes scopy{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 html.mhome #home .search.scopying input::placeholder{color:transparent}}
@@ -1031,11 +1033,11 @@ function fold(){var home=document.getElementById('home'),hr=home&&home.querySele
  function set(v){op=v;b.textContent=v?TX.fold2:TX.fold;b.classList.toggle('open',v);hr.classList.toggle('open',v);try{sessionStorage.setItem('icc_hfold',v?'1':'0')}catch(e){}}
  b.onclick=function(){set(!op)};hr.parentNode.insertBefore(b,hr.nextSibling);set(op)}
 function scopy(){var home=document.getElementById('home'),sb=home&&home.querySelector('.search');if(!sb||sb.dataset.sc)return;sb.dataset.sc=1;
- try{if(sessionStorage.getItem('icc_scopy'))return;sessionStorage.setItem('icc_scopy','1')}catch(e){}
+ 
  var inp=sb.querySelector('input');var w=document.createElement('div');w.className='scopy';
  w.innerHTML=KO?'<span>차 좋아하는 사람들의 놀이터 · <b>클래식카 · 영타이머</b></span>':'<span>Where car lovers play · <b>Classics · Youngtimers</b></span>';
  if(inp){w.style.left=inp.offsetLeft+'px';w.style.right=Math.max(0,sb.clientWidth-inp.offsetLeft-inp.offsetWidth)+'px'}sb.classList.add('scopying');sb.appendChild(w);function end(){if(w.parentNode)w.remove();sb.classList.remove('scopying')}
- w.firstChild.addEventListener('animationend',end);setTimeout(end,8000);if(inp)inp.addEventListener('focus',end,{once:true})}
+ w.firstChild.addEventListener('animationend',end);setTimeout(end,14000);if(inp)inp.addEventListener('focus',end,{once:true})}
 function hcopy(){var home=document.getElementById('home');if(!home||home.querySelector('.hcopy'))return;var d=document.createElement('div');d.className='hcopy';d.innerHTML=KO?'차 좋아하는 사람들의 놀이터<b>클래식카 · 영타이머</b>':'Where car lovers play<b>Classics · Youngtimers</b>';home.insertBefore(d,home.firstChild)}
 function deck(r){try{fetch('https://icc-mail.futurenix.workers.dev/api/nc/deck').then(function(x){return x.json()}).then(function(j){if(!j||!j.cards||!j.cards.length)return;var box=r.querySelector('.ncs');if(!box)return;var inv=box.querySelector('a.add:last-child');var seen={};[].forEach.call(box.querySelectorAll('a[data-k]'),function(a){seen[a.dataset.k]=1});
  var mine=g('icc_nc',null)||{},mc=String(mine.cd||'').toLowerCase(),mcc=String(mine.cc||'').toUpperCase();var L=j.cards.map(function(c,i){var sc=(mc&&String(c.car||'').toLowerCase().indexOf(mc.split(' ')[0])>=0?2:0)+(mcc&&String(c.c||'').toUpperCase()===mcc?1:0);return{c:c,s:sc,i:i}}).sort(function(a,b){return b.s-a.s||a.i-b.i}).map(function(x){return x.c});var cnt=0;
@@ -1044,7 +1046,7 @@ function phMark(r){[].forEach.call(r.querySelectorAll('.ncs a:not(.add)'),functi
 function myPhoto(r){try{var cars=JSON.parse(localStorage.getItem('icc_nc_cars')||'[]'),cur=+(localStorage.getItem('icc_nc_cur')||0),id=cars[cur]&&cars[cur].id;if(!id)return;var k='icc_nc_photo_'+id,ls=localStorage.getItem(k);
  function put(u){if(!u)return;var a=r.querySelector('.ncs a.me');if(!a)return;a.style.setProperty('--ph','url("'+u+'")');a.classList.remove('noph');a.classList.add('hasph')}
  if(ls)return put(ls);var q=indexedDB.open('icc_nc',1);q.onupgradeneeded=function(){q.result.createObjectStore('ph')};q.onsuccess=function(){try{var g=q.result.transaction('ph').objectStore('ph').get(k);g.onsuccess=function(){put(g.result)}}catch(e){}}}catch(e){}}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();hcopy()}}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
