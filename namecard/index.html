@@ -333,4 +333,5 @@ function my(){try{return JSON.parse(localStorage.getItem('icc_nc_tok')||'""')}ca
 function ev(t,tok){if(!tok)return;try{fetch(API+'ev',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tok:tok,t:t}),keepalive:true})}catch(e){}}
 var m=location.search.match(/[?&]c=([^&#]+)/);if(m){var t=decodeURIComponent(m[1]);if(t&&t!==my()){try{if(!localStorage.getItem('icc_nc_tok'))localStorage.setItem('icc_ref',t)}catch(e){}ev('view',t)}}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.sendbig .s1,#shr,[data-share]');if(b)ev('share',my())},true);
-})()</script></body></html>
+})()</script><style id="tone-nc-css">select,input[type=text],input[type=email],input[type=password],input:not([type]){background-color:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:14px!important;color:#e8eefc!important}
+</style></body></html>
