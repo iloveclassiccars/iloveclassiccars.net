@@ -4,7 +4,21 @@
 .qrfull button{height:52px;padding:0 28px;border:0;background:#1F4D36;color:#fff;font:800 18px 'Noto Sans KR',sans-serif}
 .sendbig{position:fixed;left:0;right:0;bottom:0;z-index:9998;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:#1F4D36;display:flex;gap:10px;justify-content:center;box-shadow:0 -6px 24px rgba(0,0,0,.4)}
 .sendbig button{flex:1;max-width:320px;height:56px;white-space:nowrap;border:0;font:800 16.5px 'Noto Sans KR',sans-serif;cursor:pointer}.sendbig .s1{background:#2AA84B;color:#fff}.sendbig .s2{background:#fff;color:#1F4D36}
-.welcome{background:#2AA84B;color:#fff;padding:12px 10px;text-align:center;font:700 15px 'Noto Sans KR',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}</style><style id="bar-1line">@media (max-width:600px){.bar small{display:block!important;margin:3px 0 0!important;white-space:nowrap!important;font-size:14px!important}}</style></head><body>
+.welcome{background:#2AA84B;color:#fff;padding:12px 10px;text-align:center;font:700 15px 'Noto Sans KR',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}</style><style id="bar-1line">@media (max-width:600px){.bar small{display:block!important;margin:3px 0 0!important;white-space:nowrap!important;font-size:14px!important}}</style><style id="wiz-css">
+#own,label:has(+#own){display:none!important}.pbtn[data-mv]{display:none!important}.pbtn[data-mv]{}
+.f .row:has(>.pbtn[data-mv]){display:none!important}
+#wz{max-width:520px;margin:0 auto;padding:18px 16px 120px;color:#E8EAEE;font-family:'Noto Sans KR',sans-serif}
+#wz .dots{display:flex;gap:8px;justify-content:center;margin:4px 0 18px}#wz .dots i{width:10px;height:10px;border-radius:50%;background:#2a3142}#wz .dots i.on{background:#2AA84B}
+#wz h2{font-size:26px;font-weight:800;margin:0 0 6px;text-align:center}#wz p.s{margin:0 0 18px;text-align:center;color:#9AA3AD;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#wz select,#wz input{width:100%;height:56px;margin:0 0 12px;padding:0 14px;background:#1d2230;border:1px solid #3a4356;color:#fff;font:600 18px 'Noto Sans KR',sans-serif;border-radius:12px}
+#wz .big{display:flex;gap:10px}#wz .big button{flex:1;height:96px;border:2px solid #2AA84B;background:#1d2a24;color:#fff;font:800 19px 'Noto Sans KR',sans-serif;border-radius:16px}
+#wz .nav{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#171B26;border-top:1px solid #2a3142;display:flex;gap:10px;justify-content:center;z-index:50}
+#wz .nav button{flex:1;max-width:260px;height:58px;border:0;border-radius:14px;font:800 19px 'Noto Sans KR',sans-serif}#wz .nav .nx{background:#2AA84B;color:#fff}#wz .nav .bk{background:#2a3142;color:#cfd5dc;max-width:120px}
+#wz .pv{margin:14px auto 0;display:block;width:100%;max-width:340px;height:auto;border-radius:12px}
+#wz .opt{font-size:14px;color:#9AA3AD;margin:-6px 0 12px;white-space:nowrap}
+.edit-btn{display:block;width:100%;height:52px;margin:10px 0 0;background:transparent;border:1px solid #2AA84B;color:#7FD99A;font:800 17px 'Noto Sans KR',sans-serif;border-radius:12px}
+html.cardview .wr>.f{display:none}html.wizon .wr,html.wizon .sendbig{display:none!important}
+</style></head><body>
 <div class="bar">I ♥ Classic Cars <small>네임카드 (내차 명함 만들기 - 회원가입)</small></div>
 <div class="wr"><div class="f">
 <label>이름 또는 닉네임</label><input id="nk" maxlength="16" value="춘식이형" placeholder="본인 이름 또는 닉네임" readonly><div class="nkr" id="nkr"></div><button type="button" class="pbtn" id="nkb" style="width:100%;margin-top:6px!important">이름 바꾸기</button>
@@ -170,4 +184,43 @@ if(/[?&]from=card/.test(q)){var w=document.createElement('div');w.className='wel
 var bar=document.createElement('div');bar.className='sendbig';bar.innerHTML='<button type="button" class="s1">📤 네임카드 보내기</button><button type="button" class="s2">📷 QR 보여 주기</button>';
 bar.querySelector('.s1').onclick=function(){var b=document.getElementById('shr');if(b)b.click()};bar.querySelector('.s2').onclick=qrShow;
 if(/[?&](share|qr)=1/.test(q)||window.matchMedia('(max-width:899px)').matches){document.body.appendChild(bar);document.body.style.paddingBottom='96px'}
-if(/[?&]qr=1/.test(q))setTimeout(qrShow,600)})();</script></body></html>
+if(/[?&]qr=1/.test(q))setTimeout(qrShow,600)})();</script><script id="wiz-js">(function(){var $=function(i){return document.getElementById(i)};
+var fresh=false;try{fresh=!localStorage.getItem('icc_nc')}catch(e){}
+if(fresh){['nk','em','ac'].forEach(function(i){if($(i)){$(i).value='';$(i).readOnly=false}});try{draw()}catch(e){}}
+if($('own'))$('own').value='';
+var want=/[?&]new=1/.test(location.search)||fresh;
+var H=document.documentElement;
+function ev(el,t){el.dispatchEvent(new Event(t,{bubbles:true}))}
+function cloneSel(src){var s=document.createElement('select');s.innerHTML=src.innerHTML;s.value=src.value;return s}
+var wz=document.createElement('div');wz.id='wz';var wr=document.querySelector('.wr');
+var step=0;var N=4;
+function dots(){return '<div class="dots">'+[0,1,2,3].map(function(i){return '<i class="'+(i<=step?'on':'')+'"></i>'}).join('')+'</div>'}
+function nav(last){var n=document.createElement('div');n.className='nav';n.innerHTML=(step>0?'<button type="button" class="bk">이전</button>':'')+'<button type="button" class="nx">'+(last?'완성! 🎉':'다음')+'</button>';n.querySelector('.nx').onclick=function(){if(last)done();else{step++;render()}};var b=n.querySelector('.bk');if(b)b.onclick=function(){step--;render()};return n}
+function preview(){var c=document.createElement('canvas');c.className='pv';c.width=1080;c.height=640;var g=c.getContext('2d');function cp(){try{var o=$('c');if(c.width!==o.width||c.height!==o.height){c.width=o.width;c.height=o.height}g.drawImage(o,0,0)}catch(e){}}cp();var t=setInterval(function(){if(!c.isConnected)return clearInterval(t);cp()},500);return c}
+function render(){wz.innerHTML=dots();
+ if(step===0){wz.insertAdjacentHTML('beforeend','<h2>어떤 차를 타세요?</h2><p class="s">제조사 → 차종 → 모델 순서로 고르면 됩니다</p>');
+  var mk=cloneSel($('mk')),cd=cloneSel($('cd')),md=cloneSel($('md'));var yr=document.createElement('input');yr.inputMode='numeric';yr.maxLength=4;yr.placeholder='연식 (예: 1997)';yr.value=$('yr').value;
+  mk.onchange=function(){$('mk').value=mk.value;ev($('mk'),'change');cd.innerHTML=$('cd').innerHTML;cd.value=$('cd').value;md.innerHTML=$('md').innerHTML;md.value=$('md').value};
+  cd.onchange=function(){$('cd').value=cd.value;ev($('cd'),'change');md.innerHTML=$('md').innerHTML;md.value=$('md').value};
+  md.onchange=function(){$('md').value=md.value;ev($('md'),'change')};
+  yr.oninput=function(){$('yr').value=yr.value;ev($('yr'),'input')};
+  [mk,cd,md,yr].forEach(function(e){wz.appendChild(e)});wz.appendChild(preview());wz.appendChild(nav(false))}
+ if(step===1){wz.insertAdjacentHTML('beforeend','<h2>내 차 사진 한 장</h2><p class="s">없으면 건너뛰어도 됩니다</p><div class="big"><button type="button" id="wcam">📷<br>찍기</button><button type="button" id="walb">🖼<br>앨범</button></div>');
+  wz.querySelector('#wcam').onclick=function(){$('phc').click()};wz.querySelector('#walb').onclick=function(){$('phb').click()};
+  wz.appendChild(preview());wz.insertAdjacentHTML('beforeend','<p class="s" style="margin-top:10px">👆 카드 사진은 나중에 손가락으로 맞출 수 있습니다</p>');wz.appendChild(nav(false))}
+ if(step===2){wz.insertAdjacentHTML('beforeend','<h2>닉네임과 나라</h2><p class="s">카드와 게시판에 보이는 이름입니다</p>');
+  var nk=document.createElement('input');nk.maxLength=16;nk.placeholder='닉네임';nk.value=$('nk').value;if($('nk').readOnly&&!fresh){nk.readOnly=true}
+  nk.oninput=function(){$('nk').value=nk.value;ev($('nk'),'input')};var cc=cloneSel($('cc'));cc.onchange=function(){$('cc').value=cc.value;ev($('cc'),'change')};
+  wz.appendChild(nk);wz.appendChild(cc);wz.appendChild(preview());wz.appendChild(nav(false))}
+ if(step===3){wz.insertAdjacentHTML('beforeend','<h2>내 SNS</h2><p class="s">카드의 QR을 찍으면 이 SNS로 갑니다</p>');
+  var sn=cloneSel($('sn'));var ac=document.createElement('input');ac.placeholder='SNS 아이디';ac.value=$('ac').value;
+  sn.onchange=function(){$('sn').value=sn.value;ev($('sn'),'change')};ac.oninput=function(){$('ac').value=ac.value;ev($('ac'),'input')};
+  var em=document.createElement('input');em.type='email';em.placeholder='이메일 (선택)';em.value=$('em').value;em.oninput=function(){$('em').value=em.value;ev($('em'),'input')};
+  wz.appendChild(sn);wz.appendChild(ac);wz.appendChild(em);wz.insertAdjacentHTML('beforeend','<p class="opt">이메일은 회원가입할 때만 필요합니다</p>');wz.appendChild(preview());wz.appendChild(nav(true))}
+ scrollTo(0,0)}
+function done(){H.classList.remove('wizon');H.classList.add('cardview');wz.remove();try{saveNC()}catch(e){}try{draw()}catch(e){}scrollTo(0,0)}
+function cardMode(){H.classList.add('cardview')}
+var eb=document.createElement('button');eb.type='button';eb.className='edit-btn';eb.textContent='✏️ 고치기';eb.onclick=function(){H.classList.toggle('cardview');eb.textContent=H.classList.contains('cardview')?'✏️ 고치기':'✅ 다 고쳤어요';if(!H.classList.contains('cardview'))document.querySelector('.wr>.f').scrollIntoView({behavior:'smooth'})};
+var cv=document.querySelector('.cv');if(cv)cv.insertBefore(eb,$('sv').parentNode);
+if(want){H.classList.add('wizon');wr.parentNode.insertBefore(wz,wr);render()}else cardMode();
+})();</script></body></html>
