@@ -967,6 +967,10 @@ html.mhome #home #cards .lgt{flex:none;font-size:10px;padding:1px 4px;border-rad
 html.mhome #home #cards .tmark{display:none}
 html.mhome #home #cards .rlk{flex:none;white-space:nowrap;font-size:13px;color:#E8EAEE}html.mhome #home #cards .rlk .hh{color:#E57373;font-style:normal}
 }
+.hfold{display:none}
+@media(max-width:899px){html.mhome #home .hfold{order:2;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:34px;padding:0;background:none;border:0;color:#7FD99A;font:700 13.5px 'Noto Sans KR',sans-serif;cursor:pointer;margin:-14px 0 -6px}
+html.mhome #home .hfold:after{content:"⌄";color:#2AA84B;font-size:18px;transition:transform .2s}html.mhome #home .hfold.open:after{transform:rotate(180deg)}
+html.mhome #home .hrow{order:2;display:grid!important}html.mhome #home .menu{order:3}}
 @media(min-width:900px){.ncrow,.btabs{display:none!important}}</style>
 <script id="mfront-mix-js">(function(){
 var mq=matchMedia('(max-width:899px)'),H=document.documentElement;
@@ -975,18 +979,30 @@ function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:JSON.parse(v)
 function fl(c){c=(c||'').toUpperCase();return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(127397+c.charCodeAt(0),127397+c.charCodeAt(1)):''}
 function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
 function build(){var home=document.getElementById('home');if(!home)return;
- var se=home.querySelector('.search input');if(se&&!se.dataset.mx){se.dataset.mx=1;se.setAttribute('placeholder','VIN·부품번호·부품명')}
+ 
  if(!home.querySelector('.ncrow')){var me=g('icc_nc',null),F=g('icc_nc_friends',[]),h='';
-  if(me&&me.nk)h+='<a href="/namecard/"><span>'+esc(fl(me.cc)+' '+me.nk)+'</span><span>'+esc(me.cd||'')+'</span></a>';else h+='<a class="add" href="/namecard/?new=1"><span>내 카드 만들기</span></a>';
+  if(me&&me.nk)h+='<a href="/namecard/"><span>'+esc(fl(me.cc)+' '+me.nk)+'</span><span>'+esc(me.cd||'')+'</span></a>';else h+='<a class="add" href="/namecard/?new=1"><span>'+TX.mk+'</span></a>';
   (F||[]).slice(0,20).forEach(function(f){h+='<a href="/namecard/"><span>'+esc(fl(f.c)+' '+(f.n||''))+'</span><span>'+esc((f.car||'').split(' · ')[0])+'</span></a>'});
-  h+='<a class="add" href="/namecard/?share=1"><span>친구 초대</span></a>';
-  var r=document.createElement('div');r.className='ncrow';r.innerHTML='<div class="nh">네임카드 <a href="/namecard/">내차 명함 ›</a></div><div class="ncs">'+h+'</div>';home.appendChild(r)}
+  h+='<a class="add" href="/namecard/?share=1"><span>'+TX.inv+'</span></a>';
+  var r=document.createElement('div');r.className='ncrow';r.innerHTML='<div class="nh">'+TX.nc+' <a href="/namecard/">'+TX.ncl+'</a></div><div class="ncs">'+h+'</div>';home.appendChild(r)}
  var cards=document.getElementById('cards');if(cards&&!home.querySelector('.btabs')){var bs=[].slice.call(cards.children).filter(function(b){return b.classList.contains('board')});if(bs.length){
   var t=document.createElement('div');t.className='btabs';bs.forEach(function(b,i){var hd=b.querySelector('h2,h3,.ct,b'),nm=hd?hd.childNodes[0]&&hd.childNodes[0].textContent||hd.textContent:'';nm=(nm||'').trim()||('Board '+(i+1));
    var bt=document.createElement('button');bt.type='button';bt.textContent=nm;bt.onclick=function(){bs.forEach(function(x){x.classList.remove('on')});[].forEach.call(t.children,function(x){x.classList.remove('on')});b.classList.add('on');bt.classList.add('on');try{dispatchEvent(new Event('resize'))}catch(e){}};t.appendChild(bt)});
   home.insertBefore(t,cards);t.children[0].click()}}
  else if(cards){var on=cards.querySelector('.board.on');if(!on){var f=cards.querySelector('.board');if(f)f.classList.add('on')}}}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(on)build()}
+var L=(typeof LANG==='string'?LANG:'ko'),KO=L==='ko';
+var TX=KO?{ph:'VIN·부품번호·부품명',go:'검색',nc:'네임카드',ncl:'내차 명함 ›',mk:'내 카드 만들기',inv:'친구 초대',fold:'＋ 연식 · 파트별 · 컬러코드',fold2:'접기',hr:['제조사','코드명','모델명','연식','파트별','컬러코드']}:{ph:'VIN or part no.',go:'Search',nc:'Name cards',ncl:'My car card ›',mk:'Make my card',inv:'Invite a friend',fold:'＋ Year · Part · Color',fold2:'Less',hr:['Make','Code','Model','Year','Part','Color']};
+function i18n(){var home=document.getElementById('home');if(!home)return;
+ var se=home.querySelector('.search input');if(se)se.setAttribute('placeholder',TX.ph);[].forEach.call(document.querySelectorAll('header a,header button'),function(x){if(!KO&&x.textContent.trim()==='앱')x.textContent='App'});var go=home.querySelector('.search .sgo');if(go&&go.textContent!==TX.go)go.textContent=TX.go;
+ if(!KO){[].forEach.call(home.querySelectorAll('.menu a'),function(a){var k=a.querySelector('.ko'),e=a.querySelector('.en');if(!k||!e||a.dataset.lx)return;a.dataset.lx=1;var en=/[가-힣]/.test(e.textContent)?k.textContent:e.textContent;if(en==="Owners' Lounge")en='Lounge';k.textContent=en;e.style.display='none'});
+  [].forEach.call(home.querySelectorAll('.hero *'),function(x){if(x.children.length)return;var t=x.textContent.trim();if(t==='차 좋아하는 사람들의 놀이터')x.textContent='Where car lovers play';else if(t==='클래식카 · 영타이머')x.textContent='Classics · Youngtimers'});
+  [].forEach.call(home.querySelectorAll('.hrow select'),function(sl,i){if(sl.options[0]&&TX.hr[i]&&sl.options[0].text!==TX.hr[i])sl.options[0].text=TX.hr[i]})}}
+function fold(){var home=document.getElementById('home'),hr=home&&home.querySelector('.hrow');if(!hr||home.querySelector('.hfold'))return;
+ var b=document.createElement('button');b.type='button';b.className='hfold';b.textContent=TX.fold;var op=false;try{op=sessionStorage.getItem('icc_hfold')==='1'}catch(e){}
+ function set(v){op=v;b.textContent=v?TX.fold2:TX.fold;b.classList.toggle('open',v);hr.classList.toggle('open',v);try{sessionStorage.setItem('icc_hfold',v?'1':'0')}catch(e){}}
+ b.onclick=function(){set(!op)};hr.parentNode.insertBefore(b,hr.nextSibling);set(op)}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on)build()}
+document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
 new MutationObserver(function(){if(H.classList.contains('mhome')){var c=document.getElementById('cards');if(c&&!c.querySelector('.board.on'))build()}}).observe(document.getElementById('cards')||document.body,{childList:true});
