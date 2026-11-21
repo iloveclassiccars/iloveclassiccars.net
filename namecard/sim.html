@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>네임카드 전 세계 배포 — 대안 · 사용 시뮬레이션 · 효과 분석</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0f141a;color:#e8edf2;font:14.5px/1.6 'Noto Sans KR',system-ui,sans-serif}
+.w{max-width:1100px;margin:0 auto;padding:22px}
+.hd{border-top:6px solid #2aa84b;background:#1b2a44;border-radius:10px;padding:16px 20px;margin-bottom:14px}.hd h1{margin:0;font-size:21px}.hd p{margin:4px 0 0;color:#b8c4d6;font-size:13px}
+.cn{background:#12321f;border:1px solid #2aa84b;border-radius:10px;padding:14px 18px;margin-bottom:18px}.cn h2{margin:0 0 6px;font-size:15px;color:#7fd99a}
+h2.sec{font-size:18px;margin:26px 0 10px;padding-left:10px;border-left:4px solid #2aa84b}
+.alts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.alt{background:#18202a;border:1px solid #2a3542;border-radius:12px;padding:12px 14px}.alt .who{font-size:12px;color:#7fd99a;font-weight:800}.alt h3{margin:2px 0 6px;font-size:15.5px}.alt p{margin:3px 0;font-size:13px}.alt .tag{display:inline-block;font-size:11px;border:1px solid #3a4757;border-radius:10px;padding:0 7px;margin:2px 3px 2px 0}
+.ok{color:#7fd99a}.mid{color:#ffc46b}.no{color:#ff8a8a}
+/* simulator */
+.sim{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start}
+.pers{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.pers button{background:transparent;border:1.5px solid #2aa84b;color:#7fd99a;border-radius:12px;padding:8px 12px;font:700 13px 'Noto Sans KR',sans-serif;cursor:pointer}.pers button.on{background:#2aa84b;color:#fff}
+.ph{width:300px;height:600px;background:#1a1f27;border:8px solid #000;border-radius:34px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.ph .top{background:#245C40;text-align:center;font:900 14px sans-serif;padding:11px 0}.ph .top b{color:#e53b3b}
+.scr{flex:1;padding:10px 12px;overflow:hidden;position:relative}
+.stepc{background:#18202a;border:1px solid #2a3542;border-radius:12px;padding:14px 16px}
+.stepc .n{color:#7fd99a;font-weight:800;font-size:13px}.stepc h3{margin:2px 0 8px;font-size:17px}.stepc p{margin:4px 0}
+.nav{display:flex;gap:8px;margin-top:12px}.nav button{flex:1;background:transparent;border:1.5px solid #2aa84b;color:#7fd99a;border-radius:12px;padding:10px 0;font:800 14px 'Noto Sans KR',sans-serif;cursor:pointer}
+.dots{display:flex;gap:5px;margin:10px 0 0}.dots i{width:9px;height:9px;border-radius:50%;background:#2a3542}.dots i.on{background:#2aa84b}
+/* mini ui atoms */
+.card{border:2px solid #2aa84b;border-radius:12px;overflow:hidden;background:#1a1f27}.card .h{background:#245C40;padding:5px 8px;font:900 10px sans-serif;display:flex;justify-content:space-between}.card .h em{color:#e53b3b;font-style:normal}.card .p{height:110px;margin:6px 8px;border:1px solid #2aa84b66;border-radius:8px;background:linear-gradient(#1e3a2a,#14241b);display:flex;align-items:center;justify-content:center;font-size:40px}.card .b{padding:0 8px 8px;font-size:11px}.card .b b{font-size:15px;display:block}
+.btn{border:1.5px solid #2aa84b;color:#7fd99a;border-radius:10px;text-align:center;padding:8px 0;font-weight:700;font-size:12.5px;margin:6px 0}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#f2f2f5;color:#111;border-radius:16px 16px 0 0;padding:10px 12px 14px}.sheet .t{font-size:11px;color:#666;margin-bottom:8px}.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.apps span{text-align:center;font-size:10px}.apps i{display:block;width:40px;height:40px;margin:0 auto 3px;border-radius:11px;font-style:normal;font-size:20px;line-height:40px;color:#fff}
+.chat{background:#b2c7da;border-radius:10px;padding:8px;color:#111;font-size:11px}.chat.wa{background:#e5ddd5}.bub{background:#fff;border-radius:8px;overflow:hidden;max-width:220px}.bub .im{height:90px;background:linear-gradient(160deg,#2E8B57,#14432B);color:#fff;display:flex;align-items:center;gap:6px;padding:0 10px;font-weight:800}.bub .tx{padding:6px 8px}.bub .tx b{display:block}.bub .tx small{color:#666;display:block}
+.story{height:100%;border-radius:10px;background:linear-gradient(170deg,#1f5c3c,#0c1c13);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px;text-align:center}.story .lg{font:900 12px sans-serif}.story .lg b{color:#e53b3b}
+.land{display:flex;flex-direction:column;gap:6px}.land .cta{background:transparent;border:1.5px solid #2aa84b;color:#7fd99a;border-radius:12px;text-align:center;padding:10px 0;font-weight:800}
+.fr{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #222b36;font-size:12px}.fr i{width:28px;height:28px;border-radius:8px;background:#2E8B57;font-style:normal;text-align:center;line-height:28px}.fr div{flex:1}.fr small{color:#9aa6b2;display:block}.fr span{border:1.5px solid #2aa84b;color:#7fd99a;border-radius:8px;padding:2px 8px;font-size:11px}
+.lvbar{border:1.5px solid #2aa84b;border-radius:8px;height:10px;overflow:hidden;margin:6px 0}.lvbar span{display:block;height:100%;background:#2aa84b}
+.toast{background:#2aa84b;color:#fff;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:700;text-align:center}
+/* calc */
+.calc{display:grid;grid-template-columns:330px 1fr;gap:18px;align-items:start}
+.pre{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.pre button{background:transparent;border:1.5px solid #3a4757;color:#cfd8e2;border-radius:10px;padding:6px 10px;font:600 12.5px 'Noto Sans KR',sans-serif;cursor:pointer}.pre button.on{border-color:#2aa84b;color:#7fd99a}
+.sl{margin:10px 0}.sl label{display:flex;justify-content:space-between;font-size:13px}.sl label b{color:#7fd99a}.sl input{width:100%;accent-color:#2aa84b}
+.res{background:#18202a;border:1px solid #2a3542;border-radius:12px;padding:14px}.big{font-size:30px;font-weight:900;color:#7fd99a}
+table{width:100%;border-collapse:collapse;background:#18202a;border:1px solid #2a3542;font-size:13px;margin-top:10px}th,td{padding:7px 9px;border-top:1px solid #2a3542;text-align:left}th{background:#1b2a44;color:#b8c4d6}
+.note{font-size:12.5px;color:#9aa6b2}
+@media(max-width:860px){.sim,.calc{grid-template-columns:1fr}.ph{margin:0 auto}}
+</style></head><body><div class="w">
+
+<div class="hd"><h1>네임카드 전 세계 배포 — 대안 · 사용 시뮬레이션 · 효과 분석</h1><p>2026-11-21 · 참석: 제민 · 채림 · 규록 · 춘삼(정리) · 형 산책 중 작업 · 숫자는 모두 "가정"이며 오픈 후 실제로 재서 고칩니다</p></div>
+
+<div class="cn"><h2>결론 먼저</h2>
+① <b>기본은 '한 번 눌러 보내기'</b>(휴대폰 기본 공유창)입니다. 카톡 · WhatsApp · 인스타 · LINE · WeChat 어디로든 무료로 보낼 수 있고, 전 세계 배포에 맞습니다.<br>
+② 다른 각도의 대안 중 <b>지금 바로 만들 수 있고 효과가 큰 것은 춘삼의 '차종 레지스트리 번호'</b>입니다. 예: "W140 오너 전 세계 #127". 같은 차 오너끼리 끌어당깁니다.<br>
+③ <b>제민의 차창 QR 스포팅</b>은 오프라인 모임에서 2단계로 붙이면 좋습니다. 채림의 드라이브 코스 공유는 위치 노출 위험, 규록의 사운드 스탬프는 인스타 스티커를 우리가 직접 만들 수 없다는 한계가 있어 나중에 다룹니다.<br>
+④ 효과는 아래 계산기로 가정을 바꿔 가며 볼 수 있습니다. <b>측정 장치(내 카드 링크 · QR로 들어온 수 · 가입한 수)는 비용 없이 서버에 넣을 수 있습니다.</b></div>
+
+<h2 class="sec">1. 여러 각도의 대안 5개</h2>
+<div class="alts">
+<div class="alt"><div class="who">기본 · 형 안 + 합친 안</div><h3>한 번 눌러 보내기</h3><p>완성 카드에서 [📤 보내기] 하나 → 휴대폰 공유창 → 그 나라에서 쓰는 앱으로 전송. 받은 사람은 카드 + [나도 만들기].</p><p><span class="tag ok">실현: 쉬움</span><span class="tag ok">비용: 없음</span></p><p class="note">약점: 카드만으로는 "왜 눌러야 하나"가 약할 수 있음</p></div>
+<div class="alt"><div class="who">제민 · 오프라인 각도</div><h3>카 스포터 윈도우 패스</h3><p>차창 안쪽에 두는 QR 카드. 길에서 스캔하면 'Spotted' 인증 → 차 주인의 점수가 오르고, 스캔한 사람은 정비 이야기를 보러 가입.</p><p><span class="tag ok">실현: 쉬움(QR 인쇄)</span><span class="tag ok">비용: 인쇄비 정도</span></p><p class="note">약점: 도난 · 사생활 걱정으로 붙이기를 꺼리는 오너가 많음 → 모임 · 전시 때만 쓰게</p></div>
+<div class="alt"><div class="who">채림 · 모임 각도</div><h3>로드스왑 카드</h3><p>카드에 내 대표 드라이브 코스 지도를 넣고, 받은 사람이 [참가]를 누르면 가입 + 모임 참가.</p><p><span class="tag mid">실현: 보통(지도 · 코스)</span><span class="tag mid">비용: 지도 사용량</span></p><p class="note">약점: 경로 · 주차 위치가 노출되는 안전 문제</p></div>
+<div class="alt"><div class="who">규록 · 소리 각도</div><h3>골든아워 사운드 스탬프</h3><p>엔진 소리 3초를 카드에 넣어 릴스로 퍼뜨림. 듣고 [Join]을 누르면 가입.</p><p><span class="tag no">실현: 어려움</span><span class="tag mid">비용: 영상 처리</span></p><p class="note">약점: 인스타 '스티커'는 외부 회사가 만들 수 없음. 대신 '카드 + 3초 소리 영상 저장'으로 바꾸면 가능</p></div>
+<div class="alt"><div class="who">춘삼 · 소속감 각도</div><h3>차종 레지스트리 번호</h3><p>카드에 "W140 · 전 세계 #127 · 오너 342명"처럼 차종 등록 번호를 새김. 공유받은 같은 차종 오너가 "나도 번호 받기"로 가입.</p><p><span class="tag ok">실현: 쉬움(우리 회원 DB)</span><span class="tag ok">비용: 없음</span></p><p class="note">약점: 초기에 회원 수가 적으면 "오너 3명"처럼 초라해 보일 수 있음 → 30명 넘는 차종만 숫자 공개</p></div>
+</div>
+
+<h2 class="sec">2. 사용 설명 시뮬레이션 — 실제로 이렇게 씁니다</h2>
+<p class="note">사람을 고르고 [다음 ›]을 눌러 보십시오. 왼쪽 휴대폰 화면이 단계마다 바뀝니다.</p>
+<div class="pers" id="pers"></div>
+<div class="sim"><div class="ph"><div class="top">I <b>♥</b> CLASSIC CARS</div><div class="scr" id="scr"></div></div>
+<div><div class="stepc"><div class="n" id="sn"></div><h3 id="st"></h3><p id="sd"></p><p class="note" id="se"></p></div><div class="dots" id="dots"></div><div class="nav"><button id="pv">‹ 이전</button><button id="nx">다음 ›</button></div></div></div>
+
+<h2 class="sec">3. 효과 분석 — 가정을 바꿔 보는 계산기</h2>
+<p class="note">회원 한 명이 매주 카드를 보내는 비율 × 한 번 보낼 때 보는 사람 수 × 누르는 비율 × 가입 비율 = <b>회원 1명이 매주 데려오는 새 회원 수(성장률)</b>. 처음 회원 수에서 주마다 이 비율만큼 불어난다고 단순하게 계산합니다.</p>
+<div class="calc"><div>
+<div class="pre" id="pre"></div>
+<div class="sl"><label>매주 카드를 보내는 회원 비율 <b id="vs"></b></label><input type="range" id="s" min="1" max="50" step="1"></div>
+<div class="sl"><label>한 번 보낼 때 보는 사람 수 <b id="vv"></b></label><input type="range" id="v" min="3" max="500" step="1"></div>
+<div class="sl"><label>본 사람 중 링크를 누르는 비율 <b id="vc"></b></label><input type="range" id="c" min="0.5" max="20" step="0.5"></div>
+<div class="sl"><label>누른 사람 중 가입하는 비율 <b id="vr"></b></label><input type="range" id="r" min="0.5" max="30" step="0.5"></div>
+<div class="sl"><label>처음 회원 수 <b id="vm"></b></label><input type="range" id="m0" min="10" max="2000" step="10"></div>
+</div><div class="res">
+<div>회원 1명이 매주 데려오는 새 회원 <span class="big" id="g"></span></div>
+<div>12주 뒤 예상 회원 수 <span class="big" id="m12"></span></div>
+<svg id="chart" viewBox="0 0 600 220" style="width:100%;margin-top:8px"></svg>
+<p class="note" id="warn"></p>
+</div></div>
+
+<table><tr><th>가정 묶음</th><th>보내는 비율</th><th>보는 사람</th><th>누름</th><th>가입</th><th>1명당 매주</th><th>100명 → 12주 뒤</th><th>춘삼 판단</th></tr>
+<tr><td>기본 · 한 번 보내기 (춘삼 보수 가정)</td><td>15%</td><td>80</td><td>3%</td><td>12%</td><td>0.043</td><td>약 166명</td><td class="ok">현실적 출발점</td></tr>
+<tr><td>제민 · 스포팅 (제민 가정)</td><td>35%</td><td>180</td><td>8.5%</td><td>14%</td><td>0.750</td><td>약 82,000명</td><td class="no">지나치게 낙관 — 네 숫자가 모두 높음</td></tr>
+<tr><td>채림 · 드라이브 코스 (채림 가정)</td><td>12%</td><td>6</td><td>18%</td><td>10%</td><td>0.013</td><td>약 117명</td><td class="mid">보수적 — 작은 모임방 기준</td></tr>
+<tr><td>규록 · 사운드 (규록 가정)</td><td>18%</td><td>420</td><td>6.5%</td><td>1.8%</td><td>0.089</td><td>약 277명</td><td class="mid">노출은 크고 가입은 낮음</td></tr>
+<tr><td>춘삼 · 레지스트리 번호 (춘삼 가정)</td><td>25%</td><td>50</td><td>6%</td><td>15%</td><td>0.113</td><td>약 359명</td><td class="mid">같은 차종에게 정확히 꽂힘 — 검증 필요</td></tr></table>
+<p class="note">읽는 법: 1명당 매주 0.1이면 회원 10명이 매주 1명을 데려옵니다. 이 계산은 가정입니다. 오픈 후 실제 숫자(보내기 버튼 누른 수 · 카드 링크로 들어온 수 · 가입 수)를 재서 고칩니다. 그래서 측정 장치를 처음부터 넣는 것이 중요합니다.</p>
+
+<h2 class="sec">4. 효과를 키우는 장치 (모든 안 공통)</h2>
+<table><tr><th>장치</th><th>올리는 숫자</th><th>비용</th></tr>
+<tr><td>휴대폰 공유창 한 번 보내기</td><td>보내는 비율</td><td class="ok">없음</td></tr>
+<tr><td>보는 사람 언어로 나오는 링크 미리보기 그림</td><td>누르는 비율</td><td class="ok">없음</td></tr>
+<tr><td>인스타 스토리용 세로 그림 저장</td><td>보는 사람 수</td><td class="ok">없음</td></tr>
+<tr><td>열면 바로 [나도 만들기], 자동차부터 1칸</td><td>가입 비율</td><td class="ok">없음</td></tr>
+<tr><td>등급 · 레지스트리 번호 (자랑할 이유)</td><td>다시 보내는 비율</td><td class="ok">없음</td></tr>
+<tr><td>카드별 유입 · 가입 숫자 기록 (측정)</td><td>정확한 판단</td><td class="ok">없음 (지금 서버에 추가)</td></tr></table>
+</div>
+
+<script>
+var S={
+'춘식이형 🇰🇷 카톡':[
+ ['완성 카드','발급이 끝나면 "내 네임카드 (회원가입 완료)" 화면이 뜹니다.','카드 아래 [📤 보내기]를 누릅니다.','card'],
+ ['어디로 보낼까','휴대폰 공유창이 뜨고, 카카오톡을 고릅니다.','한국 휴대폰에는 카톡이 맨 앞에 나옵니다.','sheetKR'],
+ ['카톡 대화방','친구 단톡방에 카드 그림과 "춘식이형의 클래식카 네임카드"가 크게 뜹니다.','미리보기 그림은 받는 사람 언어로 나옵니다.','kakao'],
+ ['친구가 누름','친구가 그림을 누르면 춘식이형 카드가 열리고 맨 아래 [나도 만들기]가 보입니다.','QR을 찍어도 같은 화면이 열립니다.','land'],
+ ['친구가 가입','친구는 자동차부터 1칸 → 2칸 → 완성. 춘식이형과 자동으로 친구 요청이 오갑니다.','춘식이형 카드로 가입한 수 +1','join'],
+ ['등급이 오름','춘식이형 점수가 올라 별이 하나 늘어납니다.','"다음 등급까지 3명" 막대가 보여 또 보내고 싶어집니다.','level']],
+'Klaus 🇩🇪 WhatsApp':[
+ ['완성 카드','뮌헨의 W123 오너 Klaus(58). 카드가 독일어로 나옵니다.','[📤 Senden]을 누릅니다.','cardDE'],
+ ['WhatsApp 선택','공유창에서 WhatsApp을 고르고 "W123 Stammtisch" 그룹을 선택합니다.','유럽은 WhatsApp이 기본입니다.','sheetDE'],
+ ['그룹 대화방','그룹원 30명에게 카드 미리보기가 뜹니다.','"W123 · weltweit #058" 레지스트리 번호가 눈에 띕니다.','wa'],
+ ['같은 차 오너가 누름','그룹원 Peter가 눌러 [Ich auch · 내 번호 받기]를 봅니다.','같은 차종이라 누를 이유가 분명합니다.','landDE'],
+ ['가입 → 번호','Peter는 W123 #059를 받고, 자기 그룹에 다시 보냅니다.','두 번째 퍼짐이 시작됩니다.','join'],
+ ['친구 찾기','Klaus는 친구 찾기에서 "W123 · 🇩🇪"로 근처 오너를 찾아 추가합니다.','오너끼리 친구가 늘수록 등급도 오릅니다.','friends']],
+'Tom 🇬🇧 Instagram':[
+ ['완성 카드','브라이턴의 E-Type 오너 Tom(32).','[스토리 이미지 저장]을 누릅니다.','cardEN'],
+ ['스토리 그림','세로(9:16) 카드 그림이 사진첩에 저장됩니다.','어디서 잘려도 이름 · 등급 · 링크가 보이게 배치합니다.','story'],
+ ['인스타 스토리','Tom이 스토리에 올리고 링크 스티커를 붙입니다.','팔로워 수백 명이 봅니다.','storyUp'],
+ ['팔로워가 누름','링크를 누르면 Tom 카드와 [Make yours]가 열립니다.','영어 화면입니다.','landEN'],
+ ['가입','팔로워 Amy가 자기 MG B를 등록합니다.','Tom 카드로 가입한 수 +1','join'],
+ ['스포팅 (2단계 기능)','주말 모임에서 Tom이 차창에 QR 카드를 둡니다. 사람들이 스캔합니다.','제민 안 — 모임 · 전시 때만','spot']]
+};
+var cur=Object.keys(S)[0],i=0;
+var CARD,CARDDE;function sc(k){var c={
+card:CARD='<div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span><span>★★★</span></div><div class="p">🚗</div><div class="b"><b>춘식이형</b>W140 CL600 · 1997<br>W140 · 전 세계 #127</div></div><div class="btn">📤 보내기</div><div class="btn">스토리 이미지 저장</div>',
+cardDE:CARDDE='<div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span><span>★★</span></div><div class="p">🚗</div><div class="b"><b>Klaus</b>Mercedes W123 · 1982<br>W123 · weltweit #058</div></div><div class="btn">📤 Senden</div>',
+cardEN:'<div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span><span>★★★★</span></div><div class="p">🚗</div><div class="b"><b>Tom</b>Jaguar E-Type · 1967<br>E-Type · worldwide #014</div></div><div class="btn">Save story image</div>',
+sheetKR:CARD+'<div class="sheet"><div class="t">공유</div><div class="apps"><span><i style="background:#FEE500;color:#3c1e1e">💬</i>카카오톡</span><span><i style="background:#25D366">✆</i>WhatsApp</span><span><i style="background:#d62976">◎</i>Instagram</span><span><i style="background:#1877F2">f</i>Facebook</span><span><i style="background:#06C755">L</i>LINE</span><span><i style="background:#000">X</i>X</span><span><i style="background:#09B83E">W</i>WeChat</span><span><i style="background:#888">🔗</i>복사</span></div></div>',
+sheetDE:CARDDE+'<div class="sheet"><div class="t">Teilen</div><div class="apps"><span><i style="background:#25D366">✆</i>WhatsApp</span><span><i style="background:#d62976">◎</i>Instagram</span><span><i style="background:#1877F2">f</i>Facebook</span><span><i style="background:#229ED9">✈</i>Telegram</span></div></div>',
+kakao:'<div class="chat" style="height:100%"><div style="margin-bottom:6px">클래식카 동호회 단톡방</div><div class="bub"><div class="im">🚗 춘식이형</div><div class="tx"><b>춘식이형의 클래식카 네임카드</b><small>W140 CL600 오너 · 나도 만들기</small><small>iloveclassiccars.net</small></div></div></div>',
+wa:'<div class="chat wa" style="height:100%"><div style="margin-bottom:6px">W123 Stammtisch · 30</div><div class="bub"><div class="im">🚗 Klaus</div><div class="tx"><b>Klaus · Mercedes W123</b><small>W123 · weltweit #058 · Ich auch</small><small>iloveclassiccars.net</small></div></div></div>',
+land:'<div class="land">'+'<div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span></div><div class="p">🚗</div><div class="b"><b>춘식이형</b>W140 CL600</div></div><div class="cta">나도 만들기 ›</div><div class="btn">친구 추가</div></div>',
+landDE:'<div class="land"><div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span></div><div class="p">🚗</div><div class="b"><b>Klaus</b>W123 · weltweit #058</div></div><div class="cta">Ich auch · Nummer holen ›</div></div>',
+landEN:'<div class="land"><div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span></div><div class="p">🚗</div><div class="b"><b>Tom</b>E-Type · worldwide #014</div></div><div class="cta">Make yours ›</div></div>',
+join:'<div style="font-size:12px;color:#9aa6b2">1/2 내 차 · 사진</div><div class="btn" style="text-align:left;padding-left:10px">제조사 · 코드명 · 모델명 · 연식 …</div><div class="btn" style="height:120px;line-height:100px">📷 차 사진</div><div class="toast">가입 완료 · 친구 요청이 오갔습니다</div>',
+level:'<div class="card"><div class="h"><span>I <em>♥</em> CLASSIC CARS</span><span>★★★★</span></div><div class="p">🚗</div><div class="b"><b>춘식이형</b>로드 마스터 → 헤리티지</div></div><div style="font-size:12px;margin-top:8px">다음 등급까지 3명</div><div class="lvbar"><span style="width:80%"></span></div>',
+friends:'<div style="font-size:12px;color:#7fd99a;margin-bottom:4px">Freunde finden · W123 · 🇩🇪</div><div class="fr"><i>🚗</i><div>Peter<small>W123 #059 · München</small></div><span>Add</span></div><div class="fr"><i>🚗</i><div>Jonas<small>W123 #031 · Stuttgart</small></div><span>Add</span></div><div class="fr"><i>🚗</i><div>Anna<small>W124 · Wien</small></div><span>Add</span></div>',
+story:'<div class="story"><div class="lg">I <b>♥</b> CLASSIC CARS</div><div style="font-size:60px">🚗</div><b>Tom</b><small>Jaguar E-Type · 1967 · worldwide #014</small><div class="btn" style="width:80%">iloveclassiccars.net</div></div>',
+storyUp:'<div class="story" style="background:linear-gradient(170deg,#3b2a5c,#111)"><div style="font-size:11px;align-self:flex-start">● Tom · 2m</div><div style="font-size:60px">🚗</div><div style="background:#fff;color:#111;border-radius:8px;padding:5px 10px;font-weight:800;font-size:12px">🔗 MAKE YOURS</div></div>',
+spot:'<div class="card"><div class="h"><span>SPOTTED · E-Type</span></div><div class="p" style="font-size:16px;flex-direction:column">▦<small style="font-size:11px">차창 QR</small></div><div class="b">스캔 23회 · 가입 2명</div></div><div class="toast">Spotted! Tom +1</div>'};return c[k]||''}
+function draw(){var st=S[cur][i];document.getElementById('scr').innerHTML=sc(st[3]);document.getElementById('sn').textContent=cur+' · '+(i+1)+'/'+S[cur].length;document.getElementById('st').textContent=st[0];document.getElementById('sd').textContent=st[1];document.getElementById('se').textContent=st[2];
+document.getElementById('dots').innerHTML=S[cur].map(function(_,k){return'<i class="'+(k==i?'on':'')+'"></i>'}).join('');document.getElementById('pv').disabled=i==0;document.getElementById('nx').textContent=i==S[cur].length-1?'처음부터 ›':'다음 ›';
+[].forEach.call(document.querySelectorAll('#pers button'),function(b){b.classList.toggle('on',b.dataset.k==cur)})}
+document.getElementById('pers').innerHTML=Object.keys(S).map(function(k){return'<button data-k="'+k+'">'+k+'</button>'}).join('');
+document.getElementById('pers').onclick=function(e){var b=e.target.closest('button');if(!b)return;cur=b.dataset.k;i=0;draw()};
+document.getElementById('nx').onclick=function(){i=(i+1)%S[cur].length;draw()};document.getElementById('pv').onclick=function(){if(i>0){i--;draw()}};draw();
+// calculator
+var PRE={'기본 (춘삼 보수)':[15,80,3,12],'제민 스포팅':[35,180,8.5,14],'채림 코스':[12,6,18,10],'규록 사운드':[18,420,6.5,1.8],'춘삼 레지스트리':[25,50,6,15]};
+var $=function(x){return document.getElementById(x)};
+$('pre').innerHTML=Object.keys(PRE).map(function(k){return'<button data-k="'+k+'">'+k+'</button>'}).join('');
+function setP(k){var p=PRE[k];$('s').value=p[0];$('v').value=p[1];$('c').value=p[2];$('r').value=p[3];[].forEach.call(document.querySelectorAll('#pre button'),function(b){b.classList.toggle('on',b.dataset.k==k)});calc()}
+$('pre').onclick=function(e){var b=e.target.closest('button');if(b)setP(b.dataset.k)};
+function calc(){var s=+$('s').value/100,v=+$('v').value,c=+$('c').value/100,r=+$('r').value/100,m0=+$('m0').value;var g=s*v*c*r;var pts=[m0],m=m0;for(var w=1;w<=12;w++){m*=1+g;pts.push(m)}
+$('vs').textContent=$('s').value+'%';$('vv').textContent=v+'명';$('vc').textContent=$('c').value+'%';$('vr').textContent=$('r').value+'%';$('vm').textContent=m0+'명';
+$('g').textContent=g.toFixed(3)+'명';$('m12').textContent=Math.round(m).toLocaleString()+'명';
+var mx=Math.max.apply(null,pts),W=600,H=220,pad=30;var d=pts.map(function(y,k){var X=pad+k*(W-pad*2)/12,Y=H-pad-(y/mx)*(H-pad*2);return(k?'L':'M')+X.toFixed(1)+' '+Y.toFixed(1)}).join(' ');
+var lab=pts.map(function(y,k){if(k%3)return'';var X=pad+k*(W-pad*2)/12;return'<text x="'+X+'" y="'+(H-8)+'" fill="#9aa6b2" font-size="11" text-anchor="middle">'+k+'주</text>'}).join('');
+$('chart').innerHTML='<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="#2a3542"/><path d="'+d+'" fill="none" stroke="#2aa84b" stroke-width="3"/>'+lab+'<text x="'+(W-pad)+'" y="18" fill="#7fd99a" font-size="12" text-anchor="end">'+Math.round(mx).toLocaleString()+'명</text>';
+$('warn').textContent=g>0.3?'⚠ 1명당 매주 0.3명 이상은 매우 낙관적인 가정입니다. 실제로는 이렇게 오래 이어지기 어렵습니다.':(g<0.02?'성장은 대부분 처음 회원과 직접 홍보에서 나옵니다. 보내는 비율 · 누르는 비율을 올리는 장치가 필요합니다.':'현실적인 범위입니다. 오픈 후 실제 숫자로 고칩니다.')}
+['s','v','c','r','m0'].forEach(function(x){$(x).oninput=function(){[].forEach.call(document.querySelectorAll('#pre button'),function(b){b.classList.remove('on')});calc()}});$('m0').value=100;setP('기본 (춘삼 보수)');
+</script></body></html>
