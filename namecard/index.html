@@ -298,7 +298,7 @@ window.__visInput=function(){var l=document.createElement('label');l.className='
 var eb=document.querySelector('.edit-btn');if(eb){var vw=__visInput();vw.style.maxWidth='100%';eb.parentNode.insertBefore(vw,eb.nextSibling)}
 /* sync my card */
 var st=null;function sync(){if(!TK())return;clearTimeout(st);st=setTimeout(function(){var nk=v('nk');if(!nk)return;var car=(v('cd')+' '+v('md')).trim()+(v('yr')?' · '+v('yr'):'');
- post('save',{nick:nk,cc:v('cc'),car:car,sns:v('sn'),acct:v('ac').replace(/^@/,''),vis:VIS()}).then(function(j){if(j&&j.ok&&j.tok)ps('icc_nc_tok',JSON.stringify(j.tok));if(j&&j.err==='auth'){try{localStorage.removeItem('icc_tk')}catch(e){}hint()}})},1500)}
+ post('save',{nick:nk,cc:v('cc'),car:car,sns:v('sn'),acct:v('ac').replace(/^@/,''),vis:VIS(),ref:(function(){try{return localStorage.getItem('icc_ref')||''}catch(e){return ''}})()}).then(function(j){if(j&&j.ok&&j.tok)ps('icc_nc_tok',JSON.stringify(j.tok));if(j&&j.err==='auth'){try{localStorage.removeItem('icc_tk')}catch(e){}hint()}})},1500)}
 document.addEventListener('change',function(){if(document.documentElement.classList.contains('cardview'))sync()});
 var hasCard=false;try{hasCard=!!localStorage.getItem('icc_nc')}catch(e){}
 if(hasCard)sync();
@@ -328,4 +328,9 @@ var m=location.search.match(/[?&]c=([^&]+)/);if(m){fetch(API+'card/'+m[1]).then(
   post('friend',{tok:c.tok}).then(function(k){if(k&&k.ok){local();msg.textContent='✅ '+(k.mutual?T.done:(KO?'신청했습니다 · 상대가 맞친구를 누르면 친구가 됩니다':'Request sent · you become friends when they add you back'));b.remove()}else if(k&&k.err==='pending30'){msg.textContent='⚠️ '+T.p30}else if(k&&k.err==='declined'){msg.textContent='⚠️ '+T.dec}else{msg.textContent='⚠️ '+(KO?'잠시 후 다시 시도하십시오':'Please try again later')}})};
  document.body.insertBefore(P,document.body.firstChild)}).catch(function(){})}
 })();</script>
-</body></html>
+<script id="stats-js">(function(){var API='https://icc-mail.futurenix.workers.dev/api/nc/';
+function my(){try{return JSON.parse(localStorage.getItem('icc_nc_tok')||'""')}catch(e){return ''}}
+function ev(t,tok){if(!tok)return;try{fetch(API+'ev',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tok:tok,t:t}),keepalive:true})}catch(e){}}
+var m=location.search.match(/[?&]c=([^&#]+)/);if(m){var t=decodeURIComponent(m[1]);if(t&&t!==my()){try{if(!localStorage.getItem('icc_nc_tok'))localStorage.setItem('icc_ref',t)}catch(e){}ev('view',t)}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.sendbig .s1,#shr,[data-share]');if(b)ev('share',my())},true);
+})()</script></body></html>
