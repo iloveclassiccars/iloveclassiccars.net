@@ -933,8 +933,8 @@ var l=document.createElement('span');l.className='rlk';l.textContent='♥ '+(it.
 function go(){if((location.hash||'#home')!=='#home'&&location.hash!=='')return;last=-1;render()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 var tm;addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(render,150)});addEventListener('hashchange',function(){setTimeout(go,60)})})();</script><script id="tool-dd-js">(function(){
-function sync(box,cls,label){if(!box)return;var btns=[].filter.call(box.querySelectorAll('button'),function(x){return !x.classList.contains('chip')&&x.className!=='tdd'});if(!btns.length)return;var s=box.querySelector('select.tdd');
-if(!s){s=document.createElement('select');s.className='tdd '+cls;s.setAttribute('aria-label',label);s.addEventListener('change',function(){var b=btns2()[+s.value];if(b)b.click()});box.insertBefore(s,box.firstChild)}
+function sync(box,cls,label){if(!box)return;var btns=[].filter.call(box.querySelectorAll('button'),function(x){return !x.classList.contains('chip')&&x.className!=='tdd'});if(!btns.length)return;var out=cls==='tview';var s=out?document.querySelector('select.tview'):box.querySelector('select.tdd');
+if(!s){s=document.createElement('select');s.className='tdd '+cls;s.setAttribute('aria-label',label);s.addEventListener('change',function(){var b=btns2()[+s.value];if(b)b.click()});if(out)box.parentNode.insertBefore(s,box);else box.insertBefore(s,box.firstChild)}
 function btns2(){return [].filter.call(box.querySelectorAll('button'),function(x){return !x.classList.contains('chip')})}
 var opts=btns.map(function(x,i){return '<option value="'+i+'"'+(x.classList.contains('on')||x.getAttribute('aria-pressed')==='true'?' selected':'')+'>'+x.textContent+'</option>'}).join('');if(s.innerHTML!==opts)s.innerHTML=opts}
 function run(){sync(document.getElementById('fbar'),'tsort','정렬');sync(document.getElementById('views'),'tview','보기 방식')}
