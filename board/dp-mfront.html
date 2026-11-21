@@ -1293,5 +1293,15 @@ html.mhome #home>.hrow select{border-radius:14px!important;background-color:rgba
 html.mhome #home .search{border-radius:16px!important;overflow:hidden}
 header .btns button{background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.28)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 </style>
+<style id="glass-head-css">
+header{background:linear-gradient(180deg,rgba(38,104,70,.96),rgba(26,74,50,.92))!important;box-shadow:inset 0 -1px 0 rgba(255,255,255,.10),0 6px 20px rgba(0,0,0,.25)!important;-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%)}
+header .btns{display:flex;gap:6px;flex-wrap:nowrap}
+header .btns button{height:32px!important;padding:0 12px!important;border-radius:999px!important;font-size:13px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.26)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+@media(max-width:899px){header{flex-wrap:nowrap!important}header .logo{min-width:0}header .logo svg{flex:none}header .btns button{height:30px!important;padding:0 10px!important;font-size:12.5px!important}}
+@media(max-width:379px){header .btns button{padding:0 8px!important;font-size:12px!important}}
+html.mhome #home .search{border-radius:18px!important;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.05))!important;border:1px solid rgba(255,255,255,.20)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 8px 22px rgba(0,0,0,.30)!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);padding-right:5px!important;overflow:hidden}
+html.mhome #home .search .sgo{border-radius:13px!important;align-self:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 3px 8px rgba(0,0,0,.25)}
+html.mhome #home .search.mo .sgo{height:calc(100% - 10px)!important}
+</style>
 </body>
 </html>
