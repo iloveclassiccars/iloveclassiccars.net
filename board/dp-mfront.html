@@ -1226,7 +1226,7 @@ html.mhome #home>.ncrow .ncs>a:not(.add) span:first-child{font-size:11.5px!impor
 html.mhome #home>.ncrow .ncs>a{width:auto!important;min-width:0!important;border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important}
 html.mhome #home>.ncrow .ncs>a.add{border:1px dashed #2ea05a88!important}
 html.mhome #home>.btabs{display:none!important}}</style>
-<script id="nccap-js">(function(){function f(){var n=document.querySelector('#home>.ncrow .ncs');if(!n)return;var c=0;[].forEach.call(n.children,function(a){if(a.classList.contains('add')||a.classList.contains('more'))return;c++;a.classList.toggle('ncx',innerWidth<900&&c>13)})}
+<script id="nccap-js">(function(){function f(){var n=document.querySelector('#home>.ncrow .ncs');if(!n)return;var ex=n.querySelectorAll(':scope>a.add,:scope>a.more').length,cap=Math.max(0,15-ex),c=0;[].forEach.call(n.children,function(a){if(a.classList.contains('add')||a.classList.contains('more'))return;c++;a.classList.toggle('ncx',innerWidth<900&&c>cap)})}
 var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(f,60)}).observe(document.documentElement,{childList:true,subtree:true});addEventListener('resize',f);f()})();</script>
 <style id="card-std-css">@media(min-width:900px){
 html.mhome #home>.menu{background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:12px!important;gap:10px!important}
