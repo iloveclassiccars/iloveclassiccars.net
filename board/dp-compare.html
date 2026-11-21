@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D · PC에서 모바일 실사이즈</title>
+<style>
+body{margin:0;background:#0f1d3a;color:#e8eefc;font-family:'Noto Sans KR',sans-serif}
+.w{padding:18px 20px}
+h1{font-size:18px;margin:0 0 6px}
+p{font-size:13px;color:#9fb0d6;margin:4px 0 12px}
+.l a{display:inline-block;margin:0 8px 14px 0;padding:8px 14px;border:1.5px solid #7ee2a8;color:#7ee2a8;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;cursor:pointer}
+.row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.ph{background:#05070c;border-radius:46px;padding:14px;box-shadow:0 0 0 2px #2a3550,0 20px 50px rgba(0,0,0,.5)}
+.ph iframe{display:block;border:0;border-radius:34px;background:#141a26}
+.cap{text-align:center;font-size:12.5px;color:#9fb0d6;margin-top:10px}
+</style></head><body><div class="w">
+<h1>D · 비교: 지금 톤 vs 아이폰 오마주</h1>
+<p>폰 화면 안에서 실제 페이지가 그대로 돌아갑니다. 열 때마다 최신 작업이 반영됩니다.</p>
+<div class="l"><a href="/board/dp-mfront.html" target="_blank">새 창으로 열기</a><a id="rf">새로고침</a></div>
+<div class="row">
+ <div><div class="ph"><iframe data-s="/board/dp-m2.html" width="390" height="844"></iframe></div><div class="cap">지금 시그니처 톤</div></div>
+ <div><div class="ph"><iframe data-s="/board/dp-m3.html" width="390" height="844"></iframe></div><div class="cap">아이폰 오마주 (유리 폴더 + 스퀘어클)</div></div>
+</div></div>
+<script>function ld(){document.querySelectorAll('iframe').forEach(function(f){f.src=f.dataset.s+'?v='+Date.now()})}ld();document.getElementById('rf').onclick=ld;</script>
+</body></html>
