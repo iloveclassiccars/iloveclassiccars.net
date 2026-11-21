@@ -1064,7 +1064,7 @@ new MutationObserver(function(){if(H.classList.contains('mhome')){var c=document
 function gold(){var x=document.querySelector('#home .ncs');if(!x)return;var on=document.documentElement.classList.contains('tallv')&&document.documentElement.classList.contains('mhome');
 var all=[].slice.call(x.children);if(!on){all.forEach(function(e){e.style.display=''});return}
 var W=x.clientWidth,gp=10,cols=Math.max(3,Math.floor((W+gp)/(160+gp))),cw=(W-gp*(cols-1))/cols,ch=Math.round(cw/G);
-var top=x.getBoundingClientRect().top+scrollY,remain=innerHeight-top,area=remain*0.382,rows=Math.max(2,Math.floor((area+gp)/(ch+gp)));
+var top=x.getBoundingClientRect().top+scrollY,remain=innerHeight-top,area=remain*0.382,rows=Math.max(3,Math.min(4,Math.floor((area+gp)/(ch+gp))));
 x.style.setProperty('--gc',cols);x.style.setProperty('--gh',ch+'px');
 var tail=all.filter(function(e){return e.classList.contains('add')}),cards=all.filter(function(e){return!e.classList.contains('add')});
 var room=cols*rows-tail.length;cards.forEach(function(e,i){e.style.display=i<room?'':'none'});
