@@ -1326,5 +1326,7 @@ if(ap&&!ap.dataset.g){ap.innerHTML=A+'<span>'+(ko?'앱':'App')+'</span>';ap.data
 var n=0,t=setInterval(function(){f();if(++n>40)clearInterval(t)},200);new MutationObserver(function(){setTimeout(f,50)}).observe(document.documentElement,{attributes:true,attributeFilter:['class','lang']})})();</script>
 <script id="logo-short-js">(function(){var s=document.querySelector('header .logo span:last-of-type');if(!s||s.dataset.d)return;s.dataset.d=1;s.innerHTML='CLASSIC<i class="lc"> CARS</i>'})();</script>
 <style id="logo-short-css">header .logo .lc{font-style:normal}@media(max-width:379px){header .logo .lc{display:none}}</style>
+<script id="ph-js">(function(){function f(){var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var t=ko?'차대번호(Last VIN) · 부품명 · 부품번호':'Last VIN · Part name · Part No.';document.querySelectorAll('#home .search input').forEach(function(i){if(i.placeholder!==t){i.placeholder=t;i.setAttribute('aria-label',t)}})}var n=0,iv=setInterval(function(){f();if(++n>50)clearInterval(iv)},200)})();</script>
+<style id="ph-css">html.mhome #home .search input::placeholder{font-size:14.5px}@media(max-width:379px){html.mhome #home .search input::placeholder{font-size:12.5px;letter-spacing:-.3px}}</style>
 </body>
 </html>
