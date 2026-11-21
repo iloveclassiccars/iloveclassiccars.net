@@ -1217,16 +1217,16 @@ html.mhome #home>.ncrow{background:#171e2c;border:1px solid #2a3550;border-radiu
 html.mhome #home>.ncrow .nh{display:flex;justify-content:flex-start;gap:4px;align-items:center;font:700 13px 'Noto Sans KR',sans-serif!important;color:#e8eefc;margin:0 2px 8px!important;white-space:nowrap}
 html.mhome #home>.ncrow .nh a{margin-left:auto;font-size:11px!important;font-weight:600;color:#5fd38d}
 html.mhome #home>.ncrow .nh::before{content:'🪪'}
-html.mhome #home>.ncrow .ncs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px!important;overflow:visible!important}
+html.mhome #home>.ncrow .ncs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px!important;overflow:visible!important}
 html.mhome #home>.ncrow .ncs>a:not(.ncx){display:flex!important}
 html.mhome #home>.ncrow .ncs>a.ncx{display:none!important}
-html.mhome #home>.ncrow .ncs>a:not(.add){height:92px!important;min-height:92px!important;padding:6px 7px!important}
-html.mhome #home>.ncrow .ncs>a.add,html.mhome #home>.ncrow .ncs>a.more{height:92px!important;min-height:92px!important}
+html.mhome #home>.ncrow .ncs>a:not(.add){height:72px!important;min-height:72px!important;padding:6px 9px!important}
+html.mhome #home>.ncrow .ncs>a.add,html.mhome #home>.ncrow .ncs>a.more{height:72px!important;min-height:72px!important}
 html.mhome #home>.ncrow .ncs>a:not(.add) span:first-child{font-size:11.5px!important}html.mhome #home>.ncrow .ncs>a:not(.add) span+span{font-size:10px!important}
 html.mhome #home>.ncrow .ncs>a{width:auto!important;min-width:0!important;border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important}
 html.mhome #home>.ncrow .ncs>a.add{border:1px dashed #2ea05a88!important}
 html.mhome #home>.btabs{display:none!important}}</style>
-<script id="nccap-js">(function(){function f(){var n=document.querySelector('#home>.ncrow .ncs');if(!n)return;var ex=n.querySelectorAll(':scope>a.add,:scope>a.more').length,cap=Math.max(0,15-ex),c=0;[].forEach.call(n.children,function(a){if(a.classList.contains('add')||a.classList.contains('more'))return;c++;a.classList.toggle('ncx',innerWidth<900&&c>cap)})}
+<script id="nccap-js">(function(){function f(){var n=document.querySelector('#home>.ncrow .ncs');if(!n)return;var ex=n.querySelectorAll(':scope>a.add,:scope>a.more').length,cap=Math.max(0,10-ex),c=0;[].forEach.call(n.children,function(a){if(a.classList.contains('add')||a.classList.contains('more'))return;c++;a.classList.toggle('ncx',innerWidth<900&&c>cap)})}
 var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(f,60)}).observe(document.documentElement,{childList:true,subtree:true});addEventListener('resize',f);f()})();</script>
 <style id="card-std-css">@media(min-width:900px){
 html.mhome #home>.menu{background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:12px!important;gap:10px!important}
