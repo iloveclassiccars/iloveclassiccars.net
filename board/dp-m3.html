@@ -1321,12 +1321,16 @@ html.mhome header{box-shadow:none!important}}</style>
 var A='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path transform="translate(7.4 0.2) scale(0.38)" d="M12 21 C4 15 0.5 10.5 0.5 6.5 C0.5 3 3.2 0.5 6.4 0.5 C8.8 0.5 10.9 1.8 12 3.8 C13.1 1.8 15.2 0.5 17.6 0.5 C20.8 0.5 23.5 3 23.5 6.5 C23.5 10.5 20 15 12 21 Z" fill="#FF4D55" stroke="#fff" stroke-width="2.6"/><path d="M5 19 H3.5 a1 1 0 0 1 -1 -1 v-2 q0 -1.6 2 -1.9 l3 -0.5 l2 -3 q0.6 -0.8 1.6 -0.8 h4.2 q1 0 1.7 0.7 l2.6 3.1 l2.2 0.5 q1.7 0.4 1.7 2 v1.9 a1 1 0 0 1 -1 1 H19"/><path d="M9 19 h6"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>';
 function f(){var w=document.querySelector('header .btns');if(!w)return;var l=document.getElementById('langb'),c=document.getElementById('colorb');if(!l)return;var ap=[].filter.call(w.children,function(b){return b!==l&&b!==c})[0];
 if(c&&w.firstChild!==c)w.insertBefore(c,w.firstChild);if(l&&c&&l.previousSibling!==c)w.insertBefore(l,c.nextSibling);
-var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var want=G+'<span>'+(ko?'EN':'KO')+'</span>';if(l.dataset.g!==String(ko)){l.innerHTML=want;l.dataset.g=String(ko);l.setAttribute('aria-label',ko?'English':'한국어')}
-if(ap&&!ap.dataset.g){ap.innerHTML=A+'<span>'+(ko?'앱':'App')+'</span>';ap.dataset.g='1'}}
+var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var want=G;if(l.dataset.g!==String(ko)){l.innerHTML=want;l.dataset.g=String(ko);l.setAttribute('aria-label',ko?'English':'한국어')}
+if(ap&&ap.dataset.g!==String(ko)){ap.innerHTML='<span>'+(ko?'앱':'APP')+'</span>';ap.dataset.g=String(ko)}}
 var n=0,t=setInterval(function(){f();if(++n>40)clearInterval(t)},200);new MutationObserver(function(){setTimeout(f,50)}).observe(document.documentElement,{attributes:true,attributeFilter:['class','lang']})})();</script>
 <script id="logo-short-js">(function(){var s=document.querySelector('header .logo span:last-of-type');if(!s||s.dataset.d)return;s.dataset.d=1;s.innerHTML='CLASSIC<i class="lc"> CARS</i>'})();</script>
 <style id="logo-short-css">header .logo .lc{font-style:normal}@media(max-width:379px){header .logo .lc{display:none}}</style>
-<script id="ph-js">(function(){function f(){var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var t=ko?'차대번호(Last VIN) · 부품명 · 부품번호':'Last VIN · Part name · Part No.';document.querySelectorAll('#home .search input').forEach(function(i){if(i.placeholder!==t){i.placeholder=t;i.setAttribute('aria-label',t)}})}var n=0,iv=setInterval(function(){f();if(++n>50)clearInterval(iv)},200)})();</script>
+<script id="ph-js">(function(){var k=0;function L(){var ko=(typeof LANG==='string'?LANG:'ko')==='ko';return ko?['차대번호(Last VIN) · 부품명 · 부품번호','차대번호(Last VIN)','부품명 · 부품번호']:['Last VIN · Part name · Part No.','Last VIN','Part name · Part No.']}
+function set(t){document.querySelectorAll('#home .search input').forEach(function(i){i.placeholder=t;i.setAttribute('aria-label',L()[0])})}
+function tick(){var sb=document.querySelector('#home .search.mo');var narrow=innerWidth<900&&sb&&sb.offsetParent;if(sb&&sb.classList.contains('scopying')){setTimeout(tick,600);return}
+if(!narrow){set(L()[0]);setTimeout(tick,1500);return}k=k===1?2:1;set(L()[k]);setTimeout(tick,2600)}setTimeout(tick,300)})();</script>
 <style id="ph-css">html.mhome #home .search input::placeholder{font-size:14.5px}@media(max-width:379px){html.mhome #home .search input::placeholder{font-size:12.5px;letter-spacing:-.3px}}</style>
+<style id="hide-color-css">#colorb{display:none!important}header .btns #langb{width:32px;padding:0!important;justify-content:center}header .btns #langb svg{width:17px;height:17px}</style>
 </body>
 </html>
