@@ -1183,25 +1183,7 @@ function onS(){var b=document.getElementById('mbar');if(!b)return;var hh=locatio
 document.documentElement.classList.toggle('lang-en',(typeof LANG==='string'?LANG:'ko')!=='ko');function hm(){if(innerWidth>899)return;var h=document.querySelector('#home>.hrow');if(!h||document.getElementById('hmore'))return;var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var b=document.createElement('button');b.id='hmore';b.type='button';var c=ko?'＋ 1개 더 (파트별)':'＋ 1 more (Part)',x=ko?'접기 ▲':'Less ▲';b.textContent=c;b.onclick=function(){var o=h.classList.toggle('open');b.textContent=o?x:c};h.appendChild(b)}
 var t;function go(){clearTimeout(t);t=setTimeout(function(){hero();bar();hm();onS()},150)}
 addEventListener('load',go);addEventListener('hashchange',go);addEventListener('resize',go);addEventListener('scroll',onS,{passive:true});addEventListener('hashchange',onS);
-new MutationObserver(function(m){for(var i=0;i<m.length;i++){var x=m[i].target;if(x.closest&&x.closest('#mhero,#mbar'))continue;go();return}}).observe(document.documentElement,{childList:true,subtree:true});})()</script><style id="mq-css">@media(max-width:899px){#mquick{order:3;margin:0;background:#171e2c;border:1px solid #2a3550;border-radius:16px;padding:10px 10px 12px}
-#mquick .hd{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#e8eefc;margin:0 2px 8px;white-space:nowrap}
-#mquick .hd span{font-size:11px;font-weight:600;color:#5fd38d}
-#mquick .gr{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-#mquick a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:70px;padding:7px 2px;border-radius:12px;background:#1e2535;border:1px solid #2e3a52;text-decoration:none;color:#e8eefc;font-size:11px;font-weight:600;white-space:nowrap}
-#mquick a i{width:32px;height:32px;border-radius:50%;background:rgba(46,160,90,.18);color:#5fd38d;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:16px}
-#mquick a.ai i{background:#1f8a4c;color:#fff;font-size:11px;font-weight:800}
-@media(max-width:379px){#mquick a{font-size:10px}#mquick a i{width:28px;height:28px;font-size:14px}}}
-@media(min-width:900px){#mquick{display:none!important}}</style>
-<script id="mq-js">(function(){function mk(){if(innerWidth>899)return;var home=document.getElementById('home');if(!home||document.getElementById('mquick'))return;var h=document.getElementById('mhero');if(!h)return;
-var ko=(typeof LANG==='string'?LANG:'ko')==='ko';
-var T=ko?['🔧 미캐닉팀 · 컨시어지','무료 · AI 참고용']:['🔧 Mechanic Team · Concierge','Free · AI guidance'];
-var G='/board/dp-garage.html';
-var I=[['ai','#help','AI','미캐닉 상담','Ask Mechanic'],['','#restore-write','🔧','증상 올리기','Post Symptom'],['','#parts','#','순정번호','Part No.'],['',G,'📘','복원 여권','Passport'],
-['',G,'🛎','컨시어지','Concierge'],['',G,'📝','정비일지','Service Log'],['',G,'⏰','정비 알림','Reminders'],['','#restore','🗄','아카이브','Archive']];
-var d=document.createElement('div');d.id='mquick';var x='<div class="hd">'+T[0]+'<span>'+T[1]+'</span></div><div class="gr">';
-I.forEach(function(r){x+='<a'+(r[0]?' class="'+r[0]+'"':'')+' href="'+r[1]+'"><i>'+r[2]+'</i>'+(ko?r[3]:r[4])+'</a>'});d.innerHTML=x+'</div>';
-h.parentNode.insertBefore(d,h.nextSibling)}
-var n=0,t=setInterval(function(){mk();if(document.getElementById('mquick')||++n>40)clearInterval(t)},150);addEventListener('resize',mk)})();</script>
+new MutationObserver(function(m){for(var i=0;i<m.length;i++){var x=m[i].target;if(x.closest&&x.closest('#mhero,#mbar'))continue;go();return}}).observe(document.documentElement,{childList:true,subtree:true});})()</script>
 <style id="color-css">#colorm{position:fixed;z-index:9999;width:260px;max-width:calc(100vw - 16px);box-sizing:border-box;background:#1b2232;border:1px solid #2e3a52;border-radius:14px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.45);display:none}
 #colorm.on{display:block}#colorm button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#e8eefc;font:600 14px 'Noto Sans KR',sans-serif;padding:11px 12px;border-radius:10px;text-align:left;cursor:pointer;white-space:nowrap}
 #colorm button:hover{background:#26304a}#colorm .ccx{padding:8px 12px 10px;border-bottom:1px solid #2e3a52;margin-bottom:4px}#colorm .ccx .t{font:600 14px 'Noto Sans KR',sans-serif;color:#e8eefc;margin-bottom:8px;white-space:nowrap}#colorm form{display:flex;gap:6px}#colorm form input{flex:1;min-width:0;height:38px;border-radius:9px;border:1px solid #2e3a52;background:#121826;color:#e8eefc;padding:0 10px;font-size:14px}#colorm form button{width:auto;height:38px;padding:0 14px;background:#2ea05a;color:#fff;justify-content:center;border-radius:9px}#colorm form button:hover{background:#2ea05a}
