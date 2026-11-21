@@ -1918,14 +1918,10 @@ document.addEventListener("click",function(e){var im=e.target.closest&&e.target.
  var v=document.createElement("div");v.id="gview";v.innerHTML='<div class="gvt">'+E(lg.d.replace(/-/g,"."))+' · '+E(String(lg.t).replace(/ \(테스트\)$/,""))+'</div><img class="gvm" alt=""><div class="gvs">'+lg.ph.map(function(p,i){return '<img data-gpid="'+E(p)+'" data-i="'+i+'"'+(i?'':' class="on"')+' alt="">'}).join("")+'</div><div class="gvb"><button type="button" data-gvdl>이 기기에 저장</button><button type="button" data-gvx>닫기</button></div>';document.body.appendChild(v);
  var DB=indexedDB.open("icc_photos",1);DB.onsuccess=function(){var d=DB.result;function get(id,cb){var r=d.transaction("p").objectStore("p").get(id);r.onsuccess=function(){cb(r.result?URL.createObjectURL(r.result.b):"")}}var cur=0;v.querySelectorAll(".gvs img").forEach(function(t){get(t.dataset.gpid,function(u){t.src=u;if(+t.dataset.i===0)v.querySelector(".gvm").src=u})});
   v.addEventListener("click",function(ev){var t=ev.target;if(t.dataset.gvx!=null||t===v){v.remove();return}if(t.dataset.i!=null){cur=+t.dataset.i;v.querySelector(".gvm").src=t.src;v.querySelectorAll(".gvs img").forEach(function(z){z.classList.toggle("on",z===t)})}if(t.dataset.gvdl!=null){lg.ph.forEach(function(p,i){var s=v.querySelector('.gvs img[data-i="'+i+'"]');if(!s||!s.src)return;var a=document.createElement("a");a.href=s.src;a.download=(lg.d||"")+"_"+String(lg.t).replace(/[^가-힣A-Za-z0-9]+/g,"_").slice(0,20)+"_"+(i+1)+".jpg";document.body.appendChild(a);a.click();a.remove()})}})}},true);
-addEventListener("keydown",function(e){if(e.key==="Escape"){var v=document.getElementById("gview");if(v)v.remove()}})})();</script><style id="tone-app-css">
-.gbox{background:#171e2c!important;border:1px solid #2a3550!important;border-radius:16px!important}
-.gbox a.p{border-radius:12px!important;background:#2ea05a!important;border-color:#2ea05a!important}
-.gbox a:not(.p){border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important;color:#e8eefc!important}
-button.cr{border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important;color:#e8eefc!important}
-button.cr.on{background:#2ea05a!important;border-color:#2ea05a!important;color:#fff!important}
-label.gq{border-radius:12px!important;background:#1e2535!important;border:1px solid #2e3a52!important}
-.gadd{border-radius:12px!important;background:#2ea05a!important}
-header .ob{background:#1e2535!important;border:1px solid #2e3a52!important;color:#e8eefc!important}
+addEventListener("keydown",function(e){if(e.key==="Escape"){var v=document.getElementById("gview");if(v)v.remove()}})})();</script><style id="tone-app-css">body{background:radial-gradient(120% 60% at 20% 0%,#24324a 0%,#121826 55%,#0d121c 100%) fixed!important}
+.gbox{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:28px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.35)!important;-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+.gbox a:not(.p),button.cr:not(.on),label.gq{border-radius:14px!important;background:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.16)!important}
+.gbox a.p,button.cr.on,.gadd{border-radius:14px!important}
+header .ob{background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.28)!important}
 </style></body>
 </html>
