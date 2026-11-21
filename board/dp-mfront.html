@@ -1267,5 +1267,7 @@ label.bsearch{border-radius:12px!important;background-color:#1e2535!important;bo
 </style>
 <script id="tone-rank-js">(function(){function f(){var r=document.getElementById('rank');if(!r)return;r.style.setProperty('background','#171e2c','important');r.style.setProperty('border','1px solid #2a3550','important');r.style.setProperty('border-radius','16px','important')}var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(f,80)}).observe(document.documentElement,{childList:true,subtree:true});f()})();</script>
 <script id="embed-nobar-js">if(/[?&]embed=1/.test(location.search)){var st=document.createElement('style');st.textContent='#mbar{display:none!important}';document.head.appendChild(st)}</script>
+<style id="mag-css">#home .search>svg.s20{display:none!important}#home .search .sgo{display:inline-flex!important;align-items:center;justify-content:center;gap:6px}#home .search .sgo svg{width:18px;height:18px;flex:none}</style>
+<script id="mag-js">(function(){function f(){document.querySelectorAll('#home .search').forEach(function(sb){var b=sb.querySelector('.sgo');if(!b||b.querySelector('svg'))return;var sv=sb.querySelector('svg.s20');if(!sv)return;var c=sv.cloneNode(true);c.removeAttribute('class');c.setAttribute('stroke','#fff');c.setAttribute('stroke-width','2.4');b.insertBefore(c,b.firstChild)})}var n=0,t=setInterval(function(){f();if(++n>40)clearInterval(t)},150)})();</script>
 </body>
 </html>
