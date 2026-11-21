@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>디피 · 네임카드 친구 맺기 · 메시지</title><meta name="robots" content="noindex">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#EEF1F4;color:#1E2430}
+.top{background:#2E5E4E;color:#fff;padding:12px 16px;font-weight:700}.top small{display:block;font-weight:400;opacity:.85;font-size:12px;margin-top:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.ph{background:#fff;border-radius:18px;box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden}
+.ph h3{margin:0;padding:10px 14px;font-size:13px;background:#262A33;color:#fff}
+.in{padding:14px}
+.card{border-radius:14px;background:linear-gradient(135deg,#1F3B33,#2E5E4E);color:#fff;padding:14px;display:flex;gap:12px;align-items:center}
+.card .av{width:54px;height:54px;border-radius:50%;background:#fff3;display:grid;place-items:center;font-size:26px;flex:none}
+.card b{font-size:16px}.card div{font-size:12px;opacity:.9;line-height:1.5}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:700;margin-top:10px;cursor:pointer;text-align:center;text-decoration:none}
+.g{background:#2E5E4E;color:#fff}.b{background:#4B5D73;color:#fff}.l{background:#E6EAEE;color:#1E2430}
+.note{font-size:12px;color:#5A6472;margin-top:8px;line-height:1.5}
+.fr{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #EEF1F4}
+.fr .av{width:40px;height:40px;border-radius:50%;background:#E6EAEE;display:grid;place-items:center;font-size:20px;flex:none}
+.fr .t{flex:1;font-size:13px;line-height:1.4}.fr .t b{font-size:14px}
+.fr a{background:#2E5E4E;color:#fff;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.ok{background:#E8F3EE;color:#2E5E4E;border-radius:10px;padding:10px;font-size:13px;font-weight:700;margin-top:10px;display:none}
+label{font-size:13px;font-weight:700;display:block;margin-top:10px}input,select{width:100%;padding:10px;border:1px solid #C9D0D8;border-radius:10px;font-size:14px;margin-top:4px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl td{border-bottom:1px solid #EEF1F4;padding:6px 4px}
+</style></head><body>
+<div class="top">디피 · 네임카드 친구 맺기 → 💬 메시지 보내기<small>시안입니다. 이 화면의 저장은 시험용 칸에만 되고, 실제 네임카드에는 손대지 않습니다.</small></div>
+<div class="wrap">
+
+<div class="ph"><h3>① 친구 네임카드를 받았을 때</h3><div class="in">
+<div class="card"><div class="av">🚗</div><div><b id="fN"></b><br><span id="fC"></span><br><span id="fS"></span></div></div>
+<button class="btn g" id="addB">🤝 친구 맺기</button>
+<div class="ok" id="okM">친구가 되었습니다 · 이제 바로 메시지를 보낼 수 있습니다</div>
+<a class="btn b" id="dmB" style="display:none" target="_blank" rel="noopener">💬 메시지 보내기</a>
+<button class="btn l" id="backB" style="display:none">📤 내 네임카드도 보내 주기 (서로 친구)</button>
+<div class="note">친구 맺기 전에는 메시지 버튼이 보이지 않습니다.<br>메시지는 친구의 SNS 앱에서 열리고, 우리 서버에는 남지 않습니다.</div>
+</div></div>
+
+<div class="ph"><h3>② 내 친구들 (네임카드 화면 아래)</h3><div class="in">
+<div id="list"></div>
+<button class="btn l" id="clrB">시험 친구 목록 비우기</button>
+</div></div>
+
+<div class="ph"><h3>③ 내 카드에 넣는 칸 (선택)</h3><div class="in">
+<label>카카오 오픈프로필 링크 (한국 회원용 · 선택)</label>
+<input placeholder="https://open.kakao.com/o/..." disabled>
+<div class="note">개인 카카오 아이디로는 대화창을 바로 열 수 없어, 오픈프로필 링크를 넣은 분만 💬 버튼이 카카오로 열립니다.</div>
+<label>시험: 다른 SNS 친구로 바꿔 보기</label>
+<select id="tS"><option>인스타그램</option><option>페이스북</option><option>텔레그램</option><option>LINE</option><option>왓츠앱</option><option>X</option><option>카카오</option><option>위챗</option></select>
+<table class="tbl" style="margin-top:12px"><tr><td><b>SNS</b></td><td><b>💬 누르면</b></td></tr>
+<tr><td>인스타그램</td><td>인스타 DM 창</td></tr><tr><td>페이스북</td><td>메신저 대화창</td></tr><tr><td>텔레그램</td><td>텔레그램 대화창</td></tr><tr><td>LINE</td><td>LINE 친구 추가</td></tr><tr><td>왓츠앱</td><td>왓츠앱 대화창 (전화번호 등록 시)</td></tr><tr><td>X</td><td>X 프로필 → 메시지</td></tr><tr><td>카카오</td><td>오픈프로필 링크 넣은 분만</td></tr><tr><td>위챗 등</td><td>아이디 복사</td></tr></table>
+</div></div>
+
+</div>
+<script>
+var K="dp_nc_friends";
+var F={nk:"클래식러버",cc:"🇯🇵",car:"BMW E34 M5 · 1991",sn:"인스타그램",ac:"classic_lover91",kk:"https://open.kakao.com/o/sample"};
+function dm(f){var a=(f.ac||"").replace(/^@/,"").trim(),e=encodeURIComponent(a);
+ var m={"인스타그램":"https://ig.me/m/"+e,"페이스북":"https://m.me/"+e,"텔레그램":"https://t.me/"+e,"LINE":"https://line.me/R/ti/p/~"+e,"왓츠앱":"https://wa.me/"+a.replace(/\D/g,""),"X":"https://x.com/"+e,"스레드":"https://threads.net/@"+e,"카카오":f.kk||""};
+ return m[f.sn]||""}
+function ld(){try{return JSON.parse(localStorage.getItem(K)||"[]")}catch(e){return[]}}
+function sv(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}}
+function isF(){return ld().some(function(x){return x.nk===F.nk})}
+function setDm(el,f){var u=dm(f);if(u){el.href=u;el.target="_blank";el.onclick=null;el.textContent=el.dataset.t||"💬 메시지 보내기"}else{el.removeAttribute("href");el.onclick=function(){try{navigator.clipboard.writeText(f.ac)}catch(e){}alert0(el,"아이디 복사됨")};el.textContent="📋 아이디 복사"}}
+function alert0(el,t){var o=el.textContent;el.textContent=t;setTimeout(function(){el.textContent=o},1200)}
+function paint(){$("fN").textContent=F.cc+" "+F.nk;$("fC").textContent=F.car;$("fS").textContent=F.sn+" @"+F.ac;
+ var f=isF();$("addB").style.display=f?"none":"block";$("okM").style.display=f?"block":"none";$("dmB").style.display=f?"block":"none";$("backB").style.display=f?"block":"none";if(f)setDm($("dmB"),F);
+ var L=ld(),h=L.length?"":'<div class="note">아직 친구가 없습니다. ①에서 친구 맺기를 눌러 보십시오.</div>';$("list").innerHTML=h;
+ L.forEach(function(x){var d=document.createElement("div");d.className="fr";d.innerHTML='<div class="av">🚗</div><div class="t"><b></b><br><span></span></div><a data-t="💬">💬</a>';d.querySelector("b").textContent=x.cc+" "+x.nk;d.querySelector("span").textContent=x.car;setDm(d.querySelector("a"),x);$("list").appendChild(d)})}
+function $(i){return document.getElementById(i)}
+$("addB").onclick=function(){var L=ld().filter(function(x){return x.nk!==F.nk});L.unshift(F);sv(L);paint()};
+$("clrB").onclick=function(){sv([]);paint()};
+$("backB").onclick=function(){alert0(this,"실제 화면에서는 내 네임카드 보내기 창이 열립니다")};
+$("tS").onchange=function(){F.sn=this.value;F.ac=this.value==="왓츠앱"?"+81 90 1234 5678":"classic_lover91";var L=ld().map(function(x){return x.nk===F.nk?F:x});sv(L);paint()};
+paint();
+</script></body></html>
