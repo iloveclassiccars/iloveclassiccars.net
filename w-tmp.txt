@@ -118,9 +118,13 @@ async function nc(req,env,u){if(!env.DB)return J({ok:false,err:"nodb"},503);
   if(env.RL&&(vis==="public"||(old&&old.vis==="public")))await env.RL.delete("deck:v1");
   return J({ok:true,tok,vis})}
  if(path==="friend"){const t=clip(d.tok,40);const r=await env.DB.prepare("SELECT id FROM members WHERE tok=?").bind(t).first();if(!r)return J({ok:false,err:"none"},404);if(r.id===me)return J({ok:false,err:"self"},400);
+  const dec=await env.DB.prepare("SELECT 1 AS x FROM declines WHERE a=? AND b=?").bind(me,r.id).first();if(dec)return J({ok:false,err:"declined"},403);
+  await env.DB.prepare("DELETE FROM declines WHERE a=? AND b=?").bind(r.id,me).run();
   const back2=await env.DB.prepare("SELECT 1 AS x FROM friends WHERE a=? AND b=?").bind(r.id,me).first();
   if(!back2){const pc=await env.DB.prepare("SELECT COUNT(*) AS n FROM friends f WHERE f.a=? AND f.at>=? AND NOT EXISTS(SELECT 1 FROM friends g WHERE g.a=f.b AND g.b=f.a)").bind(me,now-30*864e5).first();if(pc&&pc.n>=30)return J({ok:false,err:"pending30"},429)}
   await env.DB.prepare("INSERT OR IGNORE INTO friends(a,b,at) VALUES(?,?,?)").bind(me,r.id,now).run();return J({ok:true,mutual:!!back2})}
+ if(path==="decline"){const t=clip(d.tok,40);const r=await env.DB.prepare("SELECT id FROM members WHERE tok=?").bind(t).first();if(!r)return J({ok:false,err:"none"},404);
+  await env.DB.prepare("DELETE FROM friends WHERE a=? AND b=?").bind(r.id,me).run();await env.DB.prepare("INSERT OR IGNORE INTO declines(a,b,at) VALUES(?,?,?)").bind(r.id,me,now).run();return J({ok:true})}
  if(path==="unfriend"){const t=clip(d.tok,40);const r=await env.DB.prepare("SELECT id FROM members WHERE tok=?").bind(t).first();if(r)await env.DB.prepare("DELETE FROM friends WHERE a=? AND b=?").bind(me,r.id).run();return J({ok:true})}
  if(path==="row"){const cut=now-30*864e5;
   await env.DB.prepare("DELETE FROM friends WHERE at<? AND NOT EXISTS(SELECT 1 FROM friends g WHERE g.a=friends.b AND g.b=friends.a)").bind(cut).run();
@@ -128,7 +132,7 @@ async function nc(req,env,u){if(!env.DB)return J({ok:false,err:"nodb"},503);
   const mine=await env.DB.prepare("SELECT tok,nick,cc,car,sns,acct,vis FROM members WHERE id=?").bind(me).first();
   const fr=await env.DB.prepare("SELECT m.tok,m.nick,m.cc,m.car,m.sns,m.acct FROM friends f JOIN members m ON m.id=f.b WHERE f.a=? AND (m.vis='public' OR (m.vis='friends' AND EXISTS(SELECT 1 FROM friends g WHERE g.a=f.b AND g.b=f.a))) ORDER BY f.at DESC LIMIT 100").bind(me).all();
   return J({ok:true,me:mine?Object.assign(pub(mine),{vis:mine.vis}):null,friends:(fr.results||[]).map(pub),incoming:(inc.results||[]).map(pub)})}
- if(path==="delete"){await env.DB.prepare("DELETE FROM friends WHERE a=? OR b=?").bind(me,me).run();await env.DB.prepare("DELETE FROM members WHERE id=?").bind(me).run();if(env.RL)await env.RL.delete("deck:v1");return J({ok:true})}
+ if(path==="delete"){await env.DB.prepare("DELETE FROM friends WHERE a=? OR b=?").bind(me,me).run();await env.DB.prepare("DELETE FROM declines WHERE a=? OR b=?").bind(me,me).run();await env.DB.prepare("DELETE FROM members WHERE id=?").bind(me).run();if(env.RL)await env.RL.delete("deck:v1");return J({ok:true})}
  return J({ok:false},404)}
 export default {async fetch(req,env0){const env=new Proxy(env0,{get:(o,k)=>typeof k==="string"&&o[k]===undefined?o[k.toLowerCase()]:o[k]});
  if(req.method==="OPTIONS")return new Response(null,{headers:{"access-control-allow-origin":SITE,"access-control-allow-methods":"GET,POST","access-control-allow-headers":"content-type"}});
