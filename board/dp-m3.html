@@ -1325,7 +1325,7 @@ var ko=(typeof LANG==='string'?LANG:'ko')==='ko';var want=G;if(l.dataset.g!==Str
 if(ap&&ap.dataset.g!==String(ko)){ap.innerHTML='<span>'+(ko?'앱':'APP')+'</span>';ap.dataset.g=String(ko)}}
 var n=0,t=setInterval(function(){f();if(++n>40)clearInterval(t)},200);new MutationObserver(function(){setTimeout(f,50)}).observe(document.documentElement,{attributes:true,attributeFilter:['class','lang']})})();</script>
 <script id="logo-short-js">(function(){var s=document.querySelector('header .logo span:last-of-type');if(!s||s.dataset.d)return;s.dataset.d=1;s.innerHTML='CLASSIC<i class="lc"> CARS</i>'})();</script>
-<style id="logo-short-css">header .logo .lc{font-style:normal}@media(max-width:379px){header .logo .lc{display:none}}</style>
+<style id="logo-short-css">header .logo .lc{font-style:normal}@media(max-width:339px){header .logo .lc{display:none}}</style>
 <script id="ph-js">(function(){var k=0;function L(){var ko=(typeof LANG==='string'?LANG:'ko')==='ko';return ko?['차대번호(Last VIN) · 부품명 · 부품번호','차대번호(Last VIN)','부품명 · 부품번호']:['Last VIN · Part name · Part No.','Last VIN','Part name · Part No.']}
 function set(t){document.querySelectorAll('#home .search input').forEach(function(i){i.placeholder=t;i.setAttribute('aria-label',L()[0])})}
 function tick(){var sb=document.querySelector('#home .search.mo');var narrow=innerWidth<900&&sb&&sb.offsetParent;if(sb&&sb.classList.contains('scopying')){setTimeout(tick,600);return}
