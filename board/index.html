@@ -971,6 +971,12 @@ html.mhome #home #cards .rlk{flex:none;white-space:nowrap;font-size:13px;color:#
 @media(max-width:899px){html.mhome #home .hfold{order:2;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:34px;padding:0;background:none;border:0;color:#7FD99A;font:700 13.5px 'Noto Sans KR',sans-serif;cursor:pointer;margin:-14px 0 -6px}
 html.mhome #home .hfold:after{content:"⌄";color:#2AA84B;font-size:18px;transition:transform .2s}html.mhome #home .hfold.open:after{transform:rotate(180deg)}
 html.mhome #home .hrow{order:2;display:grid!important}html.mhome #home .menu{order:3}}
+@media(max-width:899px){html.mhome #home .search{position:relative;overflow:hidden}
+.scopy{position:absolute;left:44px;right:0;top:0;bottom:0;display:flex;align-items:center;pointer-events:none;overflow:hidden;z-index:2}
+.scopy span{white-space:nowrap;font:700 15px 'Noto Sans KR',sans-serif;color:#fff;padding-left:100%;animation:scopy 7s linear 1 forwards}
+.scopy span b{color:#7FD99A;font-weight:700}
+@keyframes scopy{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+html.mhome #home .search.scopying input::placeholder{color:transparent}}
 @media(min-width:900px){.ncrow,.btabs{display:none!important}}</style>
 <script id="mfront-mix-js">(function(){
 var mq=matchMedia('(max-width:899px)'),H=document.documentElement;
@@ -1001,7 +1007,13 @@ function fold(){var home=document.getElementById('home'),hr=home&&home.querySele
  var b=document.createElement('button');b.type='button';b.className='hfold';b.textContent=TX.fold;var op=false;try{op=sessionStorage.getItem('icc_hfold')==='1'}catch(e){}
  function set(v){op=v;b.textContent=v?TX.fold2:TX.fold;b.classList.toggle('open',v);hr.classList.toggle('open',v);try{sessionStorage.setItem('icc_hfold',v?'1':'0')}catch(e){}}
  b.onclick=function(){set(!op)};hr.parentNode.insertBefore(b,hr.nextSibling);set(op)}
-function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on)build()}
+function scopy(){var home=document.getElementById('home'),sb=home&&home.querySelector('.search');if(!sb||sb.dataset.sc)return;sb.dataset.sc=1;
+ try{if(sessionStorage.getItem('icc_scopy'))return;sessionStorage.setItem('icc_scopy','1')}catch(e){}
+ var inp=sb.querySelector('input');var w=document.createElement('div');w.className='scopy';
+ w.innerHTML=KO?'<span>차 좋아하는 사람들의 놀이터 · <b>클래식카 · 영타이머</b></span>':'<span>Where car lovers play · <b>Classics · Youngtimers</b></span>';
+ if(inp){w.style.left=inp.offsetLeft+'px';w.style.right=Math.max(0,sb.clientWidth-inp.offsetLeft-inp.offsetWidth)+'px'}sb.classList.add('scopying');sb.appendChild(w);function end(){if(w.parentNode)w.remove();sb.classList.remove('scopying')}
+ w.firstChild.addEventListener('animationend',end);setTimeout(end,8000);if(inp)inp.addEventListener('focus',end,{once:true})}
+function upd(){var on=mq.matches&&isHome();H.classList.toggle('mhome',on);if(isHome())i18n();if(on){build();scopy()}}
 document.addEventListener('change',function(e){if(e.target.closest&&e.target.closest('#home .hrow'))setTimeout(i18n,30)},true);
 addEventListener('hashchange',function(){setTimeout(upd,50)});mq.addEventListener?mq.addEventListener('change',upd):mq.addListener(upd);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(upd,300)});else setTimeout(upd,300);
